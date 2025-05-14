@@ -1,0 +1,37 @@
+  program exemplo1;
+
+  {$APPTYPE CONSOLE}
+
+  uses
+  SysUtils;
+
+  var
+      wAux: String;
+      wNumero1, wNumero2, wResultado: Integer;
+
+  begin
+
+      Write('Informe o numero 1: ');
+      ReadLn(wNumero1);
+
+      Write('Informe o numero 2: ');
+      ReadLn(wNumero2);
+
+      wResultado := wNumero1 + wNumero2;
+      WriteLn('Soma: ', wResultado);
+
+      wResultado := wNumero1 - wNumero2;
+      WriteLn('Subtracao: ', wResultado);
+
+      wResultado := wNumero1 * wNumero2;
+      WriteLn('Multiplicacao: ', wResultado);
+
+      wResultado := wNumero1 div wNumero2;
+      WriteLn('Divisao: ', wResultado);
+
+      wResultado := wNumero1 mod wNumero2;
+      WriteLn('Resto da Divisao: ', wResultado);
+
+      ReadLn(wAux);
+
+  end.

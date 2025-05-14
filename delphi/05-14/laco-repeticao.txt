@@ -1,0 +1,32 @@
+  program exemplo1;
+
+  {$APPTYPE CONSOLE}
+
+  uses
+  SysUtils;
+
+  var
+    wAux: String;
+    wMaiorValor, wValor, i: Integer;
+
+  begin
+
+      wMaiorValor := 0;
+
+      for i := 1 to 10 do
+      begin
+        Write('Informe um numero: ');
+        ReadLn(wValor);
+
+        if wValor > wMaiorValor then
+          wMaiorValor := wValor;
+
+        if wValor = 0 then
+          break;
+      end;
+
+      WriteLn('Maior Valor: ', wMaiorValor);
+
+      ReadLn(wAux);
+
+  end.

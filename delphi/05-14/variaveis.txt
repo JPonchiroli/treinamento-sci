@@ -1,0 +1,27 @@
+  program exemplo1;
+
+  {$APPTYPE CONSOLE}
+
+  uses
+  SysUtils;
+
+const
+      cDescNome = 'Nome: ';
+      cDescIdade = 'Idade: ';
+  var
+      wNome, wAux: String;
+      wIdade: Integer;
+
+  begin
+
+      Write('Informe seu nome: ');
+      ReadLn(wNome);
+
+      Write('Informe sua idade: ');
+      ReadLn(wIdade);
+
+      WriteLn(cDescNome, wNome);
+      WriteLn(cDescIdade, wIdade);
+      ReadLn(wAux);
+
+  end.

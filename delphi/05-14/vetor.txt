@@ -1,0 +1,34 @@
+  program exemplo1;
+
+  {$APPTYPE CONSOLE}
+
+  uses
+  SysUtils;
+
+  var
+    wAux: String;
+    wVetor: Array[1..3] of string;
+    i: Integer;
+  begin
+
+      for i := 1 to length(wVetor) do
+      begin
+        Write('Escreva um nome: ');
+        ReadLn(wVetor[i]);
+      end;
+
+      for i := 3 downto low(wVetor) do
+      begin
+
+        begin
+          if wVetor[i] = '' then
+            continue
+          else
+            WriteLn('Nome da posicao: ', i, ': ', wVetor[i])
+        end;
+
+      end;
+
+      ReadLn(wAux);
+
+  end.

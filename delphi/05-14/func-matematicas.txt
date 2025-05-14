@@ -1,0 +1,54 @@
+  program exemplo1;
+
+  {$APPTYPE CONSOLE}
+
+  uses
+  SysUtils;
+
+  var
+      wAux: String;
+      wNumero1, wNumero2, wResultado: Extended;
+
+  begin
+      
+      Write('Informe o numero 1: ');
+      ReadLn(wNumero1);
+
+      Write('Informe o numero 2: ');
+      ReadLn(wNumero2);
+
+      wResultado := wNumero1 + wNumero2;
+      WriteLn('Soma: ', wResultado);
+      WriteLn('Soma Absoluta: ', Abs(wResultado));
+      WriteLn('Soma Arredondada: ', Round(wResultado));
+      WriteLn('Soma Inteira: ', Trunc(wResultado));
+
+      WriteLn('------------------------------------------');
+
+      wResultado := wNumero1 - wNumero2;
+      WriteLn('Subtracao: ', wResultado);
+      WriteLn('Subtracao Absoluta: ', Abs(wResultado));
+      WriteLn('Subtracao Arredondada: ', Round(wResultado));
+      WriteLn('Subtracao Inteira: ', Trunc(wResultado));
+
+      WriteLn('------------------------------------------');
+
+      wResultado := wNumero1 * wNumero2;
+      WriteLn('Multiplicacao: ', wResultado);
+      WriteLn('Multiplicacao Absoluta: ', Abs(wResultado));
+      WriteLn('Multiplicacao Arredondada: ', Round(wResultado));
+      WriteLn('Multiplicacao Inteira: ', Trunc(wResultado));
+
+      WriteLn('------------------------------------------');
+
+      wResultado := wNumero1 / wNumero2;
+      WriteLn('Divisao: ', wResultado);
+      WriteLn('Divisao Absoluta: ', Abs(wResultado));
+      WriteLn('Divisao Arredondada: ', Round(wResultado));
+      WriteLn('Divisao Inteira: ', Trunc(wResultado));
+
+      WriteLn('------------------------------------------');
+
+      ReadLn(wAux);
+
+  end.

@@ -1,0 +1,49 @@
+  program exemplo1;
+
+  {$APPTYPE CONSOLE}
+
+  uses
+  SysUtils;
+
+  var
+    wAux: String;
+    wVetor: Array of String;
+    i, wCondicao: Integer;
+  begin
+      setLength(wVetor, 1);
+      i := 0;
+
+      repeat
+        Write('Escreva um nome: ');
+        ReadLn(wVetor[high(wVetor)]);
+
+        WriteLn('Deseja Continuar?');
+        WriteLn('1- Sim   0- Nao');
+        ReadLn(wCondicao);
+
+        begin
+          if wCondicao = 0 then
+            break
+          else if wCondicao = 1 then
+            setLength(wVetor, length(wVetor) + 1)
+        end;
+      until (wVetor[high(wVetor)] <> '');
+
+
+      WriteLn('tamanho vetor: ', length(wVetor));
+
+      for i := low(wVetor) to high(wVetor) do
+      begin
+
+        begin
+          if wVetor[i] = '' then
+            continue
+          else
+            WriteLn('Nome da posicao: ', i, ': ', wVetor[i])
+        end;
+
+      end;
+
+      ReadLn(wAux);
+
+  end.

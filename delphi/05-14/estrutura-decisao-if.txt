@@ -1,0 +1,43 @@
+  program exemplo1;
+
+  {$APPTYPE CONSOLE}
+
+  uses
+  SysUtils;
+
+  var
+      wAux: String;
+      wNumero1, wNumero2, wOperacao, wResultado: Integer;
+
+  begin
+
+      wResultado := 0;
+
+      Write('Informe o numero 1: ');
+      ReadLn(wNumero1);
+
+      Write('Informe o numero 2: ');
+      ReadLn(wNumero2);
+
+      Write('Informe o operecao: ');
+      WriteLn('1: Soma   2: Subtracao   3: Multiplicacao   4: Divisao');
+      ReadLn(wOperacao);
+
+      begin
+        if wOperacao = 1 then
+          wResultado := wNumero1 + wNumero2
+        else if wOperacao = 2 then
+          wResultado := wNumero1 - wNumero2
+        else if wOperacao = 3 then
+          wResultado := wNumero1 * wNumero2
+        else if wOperacao = 4 then
+          wResultado := wNumero1 div wNumero2
+        else
+          WriteLn('Operacao Invalida')
+      end;
+
+      WriteLn('Resutlado: ', wResultado);
+
+      ReadLn(wAux);
+
+  end.

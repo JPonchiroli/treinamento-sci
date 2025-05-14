@@ -1,0 +1,75 @@
+  program exemplo1;
+
+  {$APPTYPE CONSOLE}
+
+  uses
+  SysUtils;
+
+  type
+    TAluno = Record
+      Nome: String;
+      Nota1: Integer;
+      Nota2: Integer;
+      Nota3: Integer;
+      Media: Integer;
+    end;
+
+  var
+    wVetor: Array of TAluno;
+    i, wCondicao: Integer;
+    wAluno: TAluno;
+    wAux: String;
+  begin
+
+      setLength(wVetor, 1);
+      i := 0;
+
+      repeat
+        Write('Escreva o nome do Aluno: ');
+        ReadLn(wVetor[high(wVetor)].Nome);
+
+        Write('Escreva a nota 1: ');
+        ReadLn(wVetor[high(wVetor)].Nota1);
+
+        Write('Escreva a nota 2: ');
+        ReadLn(wVetor[high(wVetor)].Nota2);
+
+        Write('Escreva a nota 3: ');
+        ReadLn(wVetor[high(wVetor)].Nota3);
+
+        wVetor[high(wVetor)].Media := (wVetor[high(wVetor)].Nota1 + wVetor[high(wVetor)].Nota2 + wVetor[high(wVetor)].Nota3) div 3;
+
+        WriteLn('Deseja Continuar?');
+        WriteLn('1- Sim   0- Nao');
+        ReadLn(wCondicao);
+
+        begin
+          if wCondicao = 0 then
+            break
+          else if wCondicao = 1 then
+            setLength(wVetor, length(wVetor) + 1);
+        end;
+      until (wVetor[high(wVetor)].Nome <> '');
+
+
+      WriteLn('-----------------------------------------------');
+
+      for i := low(wVetor) to high(wVetor) do
+      begin
+
+        begin
+          if wVetor[i].Nome = '' then
+            continue
+          else
+            WriteLn('Aluno: ', wVetor[i].Nome);
+            WriteLn('Notas: ', wVetor[i].Nota1, ', ', wVetor[i].Nota2, ', ', wVetor[i].Nota3);
+            WriteLn('Media de Notas: ', wVetor[i].Media);
+
+            WriteLn('-----------------------------------------------');
+        end;
+
+      end;
+
+      ReadLn(wAux);
+
+  end.
