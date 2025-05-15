@@ -1,0 +1,14 @@
+program cadastro;
+
+uses
+  Forms,
+  frCadastro in 'frCadastro.pas' {AcademiaSci},
+  uCadastroPadrao in 'uCadastroPadrao.pas' {frCadastroPadrao};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TAcademiaSci, AcademiaSci);
+  Application.Run;
+end.

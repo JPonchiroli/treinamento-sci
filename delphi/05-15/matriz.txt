@@ -1,0 +1,50 @@
+  program exemplo1;
+
+  {$APPTYPE CONSOLE}
+
+  uses
+  SysUtils;
+
+  var
+    matriz: Array[1..2,1..4] of String;
+    i, j: Integer;
+    wAux: String;
+
+  begin
+      for i := 1 to length(matriz) do
+      begin
+        for j := 1 to length(matriz[i]) do
+        begin
+          if j = 1 then
+          begin
+            Write(i, '.', j, ' Escreva o nome do aluno: ');
+            ReadLn(matriz[i,j]);
+          end
+          else
+          begin
+            Write(i, '.', j, ' Informe a nota: ');
+            ReadLn(matriz[i,j]);
+          end;
+        end;
+      end;
+
+      for i := 1 to length(matriz) do
+      begin
+      WriteLn('---------------------------------------------');
+        for j := 1 to length(matriz[i]) do
+        begin
+          if j = 1 then
+          begin
+            WriteLn(i, '.', j, ' Nome do aluno: ', matriz[i,j]);
+          end
+          else
+          begin
+            WriteLn(i, '.', j, ' Nota: ', matriz[i,j]);
+          end;
+        end;
+      WriteLn('---------------------------------------------');
+      end;
+
+      ReadLn(wAux);
+
+  end.

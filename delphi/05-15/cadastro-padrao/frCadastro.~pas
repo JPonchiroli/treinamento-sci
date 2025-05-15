@@ -1,0 +1,35 @@
+unit frCadastro;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls;
+
+type
+  TAcademiaSci = class(TForm)
+    Button1: TButton;
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  AcademiaSci: TAcademiaSci;
+
+implementation
+
+uses uCadastroPadrao, uCadastroTeste;
+
+{$R *.dfm}
+
+procedure TAcademiaSci.Button1Click(Sender: TObject);
+begin
+  frCadastroTeste := TfrCadastroTeste.Create(Self);
+  frCadastroTeste.ShowModal;
+  FreeAndNil(frCadastroTeste);
+end;
+
+end.

@@ -1,32 +1,27 @@
-program Fundamentos;
+  program exemplo1;
 
+  {$APPTYPE CONSOLE}
 
-// Variaveis globais
+  uses
+  SysUtils;
 
-var
-    nome: string;
-    idade: integer;
-    altura: real;
-    ativo: boolean = true;
-    
-const 
-    TAXA: real = 0.15; //  Valor fixo
+const
+      cDescNome = 'Nome: ';
+      cDescIdade = 'Idade: ';
+  var
+      wNome, wAux: String;
+      wIdade: Integer;
 
-begin
+  begin
 
-    
-    //Write('Informe seu nome: ');
-    Readln(nome);
-    //Write('Informe sua idade: ');
-    Readln(idade);
-    //Write('Informe sua altura: ');
-    Readln(altura);
-    
-    Writeln('--------------');
-    Writeln(nome);
-    Writeln(idade);
-    Writeln(altura:0:2);
-    Writeln(ativo);
-    Writeln(TAXA:0:2);
-  Writeln('--------------');
-end.
+      Write('Informe seu nome: ');
+      ReadLn(wNome);
+
+      Write('Informe sua idade: ');
+      ReadLn(wIdade);
+
+      WriteLn(cDescNome, wNome);
+      WriteLn(cDescIdade, wIdade);
+      ReadLn(wAux);
+
+  end.
