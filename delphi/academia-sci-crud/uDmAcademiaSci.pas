@@ -12,6 +12,21 @@ type
     TProduto: TSQLTable;
     dspProduto: TDataSetProvider;
     cdsProduto: TClientDataSet;
+    TCategoria: TSQLTable;
+    dspCategoria: TDataSetProvider;
+    cdsCategoria: TClientDataSet;
+    TCliente: TSQLTable;
+    dspCliente: TDataSetProvider;
+    cdsCliente: TClientDataSet;
+    TLoja: TSQLTable;
+    dspLoja: TDataSetProvider;
+    cdsLoja: TClientDataSet;
+    TNota: TSQLTable;
+    dspNota: TDataSetProvider;
+    cdsNota: TClientDataSet;
+    TNotaItem: TSQLTable;
+    dspNotaItem: TDataSetProvider;
+    cdsNotaItem: TClientDataSet;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

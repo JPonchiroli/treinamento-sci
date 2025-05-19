@@ -1,8 +1,8 @@
 object frCadastroProdutoTeste: TfrCadastroProdutoTeste
-  Left = 495
-  Top = 179
-  Width = 434
-  Height = 234
+  Left = 448
+  Top = 180
+  Width = 448
+  Height = 262
   Caption = 'frCadastroProdutoTeste'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -11,6 +11,7 @@ object frCadastroProdutoTeste: TfrCadastroProdutoTeste
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object lCodigoProduto: TLabel
@@ -22,17 +23,24 @@ object frCadastroProdutoTeste: TfrCadastroProdutoTeste
   end
   object lNomeProduto: TLabel
     Left = 56
-    Top = 88
+    Top = 120
     Width = 34
     Height = 13
     Caption = 'Nome: '
   end
   object lPrecoUnitarioProduto: TLabel
     Left = 32
-    Top = 120
+    Top = 152
     Width = 73
     Height = 13
     Caption = 'Pre'#231'o Unit'#225'rio: '
+  end
+  object lCodigoCategoria: TLabel
+    Left = 16
+    Top = 88
+    Width = 87
+    Height = 13
+    Caption = 'C'#243'digo Categoria: '
   end
   object eCodigoProduto: TEdit
     Left = 112
@@ -40,6 +48,7 @@ object frCadastroProdutoTeste: TfrCadastroProdutoTeste
     Width = 121
     Height = 21
     TabOrder = 0
+    OnExit = eCodigoProdutoExit
   end
   object bSalvar: TButton
     Left = 296
@@ -48,6 +57,7 @@ object frCadastroProdutoTeste: TfrCadastroProdutoTeste
     Height = 25
     Caption = 'Salvar'
     TabOrder = 1
+    OnClick = bSalvarClick
   end
   object bExcluir: TButton
     Left = 296
@@ -56,6 +66,7 @@ object frCadastroProdutoTeste: TfrCadastroProdutoTeste
     Height = 25
     Caption = 'Excluir'
     TabOrder = 2
+    OnClick = bExcluirClick
   end
   object bConsultar: TButton
     Left = 296
@@ -64,19 +75,27 @@ object frCadastroProdutoTeste: TfrCadastroProdutoTeste
     Height = 25
     Caption = 'Consultar'
     TabOrder = 3
+    OnClick = bConsultarClick
   end
   object eNomeProduto: TEdit
     Left = 112
-    Top = 88
+    Top = 120
     Width = 121
     Height = 21
     TabOrder = 4
   end
   object ePrecoUnitarioProduto: TEdit
     Left = 112
-    Top = 120
+    Top = 152
     Width = 121
     Height = 21
     TabOrder = 5
+  end
+  object eCodigoCategoria: TEdit
+    Left = 112
+    Top = 88
+    Width = 121
+    Height = 21
+    TabOrder = 6
   end
 end
