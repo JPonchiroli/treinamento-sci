@@ -1,0 +1,76 @@
+unit uDmAcademiaSci;
+
+interface
+
+uses
+  SysUtils, Classes, DBXpress, DB, SqlExpr, Dialogs, Forms, FMTBcd,
+  DBClient, Provider;
+
+type
+  TdmAcademiaSci = class(TDataModule)
+    SQLConnection: TSQLConnection;
+    TProduto: TSQLTable;
+    dspProduto: TDataSetProvider;
+    cdsProduto: TClientDataSet;
+    TCategoria: TSQLTable;
+    dspCategoria: TDataSetProvider;
+    cdsCategoria: TClientDataSet;
+    TCliente: TSQLTable;
+    dspCliente: TDataSetProvider;
+    cdsCliente: TClientDataSet;
+    TLoja: TSQLTable;
+    dspLoja: TDataSetProvider;
+    cdsLoja: TClientDataSet;
+    TNota: TSQLTable;
+    dspNota: TDataSetProvider;
+    cdsNota: TClientDataSet;
+    procedure DataModuleCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  dmAcademiaSci: TdmAcademiaSci;
+
+implementation
+
+{$R *.dfm}
+
+procedure TdmAcademiaSci.DataModuleCreate(Sender: TObject);
+begin
+  SQLConnection.Close;
+
+  SQLConnection.LoginPrompt := False;
+  SQLConnection.ConnectionName := 'FBConnection';
+  SQLConnection.DriverName := 'Firebird';
+  SQLConnection.GetDriverFunc := 'getSQLDriverINTERBASE';
+  SQLConnection.LibraryName := 'dbexpint.dll';//'dbxfb.dll';
+  SQLConnection.VendorLib := 'fbembed.dll';
+
+  SQLConnection.Params.Clear;
+  SQLConnection.Params.Values['DriverName'] := 'Firebird';
+  SQLConnection.Params.Values['Database'] := 'C:\Users\Prog11\Desktop\Academia SCI Firebird\Academia SCI Firebird\Banco\BANCO.fdb';
+  SQLConnection.Params.Values['RoleName'] := EmptyStr;
+  SQLConnection.Params.Values['User_Name'] := 'SYSDBA';
+  SQLConnection.Params.Values['Password'] := 'masterkey';
+  SQLConnection.Params.Values['ServerCharSet'] := 'WIN1252';
+  SQLConnection.Params.Values['SQLDialect'] := '3';
+  SQLConnection.Params.Values['ErrorResourceFile'] := EmptyStr;
+  SQLConnection.Params.Values['LocaleCode'] := '0000';
+  SQLConnection.Params.Values['BlobSize'] := '-1';
+  SQLConnection.Params.Values['CommitRetain'] := 'True';
+  SQLConnection.Params.Values['WaitOnLocks'] := 'True';
+  SQLConnection.Params.Values['IsolationLevel'] := 'ReadCommitted';
+  SQLConnection.Params.Values['Trim Char'] := 'False';
+
+  SQLConnection.Open;
+
+  if not SQLConnection.Connected then
+  begin
+    ShowMessage('Não foi possível conectar no banco.');
+    Application.Terminate;
+  end;
+end;
+end.

@@ -1,0 +1,41 @@
+unit uConsultaCategoriaMdi;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, uConsultaPadraoMdi, DB, ImgList, Grids, DBGrids, ComCtrls, DBClient,
+  ToolWin;
+
+type
+  TfrConsultaCategoriaMdi = class(TfrConsultaPadraoMdi)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    function setTabela: TClientDataSet; override;
+    function setChave: String; override;
+  end;
+
+var
+  frConsultaCategoriaMdi: TfrConsultaCategoriaMdi;
+
+implementation
+
+uses uDmAcademiaSci;
+
+{$R *.dfm}
+
+{ TfrConsultaCategoriaMdi }
+
+function TfrConsultaCategoriaMdi.setChave: String;
+begin
+  Result := 'BDCODCAT';
+end;
+
+function TfrConsultaCategoriaMdi.setTabela: TClientDataSet;
+begin
+  Result := dmAcademiaSci.cdsCategoria;
+end;
+
+end.

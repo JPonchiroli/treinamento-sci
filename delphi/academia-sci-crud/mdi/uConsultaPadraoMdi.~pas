@@ -1,0 +1,34 @@
+unit uConsultaPadraoMdi;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, uSimples, DB, Grids, DBGrids, ImgList, ComCtrls, ToolWin, DBClient, StdCtrls;
+
+type
+  TfrConsultaPadraoMdi = class(TfrSimples)
+    DBGrid1: TDBGrid;
+    dsPadrao: TDataSource;
+  private
+    { Private declarations }
+    FTabela: TClientDataSet;
+    FChave: String;
+  public
+    { Public declarations }
+    function setTabela: TClientDataSet; virtual; abstract;
+    function setChave: String; virtual; abstract;
+  published
+    property Tabela: TClientDataSet read FTabela write FTabela;
+  end;
+
+var
+  frConsultaPadraoMdi: TfrConsultaPadraoMdi;
+
+implementation
+
+uses uDmAcademiaSci;
+
+{$R *.dfm}
+
+end.

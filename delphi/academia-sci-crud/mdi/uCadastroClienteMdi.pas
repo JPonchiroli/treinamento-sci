@@ -1,0 +1,88 @@
+unit uCadastroClienteMdi;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, uCadastroPadrao, ImgList, ComCtrls, ToolWin, StdCtrls, DBClient;
+
+type
+  TfrCadastroClienteMdi = class(TfrCadastroPadrao)
+    lCodigoCliente: TLabel;
+    lCnpj: TLabel;
+    lCpf: TLabel;
+    lNomeCliente: TLabel;
+    lEndereco: TLabel;
+    lTelefone: TLabel;
+    eCodigoCliente: TEdit;
+    eCnpjCliente: TEdit;
+    eCpfCliente: TEdit;
+    eNomeCliente: TEdit;
+    eEnderecoCliente: TEdit;
+    eTelefoneCliente: TEdit;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    function setTabela: TClientDataSet; override;
+    function setIndice: string; override;
+    function setEditCodigo: TEdit; override;
+    procedure Salvar; override;
+    function Consultar: TForm; override;
+    procedure Carregar; override;
+  end;
+
+var
+  frCadastroClienteMdi: TfrCadastroClienteMdi;
+
+implementation
+
+uses uDmAcademiaSci;
+
+{$R *.dfm}
+
+{ TfrCadastroClienteMdi }
+
+function TfrCadastroClienteMdi.setTabela: TClientDataSet;
+begin
+  Result := dmAcademiaSci.cdsCliente;
+end;
+
+function TfrCadastroClienteMdi.setIndice: string;
+begin
+  Result := 'BDCODCLI';
+end;
+
+function TfrCadastroClienteMdi.setEditCodigo: TEdit;
+begin
+  Result := eCodigoCliente;
+end;
+
+procedure TfrCadastroClienteMdi.Carregar;
+begin
+  inherited;
+  eCodigoCliente.Text := Tabela.FieldByName('BDCODCLI').AsString;
+  eNomeCliente.Text := Tabela.FieldByName('BDNOMECLI').AsString;
+  eCnpjCliente.Text := Tabela.FieldByName('BDCNPJCLI').AsString;
+  eCpfCliente.Text := Tabela.FieldByName('BDCPFCLI').AsString;
+  eEnderecoCliente.Text := Tabela.FieldByName('BDENDERECOCLI').AsString;
+  eTelefoneCliente.Text := Tabela.FieldByName('BDFONECLI').AsString;
+end;
+
+function TfrCadastroClienteMdi.Consultar: TForm;
+begin
+
+end;
+
+procedure TfrCadastroClienteMdi.Salvar;
+begin
+  inherited;
+  Tabela.FieldByName('BDCODCLI').AsInteger := StrToIntDef(eCodigoCliente.Text, 0);
+  Tabela.FieldByName('BDNOMECLI').AsString := eNomeCliente.Text;
+  Tabela.FieldByName('BDCNPJCLI').AsString := eCnpjCliente.Text;
+  Tabela.FieldByName('BDCPFCLI').AsString  := eCpfCliente.Text;
+  Tabela.FieldByName('BDENDERECOCLI').AsString := eEnderecoCliente.Text;
+  Tabela.FieldByName('BDFONECLI').AsString := eTelefoneCliente.Text;
+end;
+
+end.
