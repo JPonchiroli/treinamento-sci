@@ -1,0 +1,96 @@
+inherited frCadastroLojaMdi: TfrCadastroLojaMdi
+  Left = 423
+  Top = 201
+  Width = 615
+  Height = 322
+  Caption = 'frCadastroLojaMdi'
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lCodigoLoja: TLabel [0]
+    Left = 64
+    Top = 72
+    Width = 33
+    Height = 13
+    Caption = 'C'#243'digo'
+  end
+  object lRazaoSocialLoja: TLabel [1]
+    Left = 40
+    Top = 104
+    Width = 63
+    Height = 13
+    Caption = 'Raz'#227'o Social'
+  end
+  object lCnpjLoja: TLabel [2]
+    Left = 72
+    Top = 136
+    Width = 27
+    Height = 13
+    Caption = 'CNPJ'
+  end
+  object lEnderecoLoja: TLabel [3]
+    Left = 56
+    Top = 168
+    Width = 46
+    Height = 13
+    Caption = 'Endere'#231'o'
+  end
+  object lTelefone: TLabel [4]
+    Left = 56
+    Top = 200
+    Width = 42
+    Height = 13
+    Caption = 'Telefone'
+  end
+  inherited tbFerramentas: TToolBar
+    Width = 599
+  end
+  object eRazaoSocialLoja: TEdit [6]
+    Left = 112
+    Top = 96
+    Width = 121
+    Height = 21
+    TabOrder = 2
+  end
+  object eCnpjLoja: TEdit [7]
+    Left = 112
+    Top = 128
+    Width = 121
+    Height = 21
+    TabOrder = 3
+  end
+  object eEnderecoLoja: TEdit [8]
+    Left = 112
+    Top = 160
+    Width = 121
+    Height = 21
+    TabOrder = 4
+  end
+  object eTelefoneLoja: TEdit [9]
+    Left = 112
+    Top = 192
+    Width = 121
+    Height = 21
+    TabOrder = 5
+  end
+  object eCodigoLoja: TEditNumerico [10]
+    Left = 112
+    Top = 64
+    Width = 121
+    Height = 21
+    TabOrder = 1
+    Text = '0'
+    Codigo = 0
+  end
+  inherited imImages: TImageList
+    Left = 400
+    Top = 64
+  end
+  inherited imHotImages: TImageList
+    Left = 400
+    Top = 104
+  end
+  inherited imDisableImages: TImageList
+    Left = 400
+    Top = 144
+  end
+end

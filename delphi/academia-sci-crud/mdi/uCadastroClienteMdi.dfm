@@ -51,47 +51,49 @@ inherited frCadastroClienteMdi: TfrCadastroClienteMdi
   inherited tbFerramentas: TToolBar
     Width = 627
   end
-  object eCodigoCliente: TEdit [7]
-    Left = 112
-    Top = 64
-    Width = 121
-    Height = 21
-    TabOrder = 1
-  end
-  object eCnpjCliente: TEdit [8]
+  object eCnpjCliente: TEdit [7]
     Left = 112
     Top = 128
     Width = 121
     Height = 21
     TabOrder = 3
   end
-  object eCpfCliente: TEdit [9]
+  object eCpfCliente: TEdit [8]
     Left = 112
     Top = 160
     Width = 121
     Height = 21
     TabOrder = 4
   end
-  object eNomeCliente: TEdit [10]
+  object eNomeCliente: TEdit [9]
     Left = 112
     Top = 96
     Width = 121
     Height = 21
     TabOrder = 2
   end
-  object eEnderecoCliente: TEdit [11]
+  object eEnderecoCliente: TEdit [10]
     Left = 112
     Top = 192
     Width = 201
     Height = 21
     TabOrder = 5
   end
-  object eTelefoneCliente: TEdit [12]
+  object eTelefoneCliente: TEdit [11]
     Left = 112
     Top = 224
     Width = 121
     Height = 21
     TabOrder = 6
+  end
+  object eCodigoCliente: TEditNumerico [12]
+    Left = 112
+    Top = 64
+    Width = 121
+    Height = 21
+    TabOrder = 1
+    Text = '0'
+    Codigo = 0
   end
   inherited imImages: TImageList
     Left = 344

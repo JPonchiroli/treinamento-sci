@@ -1,0 +1,65 @@
+inherited frConsultaClienteMdi: TfrConsultaClienteMdi
+  Caption = 'frConsultaClienteMdi'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited grPadrao: TDBGrid
+    Width = 769
+    Height = 313
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'BDCODCLI'
+        Title.Caption = 'C'#243'digo'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDNOMECLI'
+        Title.Caption = 'Nome Cliente'
+        Width = 107
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDNCPJCLI'
+        Title.Caption = 'CNPJ'
+        Width = 102
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDCPFCLI'
+        Title.Caption = 'CPF'
+        Width = 96
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDENDERECOCLI'
+        Title.Caption = 'Endere'#231'o'
+        Width = 94
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDFONECLI'
+        Title.Caption = 'Telefone'
+        Width = 106
+        Visible = True
+      end>
+  end
+  inherited imImages: TImageList
+    Left = 792
+  end
+  inherited imHotImages: TImageList
+    Left = 832
+  end
+  inherited imDisableImages: TImageList
+    Left = 872
+  end
+  inherited dsPadrao: TDataSource
+    DataSet = dmAcademiaSci.cdsCliente
+    Left = 872
+    Top = 96
+  end
+end

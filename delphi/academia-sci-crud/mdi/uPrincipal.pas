@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Menus;
+  Dialogs, StdCtrls, Menus, uEditNumerico;
 
 type
   TfrPrincipal = class(TForm)
@@ -20,10 +20,10 @@ type
     procedure Categoria1Click(Sender: TObject);
     procedure Produto1Click(Sender: TObject);
     procedure Cliente1Click(Sender: TObject);
-    procedure Loja1Click(Sender: TObject);
     procedure Nota1Click(Sender: TObject);
     procedure NotaItem1Click(Sender: TObject);
     procedure Simples1Click(Sender: TObject);
+    procedure Loja1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -36,9 +36,9 @@ var
 implementation
 
 
-uses uCadastroTeste, uCadastroLoja,
-  uCadastroNota, uCadastroNotaItem, uSimples, uCadastroCategoriaMdi,
-  uCadastroClienteMdi;
+uses uSimples, uCadastroCategoriaMdi, uCadastroClienteMdi,
+     uCadastroLojaMdi, uCadastroProdutoMdi, uCadastroNotaMdi,
+  uCadastroNotaItemMdi;
 
 {$R *.dfm}
 
@@ -49,9 +49,7 @@ end;
 
 procedure TfrPrincipal.Produto1Click(Sender: TObject);
 begin
-  frCadastroProdutoTeste := TfrCadastroProdutoTeste.Create(Self);
-  frCadastroProdutoTeste.ShowModal;
-  FreeAndNil(frCadastroProdutoTeste);
+  TfrCadastroProdutoMdi.Create(Self);
 end;
 
 procedure TfrPrincipal.Cliente1Click(Sender: TObject);
@@ -59,30 +57,24 @@ begin
   TfrCadastroClienteMdi.Create(Self);
 end;
 
-procedure TfrPrincipal.Loja1Click(Sender: TObject);
-begin
-  frCadastroLoja := TfrCadastroLoja.Create(Self);
-  frCadastroLoja.ShowModal;
-  FreeAndNil(frCadastroLoja);
-end;
-
 procedure TfrPrincipal.Nota1Click(Sender: TObject);
 begin
-  frCadastroNota := TfrCadastroNota.Create(Self);
-  frCadastroNota.ShowModal;
-  FreeAndNil(frCadastroNota);
+  TfrCadastroNotaMdi.Create(Self);
 end;
 
 procedure TfrPrincipal.NotaItem1Click(Sender: TObject);
 begin
-  frCadastroNotaItem := TfrCadastroNotaItem.Create(Self);
-  frCadastroNotaItem.ShowModal;
-  FreeAndNil(frCadastroNotaItem);
+  TfrCadastroNotaItemMdi.Create(Self);
 end;
 
 procedure TfrPrincipal.Simples1Click(Sender: TObject);
 begin
   TfrSimples.Create(Self);
+end;
+
+procedure TfrPrincipal.Loja1Click(Sender: TObject);
+begin
+  TfrCadastroLojaMdi.Create(Self);
 end;
 
 end.

@@ -1,0 +1,58 @@
+inherited frConsultaLojaMdi: TfrConsultaLojaMdi
+  Caption = 'frConsultaLojaMdi'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited grPadrao: TDBGrid
+    Width = 729
+    Height = 225
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'BDCODLOJ'
+        Title.Caption = 'C'#243'digo'
+        Width = 81
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDRAZAOSOCIALLOJ'
+        Title.Caption = 'Nome Loja'
+        Width = 110
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDCNPJLOJ'
+        Title.Caption = 'CNPJ'
+        Width = 90
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDENDERECOLOJ'
+        Title.Caption = 'Endere'#231'o'
+        Width = 115
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDFONELOJ'
+        Title.Caption = 'Telefone'
+        Width = 106
+        Visible = True
+      end>
+  end
+  inherited imImages: TImageList
+    Left = 752
+  end
+  inherited imHotImages: TImageList
+    Left = 792
+  end
+  inherited imDisableImages: TImageList
+    Left = 832
+  end
+  inherited dsPadrao: TDataSource
+    DataSet = dmAcademiaSci.cdsLoja
+    Left = 872
+  end
+end

@@ -120,8 +120,6 @@ end;
 
 procedure TfrCadastroPadrao.tbExcluirClick(Sender: TObject);
 begin
-  if FTabela.State in [dsEdit] then
-  begin
     if MessageDlg('Deseja realmente excluir o registro?', mtInformation, [mbYes, mbNo], 0) = mrYes then
     begin
       if Assigned(FTabela) and Assigned(FEditCodigo) then
@@ -138,9 +136,11 @@ begin
         LimparCampos;
       end;
     end;
-  end
-  else
-   inherited;
+end;
+
+procedure TfrCadastroPadrao.tbConsultarClick(Sender: TObject);
+begin
+  Consultar;
 end;
 
 procedure TfrCadastroPadrao.FormKeyDown(Sender: TObject; var Key: Word;
@@ -156,11 +156,6 @@ begin
   else
   if Key = vk_f3 then
      tbConsultar.Click;
-end;
-
-procedure TfrCadastroPadrao.tbConsultarClick(Sender: TObject);
-begin
-  Consultar;
 end;
 
 end.

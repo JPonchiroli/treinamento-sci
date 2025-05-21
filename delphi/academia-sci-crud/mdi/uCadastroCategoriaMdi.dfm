@@ -23,19 +23,21 @@ inherited frCadastroCategoriaMdi: TfrCadastroCategoriaMdi
   inherited tbFerramentas: TToolBar
     Width = 428
   end
-  object eCodigoCategoria: TEdit [3]
-    Left = 80
-    Top = 88
-    Width = 121
-    Height = 21
-    TabOrder = 1
-  end
-  object eNomeCategoria: TEdit [4]
+  object eNomeCategoria: TEdit [3]
     Left = 80
     Top = 120
     Width = 121
     Height = 21
     TabOrder = 2
+  end
+  object eCodigoCategoria: TEditNumerico [4]
+    Left = 80
+    Top = 88
+    Width = 121
+    Height = 21
+    TabOrder = 1
+    Text = '0'
+    Codigo = 0
   end
   inherited imImages: TImageList
     Left = 240

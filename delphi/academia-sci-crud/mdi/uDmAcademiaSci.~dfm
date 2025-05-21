@@ -1,8 +1,8 @@
 object dmAcademiaSci: TdmAcademiaSci
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 569
-  Top = 213
+  Left = 331
+  Top = 207
   Height = 336
   Width = 705
   object SQLConnection: TSQLConnection
@@ -103,19 +103,38 @@ object dmAcademiaSci: TdmAcademiaSci
     MaxBlobSize = -1
     SQLConnection = SQLConnection
     TableName = 'TNOTA'
-    Left = 456
+    Left = 440
     Top = 16
   end
   object dspNota: TDataSetProvider
     DataSet = TNota
-    Left = 456
+    Left = 440
     Top = 72
   end
   object cdsNota: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspNota'
-    Left = 456
+    Left = 440
+    Top = 128
+  end
+  object TNotaItem: TSQLTable
+    MaxBlobSize = -1
+    SQLConnection = SQLConnection
+    TableName = 'TNOTA_ITEM'
+    Left = 512
+    Top = 16
+  end
+  object dspNotaItem: TDataSetProvider
+    DataSet = TNotaItem
+    Left = 512
+    Top = 72
+  end
+  object cdsNotaItem: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspNotaItem'
+    Left = 512
     Top = 128
   end
 end

@@ -24,6 +24,9 @@ type
     TNota: TSQLTable;
     dspNota: TDataSetProvider;
     cdsNota: TClientDataSet;
+    TNotaItem: TSQLTable;
+    dspNotaItem: TDataSetProvider;
+    cdsNotaItem: TClientDataSet;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

@@ -55,7 +55,7 @@ begin
   if (Trim(FIndice) <> EmptyStr) and Assigned(FTabela) then
   begin
     FTabela.IndexDefs.Clear;
-    FTabela.IndexDefs.Add('i' + FIndice, FIndice, [ixCaseInsensitive]);
+    FTabela.IndexDefs.Add('i' + IntToStr(FTabela.IndexDefs.Count+1), FIndice, [ixCaseInsensitive]);
     FTabela.IndexFieldNames := FIndice;
     FTabela.Open;
   end;
@@ -120,8 +120,6 @@ end;
 
 procedure TfrCadastroPadrao.tbExcluirClick(Sender: TObject);
 begin
-  if FTabela.State in [dsEdit] then
-  begin
     if MessageDlg('Deseja realmente excluir o registro?', mtInformation, [mbYes, mbNo], 0) = mrYes then
     begin
       if Assigned(FTabela) and Assigned(FEditCodigo) then
@@ -138,9 +136,6 @@ begin
         LimparCampos;
       end;
     end;
-  end
-  else
-   inherited;
 end;
 
 procedure TfrCadastroPadrao.tbConsultarClick(Sender: TObject);

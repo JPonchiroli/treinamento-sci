@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, uCadastroPadrao, ImgList, ComCtrls, ToolWin, StdCtrls, DBClient;
+  Dialogs, uCadastroPadrao, ImgList, ComCtrls, ToolWin, StdCtrls, DBClient,
+  uEditNumerico;
 
 type
   TfrCadastroClienteMdi = class(TfrCadastroPadrao)
@@ -14,12 +15,12 @@ type
     lNomeCliente: TLabel;
     lEndereco: TLabel;
     lTelefone: TLabel;
-    eCodigoCliente: TEdit;
     eCnpjCliente: TEdit;
     eCpfCliente: TEdit;
     eNomeCliente: TEdit;
     eEnderecoCliente: TEdit;
     eTelefoneCliente: TEdit;
+    eCodigoCliente: TEditNumerico;
   private
     { Private declarations }
   public
@@ -37,7 +38,7 @@ var
 
 implementation
 
-uses uDmAcademiaSci;
+uses uDmAcademiaSci, uConsultaClienteMdi;
 
 {$R *.dfm}
 
@@ -71,18 +72,20 @@ end;
 
 function TfrCadastroClienteMdi.Consultar: TForm;
 begin
-
+  Result := TfrConsultaClienteMdi.Create(eCodigoCliente);
 end;
 
 procedure TfrCadastroClienteMdi.Salvar;
 begin
   inherited;
-  Tabela.FieldByName('BDCODCLI').AsInteger := StrToIntDef(eCodigoCliente.Text, 0);
+  Tabela.FieldByName('BDCODCLI').AsInteger := eCodigoCliente.Codigo;
   Tabela.FieldByName('BDNOMECLI').AsString := eNomeCliente.Text;
   Tabela.FieldByName('BDCNPJCLI').AsString := eCnpjCliente.Text;
   Tabela.FieldByName('BDCPFCLI').AsString  := eCpfCliente.Text;
   Tabela.FieldByName('BDENDERECOCLI').AsString := eEnderecoCliente.Text;
   Tabela.FieldByName('BDFONECLI').AsString := eTelefoneCliente.Text;
+
+  ShowMessage('Cliente Criado com Sucesso!');
 end;
 
 end.

@@ -4,14 +4,15 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, uCadastroPadrao, ImgList, ComCtrls, ToolWin, StdCtrls, DBClient;
+  Dialogs, uCadastroPadrao, ImgList, ComCtrls, ToolWin, StdCtrls, DBClient,
+  uEditNumerico;
 
 type
   TfrCadastroCategoriaMdi = class(TfrCadastroPadrao)
     lCodigoProduto: TLabel;
     lNomeProduto: TLabel;
-    eCodigoCategoria: TEdit;
     eNomeCategoria: TEdit;
+    eCodigoCategoria: TEditNumerico;
   private
     { Private declarations }
   public
@@ -29,7 +30,7 @@ var
 
 implementation
 
-uses uDmAcademiaSci, uCadastroCliente, uConsultaCategoriaMdi;
+uses uDmAcademiaSci, uConsultaCategoriaMdi;
 
 {$R *.dfm}
 
@@ -59,14 +60,16 @@ end;
 
 function TfrCadastroCategoriaMdi.Consultar: TForm;
 begin
-  TfrConsultaCategoriaMdi.Create(Self);
+  Result := TfrConsultaCategoriaMdi.Create(eCodigoCategoria);
 end;
 
 procedure TfrCadastroCategoriaMdi.Salvar;
 begin
   inherited;
-  Tabela.FieldByName('BDCODCAT').AsInteger := StrToIntDef(eCodigoCategoria.Text, 0);
+  Tabela.FieldByName('BDCODCAT').AsInteger := eCodigoCategoria.Codigo;
   Tabela.FieldByName('BDNOMECAT').AsString := eNomeCategoria.Text;
+
+  ShowMessage('Categoria Criada com Sucesso!');
 end;
 
 end.

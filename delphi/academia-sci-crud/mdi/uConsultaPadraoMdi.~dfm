@@ -1,14 +1,20 @@
 inherited frConsultaPadraoMdi: TfrConsultaPadraoMdi
+  Left = 266
+  Top = 140
   Caption = 'frConsultaPadraoMdi'
   OldCreateOrder = True
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   inherited tbFerramentas: TToolBar
+    inherited tbConfirmar: TToolButton
+      OnClick = tbConfirmarClick
+    end
     inherited tbExcluir: TToolButton
       Caption = 'Cancelar'
     end
   end
-  object DBGrid1: TDBGrid [1]
+  object grPadrao: TDBGrid [1]
     Left = 8
     Top = 56
     Width = 320
