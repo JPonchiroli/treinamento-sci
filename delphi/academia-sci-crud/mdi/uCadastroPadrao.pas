@@ -28,6 +28,8 @@ type
     function Consultar: TForm; virtual; abstract;
     procedure Carregar; virtual; abstract;
     procedure LimparCampos; virtual;
+    function getChaveComposta: Boolean; virtual;
+    function getInsercaoChaveComposta: Boolean; virtual;
   published
     property Tabela: TClientDataSet read FTabela write FTabela;
   end;
@@ -55,7 +57,7 @@ begin
   if (Trim(FIndice) <> EmptyStr) and Assigned(FTabela) then
   begin
     FTabela.IndexDefs.Clear;
-    FTabela.IndexDefs.Add('i' + IntToStr(FTabela.IndexDefs.Count+1), FIndice, [ixCaseInsensitive]);
+    FTabela.IndexDefs.Add('iPK', FIndice, [ixCaseInsensitive]);
     FTabela.IndexFieldNames := FIndice;
     FTabela.Open;
   end;
@@ -64,15 +66,24 @@ begin
 end;
 
 procedure TfrCadastroPadrao.EditCodigoExit(Sender: TObject);
+var
+  wEncontrou: Boolean;
 begin
   if Assigned(FTabela) and Assigned(FEditCodigo) then
   begin
     FTabela.IndexFieldNames := FIndice;
-    if FTabela.FindKey([StrToIntDef(Trim(FEditCodigo.Text), 0)]) then
-      Carregar
+    
+    if Pos(';', FIndice) > 0 then
+      wEncontrou := getChaveComposta
+    else
+      wEncontrou := FTabela.FindKey([StrToIntDef(Trim(FEditCodigo.Text), 0)]);
+
+    if wEncontrou then
+       Carregar
     else
       LimparCampos;
-  end
+      
+  end;
 end;
 
 procedure TfrCadastroPadrao.LimparCampos;
@@ -93,17 +104,25 @@ begin
 end;
 
 procedure TfrCadastroPadrao.tbConfirmarClick(Sender: TObject);
+var
+  wEncontrou: Boolean;
 begin
   inherited;
   if Assigned(FTabela) and Assigned(FEditCodigo) then
   begin
     FTabela.IndexFieldNames := FIndice;
-    if FTabela.FindKey([StrToIntDef(Trim(FEditCodigo.Text), 0)]) then
+    if Pos(';', FIndice) > 0 then
+       wEncontrou := getChaveComposta
+    else
+       wEncontrou := FTabela.FindKey([StrToIntDef(Trim(FEditCodigo.Text), 0)]);
+
+    if wEncontrou then
        FTabela.Edit
     else
     begin
       FTabela.Insert;
-      FTabela.FieldByName(FIndice).AsInteger := StrToIntDef(FEditCodigo.Text, 0);
+      if not getInsercaoChaveComposta then
+        FTabela.FieldByName(FIndice).AsInteger := StrToIntDef(FEditCodigo.Text, 0);
     end;
 
     Salvar;
@@ -119,23 +138,30 @@ begin
 end;
 
 procedure TfrCadastroPadrao.tbExcluirClick(Sender: TObject);
+var
+  wEncontrou: Boolean;
 begin
-    if MessageDlg('Deseja realmente excluir o registro?', mtInformation, [mbYes, mbNo], 0) = mrYes then
+  if MessageDlg('Deseja realmente excluir o registro?', mtInformation, [mbYes, mbNo], 0) = mrYes then
+  begin
+    if Assigned(FTabela) and Assigned(FEditCodigo) then
     begin
-      if Assigned(FTabela) and Assigned(FEditCodigo) then
-      begin
-        FTabela.IndexFieldNames := FIndice;
-        if FTabela.FindKey([StrToIntDef(Trim(FEditCodigo.Text), 0)]) then
-           FTabela.Delete;
+      FTabela.IndexFieldNames := FIndice;
+      if Pos(';', FIndice) > 0 then
+        wEncontrou := getChaveComposta
+      else
+        wEncontrou := FTabela.FindKey([StrToIntDef(Trim(FEditCodigo.Text), 0)]);
 
-        FTabela.ApplyUpdates(0);
-        FTabela.Refresh;
+      if wEncontrou then
+        FTabela.Delete;
 
-        if FEditCodigo.CanFocus then
-           FEditCodigo.SetFocus;
-        LimparCampos;
-      end;
+      FTabela.ApplyUpdates(0);
+      FTabela.Refresh;
+
+      if FEditCodigo.CanFocus then
+        FEditCodigo.SetFocus;
+      LimparCampos;
     end;
+  end;
 end;
 
 procedure TfrCadastroPadrao.tbConsultarClick(Sender: TObject);
@@ -156,6 +182,16 @@ begin
   else
   if Key = vk_f3 then
      tbConsultar.Click;
+end;
+
+function TfrCadastroPadrao.getChaveComposta: Boolean;
+begin
+  Result := False;
+end;
+
+function TfrCadastroPadrao.getInsercaoChaveComposta: Boolean;
+begin
+ Result := False;
 end;
 
 end.

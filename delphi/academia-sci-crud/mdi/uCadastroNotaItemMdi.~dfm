@@ -45,6 +45,8 @@ inherited frCadastroNotaItemMdi: TfrCadastroNotaItemMdi
     TabOrder = 4
     Text = '0'
     Codigo = 0
+    Decimal = False
+    Separador = ','
   end
   object eQuantidadeVendida: TEditNumerico [6]
     Left = 152
@@ -54,6 +56,8 @@ inherited frCadastroNotaItemMdi: TfrCadastroNotaItemMdi
     TabOrder = 3
     Text = '0'
     Codigo = 0
+    Decimal = False
+    Separador = ','
   end
   object eNumeroNota: TEditNumerico [7]
     Left = 152
@@ -63,6 +67,8 @@ inherited frCadastroNotaItemMdi: TfrCadastroNotaItemMdi
     TabOrder = 2
     Text = '0'
     Codigo = 0
+    Decimal = False
+    Separador = ','
   end
   object eCodigoProduto: TEditNumerico [8]
     Left = 152
@@ -72,6 +78,8 @@ inherited frCadastroNotaItemMdi: TfrCadastroNotaItemMdi
     TabOrder = 1
     Text = '0'
     Codigo = 0
+    Decimal = False
+    Separador = ','
   end
   inherited imImages: TImageList
     Left = 400

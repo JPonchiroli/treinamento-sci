@@ -27,6 +27,8 @@ type
     procedure Salvar; override;
     function Consultar: TForm; override;
     procedure Carregar; override;
+    function getChaveComposta: Boolean; override;
+    function  getInsercaoChaveComposta: Boolean; override;
   end;
 
 var
@@ -54,6 +56,17 @@ begin
   Result := TfrConsultaNotaItemMdi.Create(eCodigoProduto);
 end;
 
+function TfrCadastroNotaItemMdi.getChaveComposta: Boolean;
+begin
+  Result := Tabela.FindKey([eCodigoProduto.Codigo, eNumeroNota.Codigo]);
+end;
+
+function TfrCadastroNotaItemMdi.getInsercaoChaveComposta: Boolean;
+begin
+  Tabela.FieldByName('BDCODPROD').AsInteger := eCodigoProduto.Codigo;
+  Tabela.FieldByName('BDNUMNOTA').AsInteger := eNumeroNota.Codigo;
+end;
+
 procedure TfrCadastroNotaItemMdi.Salvar;
 begin
   inherited;
@@ -72,7 +85,7 @@ end;
 
 function TfrCadastroNotaItemMdi.setIndice: string;
 begin
-  Result := 'BDCODPROD';
+  Result := 'BDCODPROD;BDNUMNOTA';
 end;
 
 function TfrCadastroNotaItemMdi.setTabela: TClientDataSet;

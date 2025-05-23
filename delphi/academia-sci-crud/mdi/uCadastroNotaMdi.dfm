@@ -1,8 +1,8 @@
 inherited frCadastroNotaMdi: TfrCadastroNotaMdi
   Left = 430
-  Top = 183
-  Width = 584
-  Height = 331
+  Top = 184
+  Width = 586
+  Height = 330
   Caption = 'frCadastroNotaMdi'
   PixelsPerInch = 96
   TextHeight = 13
@@ -35,16 +35,13 @@ inherited frCadastroNotaMdi: TfrCadastroNotaMdi
     Caption = 'Status'
   end
   inherited tbFerramentas: TToolBar
-    Width = 568
-    object tbCancelar: TToolButton [2]
-      Left = 102
+    Width = 570
+    object tbCancelar: TToolButton
+      Left = 153
       Top = 0
       Caption = 'Cancelar'
       ImageIndex = 2
       OnClick = tbCancelarClick
-    end
-    inherited tbConsultar: TToolButton
-      Left = 153
     end
   end
   object eStatusNota: TEdit [5]
@@ -63,6 +60,8 @@ inherited frCadastroNotaMdi: TfrCadastroNotaMdi
     TabOrder = 3
     Text = '0'
     Codigo = 0
+    Decimal = False
+    Separador = ','
   end
   object eCodigoCliente: TEditNumerico [7]
     Left = 112
@@ -72,6 +71,8 @@ inherited frCadastroNotaMdi: TfrCadastroNotaMdi
     TabOrder = 2
     Text = '0'
     Codigo = 0
+    Decimal = False
+    Separador = ','
   end
   object eNumeroNota: TEditNumerico [8]
     Left = 112
@@ -81,6 +82,8 @@ inherited frCadastroNotaMdi: TfrCadastroNotaMdi
     TabOrder = 1
     Text = '0'
     Codigo = 0
+    Decimal = False
+    Separador = ','
   end
   inherited imImages: TImageList
     Left = 320
