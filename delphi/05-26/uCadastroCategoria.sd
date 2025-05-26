@@ -1,0 +1,69 @@
+uses
+  uUtil;
+
+procedure pCadastroCategoria(codigoCategoria, nomeCategoria: String); forward;
+procedure pExcluirCategoria(codigoCategoria: String); forward;
+procedure pConsultaCategorias; forward;
+  
+procedure pCadastroCategoria(codigoCategoria, nomeCategoria: String);
+  var p1 : OleVariant;
+  var w1 : OleVariant;
+  var w2 : OleVariant;
+begin
+  
+  p1 := Sys.Process('AcademiaSci');
+  w1 := p1.Window('TfrPrincipal', 'frPrincipal');
+  
+  w1.MainMenu.Click('Cadastro|Categoria');
+  w2 := w1.Window('MDIClient').Window('TfrCadastroCategoriaMdi', 'frCadastroCategoriaMdi');
+  w2.Window('TEditNumerico', '0').Keys(codigoCategoria + '[Tab]');
+  w2.Window('TEdit').Keys('[BS]' + nomeCategoria);
+  w2.Window('TToolBar').ClickItem('Confirmar', false);
+  p1.Window('TMessageForm', 'Academia SCI').Window('TButton', 'OK').ClickButton;
+  w2.Close;
+  
+  Log.Message('Categoria criada com sucesso!');
+end;
+
+procedure pTesteCategoria;
+begin
+  uUtil.pAbreAcademiaSci;
+  
+  pCadastroCategoria('1', 'Eletro');
+  pCadastroCategoria('2', 'Alimentar');
+  pExcluirCategoria('1');
+  pConsultaCategorias;
+  
+  uUtil.pFechaAcademiaSci;
+end;
+
+procedure pExcluirCategoria(codigoCategoria: String);
+  var p1 : OleVariant;
+  var w1 : OleVariant;
+  var w2 : OleVariant;
+begin 
+
+  p1 := Sys.Process('AcademiaSci');
+  w1 := p1.Window('TfrPrincipal', 'frPrincipal');
+  
+  w1.MainMenu.Click('Cadastro|Categoria');
+  w2 := w1.Window('MDIClient').Window('TfrCadastroCategoriaMdi', 'frCadastroCategoriaMdi');
+  w2.Window('TEditNumerico', '0').Keys(codigoCategoria + '[Tab]');
+  w2.Window('TToolBar').ClickItem('Excluir', false);
+  p1.Window('TMessageForm', 'Information').Window('TButton', '&Yes').ClickButton;
+  p1.Window('#32770', 'Academia SCI').Window('Button', 'OK').ClickButton;
+  w2.Close;  
+  
+  Log.Message('Categoria excluida com sucesso!');
+end;
+
+procedure pConsultaCategorias;
+  var w1 : OleVariant;
+  var w2 : OleVariant;
+begin
+  w1 := Sys.Process('AcademiaSci').Window('TfrPrincipal', 'frPrincipal');
+  w1.MainMenu.Click('Cadastro|Categoria');
+  w2 := w1.Window('MDIClient');
+  w2.Window('TfrCadastroCategoriaMdi', 'frCadastroCategoriaMdi').Window('TToolBar').ClickItem('Consultar', false);
+  w2.Window('TfrConsultaCategoriaMdi', 'frConsultaCategoriaMdi').Window('TToolBar').ClickItem('Confirmar', false);
+end;

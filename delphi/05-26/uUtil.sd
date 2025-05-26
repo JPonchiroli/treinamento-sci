@@ -1,0 +1,24 @@
+procedure pAbreAcademiaSci;
+begin
+  Log.Message('Abrindo o projeto AcademiaSci');
+  if not (Sys.WaitProcess('AcademiaSci').Exists) then
+    begin
+      TestedApps.AcademiaSci.Run();
+      Log.Message('O projeto foi aberto');
+    end
+  else
+    Log.Message('O sistema já está aberto');      
+end;
+
+procedure pFechaAcademiaSci;
+begin
+  Log.Message('Fechando o projeto AcademiaSci');
+  if not (Sys.WaitProcess('AcademiaSci').Exists) then
+    Log.Message('O sistema já está fechado')
+  else
+    begin
+      Sys.Process('AcademiaSci').Window('TfrPrincipal', 'frPrincipal').Close;
+      BuiltIn.Delay(2000);
+      Log.Message('O projeto foi fechado');
+    end;   
+end;
