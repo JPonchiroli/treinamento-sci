@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE Nodes [
+
+<!ENTITY % NameValue "CDATA">
+<!ENTITY % PropType "(I|S|D|L|H|B)">
+<!ENTITY % VersionValue "CDATA">
+
+<!ELEMENT Prp (#PCDATA)>
+<!ELEMENT Node (Node|Prp)*>
+<!ELEMENT Nodes (Node)+>
+
+<!ATTLIST Nodes version CDATA "1">
+
+<!ATTLIST Node name CDATA #REQUIRED>
+
+<!ATTLIST Prp name CDATA #REQUIRED>
+<!ATTLIST Prp type CDATA #REQUIRED>
+<!ATTLIST Prp value CDATA #REQUIRED>
+]>
+<Nodes version="1">
+	<Node name="root">
+		<Node name="data">
+			<Node name="units">
+				<Prp name="unit 0" type="S" value="{4FB2358A-7527-4AA0-919D-E357F4075F8B}"/>
+			</Node>
+			<Node name="message 2">
+				<Prp name="date" type="D" value="45803.6345022801"/>
+				<Prp name="priority" type="I" value="300"/>
+				<Prp name="owner id" type="I" value="-1"/>
+				<Prp name="color" type="I" value="-252645136"/>
+				<Prp name="id" type="I" value="2"/>
+				<Prp name="bkcolor" type="I" value="-252645136"/>
+				<Prp name="message" type="S" value="Toolbar button 'Confirmar' was clicked."/>
+				<Prp name="picture" type="S" value=""/>
+				<Prp name="link" type="S" value=""/>
+				<Prp name="unit id" type="I" value="0"/>
+				<Prp name="remarks" type="S" value="A click at point (25, 22) with no key pressed.&#xA;&#xA;Sys.Process('AcademiaSci').Window('TfrPrincipal', 'frPrincipal', 1).Window('MDIClient', '', 1).Window('TfrConsultaCategoriaMdi', 'frConsultaCategoriaMdi', 1).Window('TToolBar', '', 1)"/>
+				<Prp name="type" type="I" value="1"/>
+				<Prp name="line no" type="I" value="32"/>
+				<Prp name="child index" type="I" value="-1"/>
+			</Node>
+			<Node name="children"/>
+			<Node name="message 1">
+				<Prp name="date" type="D" value="45803.634500706"/>
+				<Prp name="priority" type="I" value="300"/>
+				<Prp name="owner id" type="I" value="-1"/>
+				<Prp name="color" type="I" value="-252645136"/>
+				<Prp name="id" type="I" value="1"/>
+				<Prp name="bkcolor" type="I" value="-252645136"/>
+				<Prp name="message" type="S" value="Toolbar button 'Consultar' was clicked."/>
+				<Prp name="picture" type="S" value=""/>
+				<Prp name="link" type="S" value=""/>
+				<Prp name="unit id" type="I" value="0"/>
+				<Prp name="remarks" type="S" value="A click at point (127, 22) with no key pressed.&#xA;&#xA;Sys.Process('AcademiaSci').Window('TfrPrincipal', 'frPrincipal', 1).Window('MDIClient', '', 1).Window('TfrCadastroCategoriaMdi', 'frCadastroCategoriaMdi', 1).Window('TToolBar', '', 1)"/>
+				<Prp name="type" type="I" value="1"/>
+				<Prp name="line no" type="I" value="31"/>
+				<Prp name="child index" type="I" value="-1"/>
+			</Node>
+			<Node name="message 0">
+				<Prp name="date" type="D" value="45803.6344990625"/>
+				<Prp name="priority" type="I" value="300"/>
+				<Prp name="owner id" type="I" value="-1"/>
+				<Prp name="color" type="I" value="-252645136"/>
+				<Prp name="id" type="I" value="0"/>
+				<Prp name="bkcolor" type="I" value="-252645136"/>
+				<Prp name="message" type="S" value="The menu item 'Cadastro|Categoria' was clicked."/>
+				<Prp name="picture" type="S" value=""/>
+				<Prp name="link" type="S" value=""/>
+				<Prp name="unit id" type="I" value="0"/>
+				<Prp name="remarks" type="S" value="Sys.Process('AcademiaSci').Window('TfrPrincipal', 'frPrincipal', 1).MainMenu"/>
+				<Prp name="type" type="I" value="1"/>
+				<Prp name="line no" type="I" value="29"/>
+				<Prp name="child index" type="I" value="-1"/>
+			</Node>
+			<Prp name="project" type="S" value="{2360BFA2-E4B6-489F-8D89-2CE0362F9DA2}"/>
+			<Prp name="test moniker" type="S" value="{4FB2358A-7527-4AA0-919D-E357F4075F8B}pConsultaCategorias"/>
+			<Prp name="name" type="S" value="Test Log [uCadastroCategoria\pConsultaCategorias]"/>
+			<Prp name="status" type="I" value="0"/>
+		</Node>
+		<Prp name="data type" type="S" value="{C0A16E40-A745-4685-B1CC-65EC03A4C819}"/>
+	</Node>
+</Nodes>

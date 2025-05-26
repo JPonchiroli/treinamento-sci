@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE Nodes [
+
+<!ENTITY % NameValue "CDATA">
+<!ENTITY % PropType "(I|S|D|L|H|B)">
+<!ENTITY % VersionValue "CDATA">
+
+<!ELEMENT Prp (#PCDATA)>
+<!ELEMENT Node (Node|Prp)*>
+<!ELEMENT Nodes (Node)+>
+
+<!ATTLIST Nodes version CDATA "1">
+
+<!ATTLIST Node name CDATA #REQUIRED>
+
+<!ATTLIST Prp name CDATA #REQUIRED>
+<!ATTLIST Prp type CDATA #REQUIRED>
+<!ATTLIST Prp value CDATA #REQUIRED>
+]>
+<Nodes version="1">
+	<Node name="root">
+		<Node name="data">
+			<Node name="{3e8e0d66-acea-40bc-bc33-90341ab5260d}">
+				<Node name="{3a0fb097-72e2-4379-902a-50f125689548}">
+					<Prp name="filepath" type="S" value="..\..\..\..\..\Desktop\Academia SCI Firebird\Academia SCI Firebird\"/>
+				</Node>
+				<Node name="{de110191-fbf5-4b58-b97c-b58ef5718ccf}">
+					<Prp name="filepath" type="S" value="..\..\..\..\..\Desktop\Academia SCI Firebird\Academia SCI Firebird\win32\"/>
+				</Node>
+				<Node name="{f001e918-0f3c-4a4e-91ef-74a272e5fa5d}">
+					<Prp name="filepath" type="S" value="..\..\..\..\..\Desktop\Academia SCI Firebird\"/>
+				</Node>
+			</Node>
+			<Node name="logs">
+				<Prp name="key" type="S" value="{C612FBB6-E945-46BB-BDF6-610D3E8086FE}"/>
+				<Prp name="relpath" type="S" value="Log"/>
+			</Node>
+			<Node name="variables">
+				<Node name="datav2"/>
+			</Node>
+		</Node>
+		<Prp name="signature" type="S" value="{49FC0C30-9EF7-4DBD-97A8-B7A00E79A2AF}"/>
+	</Node>
+</Nodes>
