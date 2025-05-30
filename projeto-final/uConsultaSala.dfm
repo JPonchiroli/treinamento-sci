@@ -1,0 +1,50 @@
+inherited frConsultaSala: TfrConsultaSala
+  Caption = 'frConsultaSala'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited grPadrao: TDBGrid
+    Left = 16
+    Width = 689
+    Height = 177
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'BDCODSALA'
+        Title.Caption = 'C'#243'digo'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDNOMESALA'
+        Title.Caption = 'Nome'
+        Width = 186
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDLOTACAOMAXIMASALA'
+        Title.Caption = 'Lota'#231#227'o M'#225'xima'
+        Width = 119
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDLOTACAOATUALSALA'
+        Title.Caption = 'Lota'#231#227'o Atual'
+        Width = 114
+        Visible = True
+      end>
+  end
+  inherited imImages: TImageList
+    Left = 792
+  end
+  inherited imHotImages: TImageList
+    Left = 832
+  end
+  inherited imDisableImages: TImageList
+    Left = 872
+  end
+  inherited dsPadrao: TDataSource
+    Left = 752
+  end
+end

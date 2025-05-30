@@ -1,0 +1,82 @@
+unit uCadastroEspacoCafe;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, uCadastroPadrao, ImgList, ComCtrls, ToolWin, DBClient, StdCtrls,
+  uEditNumerico;
+
+type
+  TfrCadastroEspacoCafe = class(TfrCadastroPadrao)
+    eNomeEspacoCafe: TEdit;
+    enLotacaoMaximaEspacoCafe: TEditNumerico;
+    enLotacaoAtualEspacoCafe: TEditNumerico;
+    lNomeEspacoCafe: TLabel;
+    lLotacaoMaximaEspacoCafe: TLabel;
+    lLotacaoAtualEspacoCafe: TLabel;
+    lCodigoEspacoCafe: TLabel;
+    enCodigoEspacoCafe: TEditNumerico;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    function setTabela: TClientDataSet; override;
+    function setIndice: string; override;
+    function setEditCodigo: TEdit; override;
+    procedure Salvar; override;
+    function Consultar: TForm; override;
+    procedure Carregar; override;
+  end;
+
+var
+  frCadastroEspacoCafe: TfrCadastroEspacoCafe;
+
+implementation
+
+uses uDmAcademiaSci, uConsultaEspacoCafe;
+
+{$R *.dfm}
+
+{ TfrCadastroEspacoCafe }
+
+procedure TfrCadastroEspacoCafe.Carregar;
+begin
+  inherited;
+  eNomeEspacoCafe.Text :=  Tabela.FieldByName('BDNOMEESPACOCAFE').AsString;
+  enLotacaoMaximaEspacoCafe.Text := Tabela.FieldByName('BDLOTACAOMAXIMAESPACOCAFE').AsString;
+  enLotacaoAtualEspacoCafe.Text := Tabela.FieldByName('BDLOTACAOATUALESPACOCAFE').AsString;
+end;
+
+function TfrCadastroEspacoCafe.Consultar: TForm;
+begin
+  Result := TfrConsultaEspacoCafe.Create(enCodigoEspacoCafe);
+end;
+
+procedure TfrCadastroEspacoCafe.Salvar;
+begin
+  inherited;
+  Tabela.FieldByName('BDCODESPACOCAFE').AsInteger := enCodigoEspacoCafe.Codigo;
+  Tabela.FieldByName('BDNOMEESPACOCAFE').AsString := eNomeEspacoCafe.Text;
+  Tabela.FieldByName('BDLOTACAOMAXIMAESPACOCAFE').AsInteger := enLotacaoMaximaEspacoCafe.Codigo;
+  Tabela.FieldByName('BDLOTACAOATUALESPACOCAFE').AsInteger := enLotacaoAtualEspacoCafe.Codigo;
+
+  ShowMessage('Espaço para Café Criado com Sucesso!');
+end;
+
+function TfrCadastroEspacoCafe.setEditCodigo: TEdit;
+begin
+  Result := enCodigoEspacoCafe;
+end;
+
+function TfrCadastroEspacoCafe.setIndice: string;
+begin
+  Result := 'BDCODESPACOCAFE';
+end;
+
+function TfrCadastroEspacoCafe.setTabela: TClientDataSet;
+begin
+  Result := dmAcademiaSci.cdsEspacoCafe;
+end;
+
+end.

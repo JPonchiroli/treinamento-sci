@@ -1,0 +1,87 @@
+unit uCadastroPessoa;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, uCadastroPadrao, StdCtrls, ImgList, ComCtrls, ToolWin, DBClient,
+  uEditNumerico;
+
+type
+  TfrCadastroPessoa = class(TfrCadastroPadrao)
+    eNomePessoa: TEdit;
+    eSobrenomePessoa: TEdit;
+    lNomePessoa: TLabel;
+    lSobrenomePessoa: TLabel;
+    lCodigoPessoa: TLabel;
+    enCodigoPessoa: TEditNumerico;
+    procedure tbExcluirClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    function setTabela: TClientDataSet; override;
+    function setIndice: string; override;
+    function setEditCodigo: TEdit; override;
+    procedure Salvar; override;
+    function Consultar: TForm; override;
+    procedure Carregar; override;
+  end;
+
+var
+  frCadastroPessoa: TfrCadastroPessoa;
+
+implementation
+
+uses uDmAcademiaSci, uConsultaPessoa;
+
+{$R *.dfm}
+
+{ TfrCadastroPessoa }
+
+procedure TfrCadastroPessoa.Carregar;
+begin
+  inherited;
+  eNomePessoa.Text := Tabela.FieldByName('BDNOMEPESSOA').AsString;
+  eSobrenomePessoa.Text := Tabela.FieldByName('BDSOBRENOMEPESSOA').AsString;
+end;
+
+function TfrCadastroPessoa.Consultar: TForm;
+begin
+  Result := TfrConsultaPessoa.Create(enCodigoPessoa);
+end;
+
+procedure TfrCadastroPessoa.Salvar;
+begin
+  inherited;
+
+  Tabela.FieldByName('BDCODPESSOA').AsInteger := enCodigoPessoa.Codigo;
+  Tabela.FieldByName('BDNOMEPESSOA').AsString := eNomePessoa.Text;
+  Tabela.FieldByName('BDSOBRENOMEPESSOA').AsString := eSobrenomePessoa.Text;
+
+  ShowMessage('Pessoa Criada com Sucesso!');
+end;
+
+function TfrCadastroPessoa.setEditCodigo: TEdit;
+begin
+  Result := enCodigoPessoa
+end;
+
+function TfrCadastroPessoa.setIndice: String;
+begin
+  Result := 'BDCODPESSOA';
+end;
+
+function TfrCadastroPessoa.setTabela: TClientDataSet;
+begin
+  Result := dmAcademiaSci.cdsPessoa;
+end;
+
+
+procedure TfrCadastroPessoa.tbExcluirClick(Sender: TObject);
+begin
+  inherited;
+  ShowMessage('Pessoa Exluída com Sucesso');
+end;
+
+end.

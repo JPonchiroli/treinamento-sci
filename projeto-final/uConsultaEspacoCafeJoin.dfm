@@ -1,0 +1,73 @@
+inherited frConsultaEspacoCafeJoin: TfrConsultaEspacoCafeJoin
+  Caption = 'frConsultaEspacoCafeJoin'
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lCodigoEspacoCafe: TLabel [0]
+    Left = 8
+    Top = 64
+    Width = 97
+    Height = 13
+    Caption = 'C'#243'digo Espa'#231'o Caf'#233
+  end
+  inherited tbFerramentas: TToolBar
+    Color = clMenu
+    ParentColor = False
+  end
+  inherited grPadrao: TDBGrid
+    Top = 104
+    Width = 673
+    Height = 113
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'BDNUMETAPA'
+        Title.Caption = 'N'#250'mero Etapa'
+        Width = 98
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDNOMEESPACOCAFE'
+        Title.Caption = 'Nome Espa'#231'o Caf'#233
+        Width = 99
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDNOMEPESSOA'
+        Title.Caption = 'Nome Participante'
+        Width = 105
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDSOBRENOMEPESSOA'
+        Title.Caption = 'Sobrenome Participante'
+        Width = 151
+        Visible = True
+      end>
+  end
+  object enCodigoEspacoCafe: TEditNumerico [3]
+    Left = 120
+    Top = 64
+    Width = 121
+    Height = 21
+    TabOrder = 2
+    Text = '0'
+    Codigo = 0
+    Decimal = False
+    Separador = ','
+  end
+  inherited imImages: TImageList
+    Left = 568
+  end
+  inherited imHotImages: TImageList
+    Left = 608
+  end
+  inherited imDisableImages: TImageList
+    Left = 648
+  end
+  inherited dsPadrao: TDataSource
+    Left = 528
+  end
+end

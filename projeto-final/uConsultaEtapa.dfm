@@ -1,0 +1,56 @@
+inherited frConsultaEtapa: TfrConsultaEtapa
+  Caption = 'frConsultaEtapa'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited grPadrao: TDBGrid
+    Width = 529
+    Height = 177
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'BDCODETAPA'
+        Title.Caption = 'C'#243'digo'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDNUMETAPA'
+        Title.Caption = 'Etapa'
+        Width = 65
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDCODPESSOA'
+        Title.Caption = 'C'#243'digo Pessoa'
+        Width = 88
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDCODSALA'
+        Title.Caption = 'C'#243'digo da Sala'
+        Width = 91
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDCODESPACOCAFE'
+        Title.Caption = 'C'#243'digo Espa'#231'o Caf'#233
+        Width = 110
+        Visible = True
+      end>
+  end
+  inherited imImages: TImageList
+    Left = 792
+  end
+  inherited imHotImages: TImageList
+    Left = 832
+  end
+  inherited imDisableImages: TImageList
+    Left = 872
+  end
+  inherited dsPadrao: TDataSource
+    Left = 752
+  end
+end

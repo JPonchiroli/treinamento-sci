@@ -1,0 +1,46 @@
+inherited frConsultaPadraoMdi: TfrConsultaPadraoMdi
+  Left = 266
+  Top = 140
+  Caption = 'frConsultaPadraoMdi'
+  OldCreateOrder = True
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited tbFerramentas: TToolBar
+    inherited tbConfirmar: TToolButton
+      OnClick = tbConfirmarClick
+    end
+    inherited tbExcluir: TToolButton
+      Caption = 'Cancelar'
+    end
+  end
+  object grPadrao: TDBGrid [1]
+    Left = 8
+    Top = 56
+    Width = 320
+    Height = 120
+    DataSource = dsPadrao
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+  end
+  inherited imImages: TImageList
+    Left = 552
+    Top = 56
+  end
+  inherited imHotImages: TImageList
+    Left = 592
+    Top = 56
+  end
+  inherited imDisableImages: TImageList
+    Left = 632
+    Top = 56
+  end
+  object dsPadrao: TDataSource
+    Left = 336
+    Top = 56
+  end
+end

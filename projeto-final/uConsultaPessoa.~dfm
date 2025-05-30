@@ -1,0 +1,27 @@
+inherited frConsultaPessoa: TfrConsultaPessoa
+  Caption = 'frConsultaPessoa'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited grPadrao: TDBGrid
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'BDCODPESSOA'
+        Title.Caption = 'C'#243'digo'
+        Width = 76
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDNOMEPESSOA'
+        Title.Caption = 'Nome'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDSOBRENOMEPESSOA'
+        Title.Caption = 'Sobrenome'
+        Visible = True
+      end>
+  end
+end

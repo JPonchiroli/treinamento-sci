@@ -1,0 +1,237 @@
+unit uCadastroEtapa;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, uCadastroPadrao, StdCtrls, ImgList, ComCtrls, ToolWin, DBClient,
+  uEditNumerico;
+
+type
+  TfrCadastroEtapa = class(TfrCadastroPadrao)
+    lCodigoPessoa: TLabel;
+    lNumeroEtapa: TLabel;
+    lCodigoEspacoCafe: TLabel;
+    lCodigoSala: TLabel;
+    cmNumeroEtapa: TComboBox;
+    enCodigoPessoa: TEditNumerico;
+    enCodigoSala: TEditNumerico;
+    enCodigoEspacoCafe: TEditNumerico;
+    eNomePessoa: TEdit;
+    lNomePessoa: TLabel;
+    eSobrenomePessoa: TEdit;
+    lSobrenomePessoa: TLabel;
+    lNomeSala: TLabel;
+    lSituacaoAtualSala: TLabel;
+    eNomeSala: TEdit;
+    eSituacaoSala: TEdit;
+    lNomeEspacoCafe: TLabel;
+    lSituacaoEspacoCafe: TLabel;
+    eNomeEspacoCafe: TEdit;
+    eSituacaoEspacoCafe: TEdit;
+    Label1: TLabel;
+    enCodigoEtapa: TEditNumerico;
+    procedure enCodigoPessoaExit(Sender: TObject);
+    procedure enCodigoSalaExit(Sender: TObject);
+    procedure enCodigoEspacoCafeExit(Sender: TObject);
+    procedure tbExcluirClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    function setTabela: TClientDataSet; override;
+    function setIndice: string; override;
+    function setEditCodigo: TEdit; override;
+    procedure Salvar; override;
+    function Consultar: TForm; override;
+    procedure Carregar; override;
+    function Validar: Boolean; override;
+    
+  end;
+
+var
+  frCadastroEtapa: TfrCadastroEtapa;
+
+implementation
+
+uses uDmAcademiaSci, uConsultaEtapa, uSimples, DateUtils;
+
+{$R *.dfm}
+
+
+{ TfrCadastroEtapa }
+
+function TfrCadastroEtapa.Consultar: TForm;
+begin
+  Result := TfrConsultaEtapa.Create(enCodigoEtapa);
+end;
+
+procedure TfrCadastroEtapa.Salvar;
+begin
+  inherited;
+  Tabela.FieldByName('BDCODETAPA').AsInteger := enCodigoEtapa.Codigo;
+  Tabela.FieldByName('BDNUMETAPA').AsInteger := StrToIntDef(cmNumeroEtapa, 0);
+  Tabela.FieldByName('BDCODPESSOA').AsInteger := enCodigoPessoa.Codigo;
+  Tabela.FieldByName('BDCODSALA').AsInteger := enCodigoSala.Codigo;
+  Tabela.FieldByName('BDCODESPACOCAFE').AsInteger := enCodigoEspacoCafe.Codigo;
+end;
+
+function TfrCadastroEtapa.setEditCodigo: TEdit;
+begin
+  Result := enCodigoEtapa;
+end;
+
+function TfrCadastroEtapa.setIndice: string;
+begin
+  Result := 'BDCODETAPA';
+end;
+
+function TfrCadastroEtapa.setTabela: TClientDataSet;
+begin
+  Result := dmAcademiaSci.cdsEtapa;
+end;
+
+procedure TfrCadastroEtapa.Carregar;
+begin
+  inherited;
+  enCodigoPessoa.Codigo := Tabela.FieldByName('BDCODPESSOA').AsInteger;
+  enCodigoSala.Codigo := Tabela.FieldByName('BDCODSALA').AsInteger;
+  enCodigoEspacoCafe.Codigo := Tabela.FieldByName('BDCODESPACOCAFE').AsInteger;
+  cmNumeroEtapa.ItemIndex := Tabela.FieldByName('BDNUMETAPA').AsInteger;
+end;
+
+procedure TfrCadastroEtapa.enCodigoPessoaExit(Sender: TObject);
+begin
+  if not dmAcademiaSci.SQLConnection.Connected then
+    dmAcademiaSci.SQLConnection.Connected := True;
+
+  dmAcademiaSci.qConsultaPessoa.Close;
+  dmAcademiaSci.qConsultaPessoa.SQL.Clear;
+
+  dmAcademiaSci.qConsultaPessoa.SQL.Add(
+    'select bdnomepessoa, bdsobrenomepessoa ' +
+    'from tpessoa ' +
+    'where bdcodpessoa = :bdcodpessoa ');
+
+  dmAcademiaSci.qConsultaPessoa.ParamByName('bdcodpessoa').AsInteger := enCodigoPessoa.Codigo;
+  dmAcademiaSci.qConsultaPessoa.Open;
+
+  if not dmAcademiaSci.qConsultaPessoa.IsEmpty then
+  begin
+    eNomePessoa.Text := dmAcademiaSci.qConsultaPessoa.FieldByName('bdnomepessoa').AsString;
+    eSobrenomePessoa.Text := dmAcademiaSci.qConsultaPessoa.FieldByName('bdsobrenomepessoa').AsString;
+  end
+  else
+  begin
+    ShowMessage('A pessoa escolhida não existe, favor escolher outra pessoa');
+    eSobrenomePessoa.Text := 'Não existe';
+    tbConfirmar.Enabled := False;
+  end;
+end;
+
+procedure TfrCadastroEtapa.enCodigoSalaExit(Sender: TObject);
+var
+  wLotacaoAtualSala, wLotacaoMaximaSala: String;
+begin
+  if not dmAcademiaSci.SQLConnection.Connected then
+    dmAcademiaSci.SQLConnection.Connected := True;
+
+  dmAcademiaSci.qConsultaPessoa.Close;
+  dmAcademiaSci.qConsultaPessoa.SQL.Clear;
+
+  dmAcademiaSci.qConsultaPessoa.SQL.Add(
+    'select bdnomesala, bdlotacaoatualsala, bdlotacaomaximasala ' +
+    'from tsala ' +
+    'where bdcodsala = :bdcodsala ');
+
+  dmAcademiaSci.qConsultaPessoa.ParamByName('bdcodsala').AsInteger := enCodigoSala.Codigo;
+  dmAcademiaSci.qConsultaPessoa.Open;
+
+  if not dmAcademiaSci.qConsultaPessoa.IsEmpty then
+  begin
+    eNomeSala.Text := dmAcademiaSci.qConsultaPessoa.FieldByName('bdnomesala').AsString;
+    wLotacaoAtualSala := dmAcademiaSci.qConsultaPessoa.FieldByName('bdlotacaoatualsala').AsString;
+    wLotacaoMaximaSala := dmAcademiaSci.qConsultaPessoa.FieldByName('bdlotacaomaximasala').AsString;
+
+
+    if (wLotacaoMaximaSala = wLotacaoAtualSala) then
+    begin
+      eSituacaoSala.Text := 'Não há vagas';
+      ShowMessage('A sala escolhida está cheia, favor escolher outra sala');
+      tbConfirmar.Enabled := False;
+    end
+    else
+    begin
+      eSituacaoSala.Text := 'Há vagas';
+      tbConfirmar.Enabled := True;
+    end;
+
+  end
+  else
+  begin
+    ShowMessage('A sala escolhida não existe, favor escolher outra sala');
+    eNomeSala.Text := 'Não existe';
+    eSituacaoSala.Text := 'Não existe';
+    tbConfirmar.Enabled := False;
+  end;
+end;
+
+procedure TfrCadastroEtapa.enCodigoEspacoCafeExit(Sender: TObject);
+var
+  wLotacaoAtualEspacoCafe, wLotacaoMaximaEspacoCafe: String;
+begin
+  if not dmAcademiaSci.SQLConnection.Connected then
+    dmAcademiaSci.SQLConnection.Connected := True;
+
+  dmAcademiaSci.qConsultaEspacoCafe.Close;
+  dmAcademiaSci.qConsultaEspacoCafe.SQL.Clear;
+
+  dmAcademiaSci.qConsultaEspacoCafe.SQL.Add(
+    'select bdnomeespacocafe, bdlotacaoatualespacocafe, bdlotacaomaximaespacocafe ' +
+    'from tespacocafe ' +
+    'where bdcodespacocafe = :bdcodespacocafe ');
+
+  dmAcademiaSci.qConsultaEspacoCafe.ParamByName('bdcodespacocafe').AsInteger := enCodigoEspacoCafe.Codigo;
+  dmAcademiaSci.qConsultaEspacoCafe.Open;
+
+  if not dmAcademiaSci.qConsultaEspacoCafe.IsEmpty then
+  begin
+    eNomeEspacoCafe.Text := dmAcademiaSci.qConsultaEspacoCafe.FieldByName('bdnomeespacocafe').AsString;
+    wLotacaoAtualEspacoCafe := dmAcademiaSci.qConsultaEspacoCafe.FieldByName('bdlotacaoatualespacocafe').AsString;
+    wLotacaoMaximaEspacoCafe := dmAcademiaSci.qConsultaEspacoCafe.FieldByName('bdlotacaomaximaespacocafe').AsString;
+
+   if (wLotacaoMaximaEspacoCafe = wLotacaoAtualEspacoCafe) then
+    begin
+      eSituacaoEspacoCafe.Text := 'Não há vagas';
+      ShowMessage('O espaço para café escolhido está cheio, favor escolher outro espaço');
+      tbConfirmar.Enabled := False;
+    end
+    else
+    begin
+      eSituacaoEspacoCafe.Text := 'Há vagas';
+      tbConfirmar.Enabled := True;
+    end;
+
+  end
+  else
+  begin
+    ShowMessage('O espaço para café escolhido não existe, favor escolher outro espaço');
+    eNomeEspacoCafe.Text := 'Não existe';
+    eSituacaoEspacoCafe.Text := 'Não existe';
+    tbConfirmar.Enabled := False;
+  end;
+end;
+
+
+procedure TfrCadastroEtapa.tbExcluirClick(Sender: TObject);
+begin
+  inherited;
+  ShowMessage('Etapa Exluída com Sucesso');
+end;
+
+function TfrCadastroEtapa.Validar: Boolean;
+begin
+  Result := true;
+end;
+
+end.
