@@ -1,10 +1,10 @@
-object dmAcademiaSci: TdmAcademiaSci
+object dmProjeto: TdmProjeto
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 212
-  Top = 152
-  Height = 295
-  Width = 1008
+  Left = 214
+  Top = 177
+  Height = 285
+  Width = 956
   object SQLConnection: TSQLConnection
     ConnectionName = 'DB2Connection'
     DriverName = 'DB2'

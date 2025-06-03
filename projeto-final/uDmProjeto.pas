@@ -1,4 +1,4 @@
-unit uDmAcademiaSci;
+unit uDmProjeto;
 
 interface
 
@@ -7,7 +7,7 @@ uses
   DBClient, Provider;
 
 type
-  TdmAcademiaSci = class(TDataModule)
+  TdmProjeto = class(TDataModule)
     SQLConnection: TSQLConnection;
     TPessoa: TSQLTable;
     dspPessoa: TDataSetProvider;
@@ -41,13 +41,13 @@ type
   end;
 
 var
-  dmAcademiaSci: TdmAcademiaSci;
+  dmProjeto: TdmProjeto;
 
 implementation
 
 {$R *.dfm}
 
-procedure TdmAcademiaSci.DataModuleCreate(Sender: TObject);
+procedure TdmProjeto.DataModuleCreate(Sender: TObject);
 begin
   SQLConnection.Close;
 

@@ -38,7 +38,7 @@ object frPrincipal: TfrPrincipal
       end
     end
     object Consulta1: TMenuItem
-      Caption = 'Consulta'
+      Caption = 'Consulta Etapas'
       object mConsultaPessoa: TMenuItem
         Caption = 'Pessoa'
         OnClick = mConsultaPessoaClick

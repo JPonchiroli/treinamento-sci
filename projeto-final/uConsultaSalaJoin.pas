@@ -25,7 +25,7 @@ var
 
 implementation
 
-uses uDmAcademiaSci;
+uses uDmProjeto;
 
 {$R *.dfm}
 
@@ -38,22 +38,22 @@ end;
 
 function TfrConsultaSalaJoin.setTabela: TClientDataSet;
 begin
-  Result := dmAcademiaSci.cdsConsultaSala;
+  Result := dmProjeto.cdsConsultaSala;
 end;
 
 procedure TfrConsultaSalaJoin.tbConfirmarClick(Sender: TObject);
 begin
   inherited;
-  if not dmAcademiaSci.SQLConnection.Connected then
-    dmAcademiaSci.SQLConnection.Connected := True;
+  if not dmProjeto.SQLConnection.Connected then
+    dmProjeto.SQLConnection.Connected := True;
 
-  if dmAcademiaSci.cdsConsultaPessoa.Active then
-    dmAcademiaSci.cdsConsultaPessoa.Close;
+  if dmProjeto.cdsConsultaPessoa.Active then
+    dmProjeto.cdsConsultaPessoa.Close;
 
-  dmAcademiaSci.cdsConsultaSala.Close;
-  dmAcademiaSci.qConsultaSala.SQL.Clear;
+  dmProjeto.cdsConsultaSala.Close;
+  dmProjeto.qConsultaSala.SQL.Clear;
 
-  dmAcademiaSci.qConsultaSala.SQL.Add(
+  dmProjeto.qConsultaSala.SQL.Add(
   'select et.bdnumetapa, ' +
           's.bdnomesala, ' +
           'p.bdnomepessoa, p.bdsobrenomepessoa ' +
@@ -62,9 +62,12 @@ begin
   'join tsala s on (s.bdcodsala = et.bdcodsala) ' +
   'where et.bdcodsala = :bdcodsala ');
 
-  dmAcademiaSci.qConsultaSala.ParamByName('bdcodsala').AsInteger := enCodigoSala.Codigo;
-  dmAcademiaSci.cdsConsultaSala.Open;
-  dsPadrao.DataSet := dmAcademiaSci.cdsConsultaSala;
+  dmProjeto.qConsultaSala.ParamByName('bdcodsala').AsInteger := enCodigoSala.Codigo;
+  dmProjeto.cdsConsultaSala.Open;
+  dsPadrao.DataSet := dmProjeto.cdsConsultaSala;
+
+  if dmProjeto.cdsConsultaSala.IsEmpty then
+    ShowMessage('Sala não registrada em nenhuma etapa, favor escolha outra sala');
 end;
 
 end.

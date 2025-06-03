@@ -22,7 +22,7 @@ var
 
 implementation
 
-uses uDmAcademiaSci;
+uses uDmProjeto;
 
 {$R *.dfm}
 
@@ -35,7 +35,7 @@ end;
 
 function TfrConsultaSala.setTabela: TClientDataSet;
 begin
-  Result := dmAcademiaSci.cdsSala;
+  Result := dmProjeto.cdsSala;
 end;
 
 end.

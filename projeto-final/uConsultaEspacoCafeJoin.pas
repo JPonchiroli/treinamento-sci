@@ -25,7 +25,7 @@ var
 
 implementation
 
-uses uDmAcademiaSci;
+uses uDmProjeto;
 
 {$R *.dfm}
 
@@ -38,22 +38,22 @@ end;
 
 function TfrConsultaEspacoCafeJoin.setTabela: TClientDataSet;
 begin
-  Result := dmAcademiaSci.cdsConsultaEspacoCafe;
+  Result := dmProjeto.cdsConsultaEspacoCafe;
 end;
 
 procedure TfrConsultaEspacoCafeJoin.tbConfirmarClick(Sender: TObject);
 begin
   inherited;
-  if not dmAcademiaSci.SQLConnection.Connected then
-    dmAcademiaSci.SQLConnection.Connected := True;
+  if not dmProjeto.SQLConnection.Connected then
+    dmProjeto.SQLConnection.Connected := True;
 
-  if dmAcademiaSci.cdsConsultaEspacoCafe.Active then
-     dmAcademiaSci.cdsConsultaEspacoCafe.Close;
+  if dmProjeto.cdsConsultaEspacoCafe.Active then
+     dmProjeto.cdsConsultaEspacoCafe.Close;
 
-  dmAcademiaSci.cdsConsultaEspacoCafe.Close;
-  dmAcademiaSci.qConsultaEspacoCafe.SQL.Clear;
+  dmProjeto.cdsConsultaEspacoCafe.Close;
+  dmProjeto.qConsultaEspacoCafe.SQL.Clear;
 
-  dmAcademiaSci.qConsultaEspacoCafe.SQL.Add(
+  dmProjeto.qConsultaEspacoCafe.SQL.Add(
   'select et.bdnumetapa, ' +
           'ec.bdnomeespacocafe, ' +
           'p.bdnomepessoa, p.bdsobrenomepessoa ' +
@@ -62,9 +62,12 @@ begin
   'join tespacocafe ec on (ec.bdcodespacocafe = et.bdcodespacocafe) ' +
   'where et.bdcodespacocafe = :bdcodespacocafe ');
 
-  dmAcademiaSci.qConsultaEspacoCafe.ParamByName('bdcodespacocafe').AsInteger := enCodigoEspacoCafe.Codigo;
-  dmAcademiaSci.cdsConsultaEspacoCafe.Open;
-  dsPadrao.DataSet := dmAcademiaSci.cdsConsultaEspacoCafe;
+  dmProjeto.qConsultaEspacoCafe.ParamByName('bdcodespacocafe').AsInteger := enCodigoEspacoCafe.Codigo;
+  dmProjeto.cdsConsultaEspacoCafe.Open;
+  dsPadrao.DataSet := dmProjeto.cdsConsultaEspacoCafe;
+
+  if dmProjeto.cdsConsultaEspacoCafe.IsEmpty then
+    ShowMessage('Espaço para café não registrado em nenhuma etapa, favor escolha outro espaço');
 end;
 
 end.

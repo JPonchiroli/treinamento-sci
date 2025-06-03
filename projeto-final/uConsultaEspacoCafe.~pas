@@ -22,7 +22,7 @@ var
 
 implementation
 
-uses uDmAcademiaSci;
+uses uDmAcademiaSci, uDmProjeto;
 
 {$R *.dfm}
 
@@ -35,7 +35,7 @@ end;
 
 function TfrConsultaEspacoCafe.setTabela: TClientDataSet;
 begin
-  Result := dmAcademiaSci.cdsEspacoCafe;
+  Result := dmProjeto.cdsEspacoCafe;
 end;
 
 end.

@@ -3,7 +3,6 @@ program AcademiaSci;
 uses
   Forms,
   uPrincipal in 'uPrincipal.pas' {frPrincipal},
-  uDmAcademiaSci in 'uDmAcademiaSci.pas' {dmAcademiaSci: TDataModule},
   uSimples in 'uSimples.pas' {frSimples},
   uCadastroPadrao in 'uCadastroPadrao.pas' {frCadastroPadrao},
   uConsultaPadraoMdi in 'uConsultaPadraoMdi.pas' {frConsultaPadraoMdi},
@@ -17,7 +16,8 @@ uses
   uCadastroEtapa in 'uCadastroEtapa.pas' {frCadastroEtapa},
   uConsultaPessoaJoin in 'uConsultaPessoaJoin.pas' {frConsultaPessoaJoin},
   uConsultaSalaJoin in 'uConsultaSalaJoin.pas' {frConsultaSalaJoin},
-  uConsultaEspacoCafeJoin in 'uConsultaEspacoCafeJoin.pas' {frConsultaEspacoCafeJoin};
+  uConsultaEspacoCafeJoin in 'uConsultaEspacoCafeJoin.pas' {frConsultaEspacoCafeJoin},
+  uDmProjeto in 'uDmProjeto.pas' {dmProjeto: TDataModule};
 
 {$R *.res}
 
@@ -25,6 +25,6 @@ begin
   Application.Initialize;
   Application.Title := 'Projeto Final Academia';
   Application.CreateForm(TfrPrincipal, frPrincipal);
-  Application.CreateForm(TdmAcademiaSci, dmAcademiaSci);
+  Application.CreateForm(TdmProjeto, dmProjeto);
   Application.Run;
 end.

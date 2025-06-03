@@ -46,6 +46,8 @@ type
     function Consultar: TForm; override;
     procedure Carregar; override;
     function Validar: Boolean; override;
+    function ConsultarEtapa: Boolean;
+    function ValidaCamposZerados: Boolean;
     
   end;
 
@@ -54,7 +56,7 @@ var
 
 implementation
 
-uses uDmAcademiaSci, uConsultaEtapa, uSimples, DateUtils;
+uses uConsultaEtapa, uSimples, DateUtils, uDmProjeto;
 
 {$R *.dfm}
 
@@ -68,12 +70,15 @@ end;
 
 procedure TfrCadastroEtapa.Salvar;
 begin
-  inherited;
-  Tabela.FieldByName('BDCODETAPA').AsInteger := enCodigoEtapa.Codigo;
-  Tabela.FieldByName('BDNUMETAPA').AsInteger := StrToIntDef(cmNumeroEtapa, 0);
-  Tabela.FieldByName('BDCODPESSOA').AsInteger := enCodigoPessoa.Codigo;
-  Tabela.FieldByName('BDCODSALA').AsInteger := enCodigoSala.Codigo;
-  Tabela.FieldByName('BDCODESPACOCAFE').AsInteger := enCodigoEspacoCafe.Codigo;
+  if ValidaCamposZerados then
+  begin
+    inherited;
+    Tabela.FieldByName('BDCODETAPA').AsInteger := enCodigoEtapa.Codigo;
+    Tabela.FieldByName('BDNUMETAPA').AsInteger := StrToIntDef(cmNumeroEtapa.Text, 0);
+    Tabela.FieldByName('BDCODPESSOA').AsInteger := enCodigoPessoa.Codigo;
+    Tabela.FieldByName('BDCODSALA').AsInteger := enCodigoSala.Codigo;
+    Tabela.FieldByName('BDCODESPACOCAFE').AsInteger := enCodigoEspacoCafe.Codigo;
+  end;
 end;
 
 function TfrCadastroEtapa.setEditCodigo: TEdit;
@@ -88,7 +93,7 @@ end;
 
 function TfrCadastroEtapa.setTabela: TClientDataSet;
 begin
-  Result := dmAcademiaSci.cdsEtapa;
+  Result := dmProjeto.cdsEtapa;
 end;
 
 procedure TfrCadastroEtapa.Carregar;
@@ -97,141 +102,225 @@ begin
   enCodigoPessoa.Codigo := Tabela.FieldByName('BDCODPESSOA').AsInteger;
   enCodigoSala.Codigo := Tabela.FieldByName('BDCODSALA').AsInteger;
   enCodigoEspacoCafe.Codigo := Tabela.FieldByName('BDCODESPACOCAFE').AsInteger;
-  cmNumeroEtapa.ItemIndex := Tabela.FieldByName('BDNUMETAPA').AsInteger;
+  cmNumeroEtapa.ItemIndex := Tabela.FieldByName('BDNUMETAPA').AsInteger - 1;
 end;
 
 procedure TfrCadastroEtapa.enCodigoPessoaExit(Sender: TObject);
 begin
-  if not dmAcademiaSci.SQLConnection.Connected then
-    dmAcademiaSci.SQLConnection.Connected := True;
+    if not dmProjeto.SQLConnection.Connected then
+      dmProjeto.SQLConnection.Connected := True;
 
-  dmAcademiaSci.qConsultaPessoa.Close;
-  dmAcademiaSci.qConsultaPessoa.SQL.Clear;
+    dmProjeto.qConsultaPessoa.Close;
+    dmProjeto.qConsultaPessoa.SQL.Clear;
 
-  dmAcademiaSci.qConsultaPessoa.SQL.Add(
-    'select bdnomepessoa, bdsobrenomepessoa ' +
-    'from tpessoa ' +
-    'where bdcodpessoa = :bdcodpessoa ');
+    dmProjeto.qConsultaPessoa.SQL.Add(
+      'select bdnomepessoa, bdsobrenomepessoa ' +
+      'from tpessoa ' +
+      'where bdcodpessoa = :bdcodpessoa ');
 
-  dmAcademiaSci.qConsultaPessoa.ParamByName('bdcodpessoa').AsInteger := enCodigoPessoa.Codigo;
-  dmAcademiaSci.qConsultaPessoa.Open;
+    dmProjeto.qConsultaPessoa.ParamByName('bdcodpessoa').AsInteger := enCodigoPessoa.Codigo;
+    dmProjeto.qConsultaPessoa.Open;
 
-  if not dmAcademiaSci.qConsultaPessoa.IsEmpty then
-  begin
-    eNomePessoa.Text := dmAcademiaSci.qConsultaPessoa.FieldByName('bdnomepessoa').AsString;
-    eSobrenomePessoa.Text := dmAcademiaSci.qConsultaPessoa.FieldByName('bdsobrenomepessoa').AsString;
-  end
-  else
-  begin
-    ShowMessage('A pessoa escolhida não existe, favor escolher outra pessoa');
-    eSobrenomePessoa.Text := 'Não existe';
-    tbConfirmar.Enabled := False;
-  end;
+    if not dmProjeto.qConsultaPessoa.IsEmpty then
+    begin
+      eNomePessoa.Text := dmProjeto.qConsultaPessoa.FieldByName('bdnomepessoa').AsString;
+      eSobrenomePessoa.Text := dmProjeto.qConsultaPessoa.FieldByName('bdsobrenomepessoa').AsString;
+    end
+    else
+    begin
+      ShowMessage('A pessoa escolhida não existe, favor escolher outra pessoa');
+      eNomePessoa.Text := 'Não existe';
+      eSobrenomePessoa.Text := 'Não existe';
+      enCodigoPessoa.SetFocus;
+    end;
 end;
 
 procedure TfrCadastroEtapa.enCodigoSalaExit(Sender: TObject);
 var
   wLotacaoAtualSala, wLotacaoMaximaSala: String;
 begin
-  if not dmAcademiaSci.SQLConnection.Connected then
-    dmAcademiaSci.SQLConnection.Connected := True;
+    if not dmProjeto.SQLConnection.Connected then
+      dmProjeto.SQLConnection.Connected := True;
 
-  dmAcademiaSci.qConsultaPessoa.Close;
-  dmAcademiaSci.qConsultaPessoa.SQL.Clear;
+    dmProjeto.qConsultaPessoa.Close;
+    dmProjeto.qConsultaPessoa.SQL.Clear;
 
-  dmAcademiaSci.qConsultaPessoa.SQL.Add(
-    'select bdnomesala, bdlotacaoatualsala, bdlotacaomaximasala ' +
-    'from tsala ' +
-    'where bdcodsala = :bdcodsala ');
+    dmProjeto.qConsultaPessoa.SQL.Add(
+      'select bdnomesala, bdlotacaoatualsala, bdlotacaomaximasala ' +
+      'from tsala ' +
+      'where bdcodsala = :bdcodsala ');
 
-  dmAcademiaSci.qConsultaPessoa.ParamByName('bdcodsala').AsInteger := enCodigoSala.Codigo;
-  dmAcademiaSci.qConsultaPessoa.Open;
+    dmProjeto.qConsultaPessoa.ParamByName('bdcodsala').AsInteger := enCodigoSala.Codigo;
+    dmProjeto.qConsultaPessoa.Open;
 
-  if not dmAcademiaSci.qConsultaPessoa.IsEmpty then
-  begin
-    eNomeSala.Text := dmAcademiaSci.qConsultaPessoa.FieldByName('bdnomesala').AsString;
-    wLotacaoAtualSala := dmAcademiaSci.qConsultaPessoa.FieldByName('bdlotacaoatualsala').AsString;
-    wLotacaoMaximaSala := dmAcademiaSci.qConsultaPessoa.FieldByName('bdlotacaomaximasala').AsString;
-
-
-    if (wLotacaoMaximaSala = wLotacaoAtualSala) then
+    if not dmProjeto.qConsultaPessoa.IsEmpty then
     begin
-      eSituacaoSala.Text := 'Não há vagas';
-      ShowMessage('A sala escolhida está cheia, favor escolher outra sala');
-      tbConfirmar.Enabled := False;
+      eNomeSala.Text := dmProjeto.qConsultaPessoa.FieldByName('bdnomesala').AsString;
+      wLotacaoAtualSala := dmProjeto.qConsultaPessoa.FieldByName('bdlotacaoatualsala').AsString;
+      wLotacaoMaximaSala := dmProjeto.qConsultaPessoa.FieldByName('bdlotacaomaximasala').AsString;
+
+
+      if (wLotacaoMaximaSala = wLotacaoAtualSala) then
+      begin
+        eSituacaoSala.Text := 'Não há vagas';
+        ShowMessage('A sala escolhida está cheia, favor escolher outra sala');
+        enCodigoSala.SetFocus;
+      end
+      else
+        eSituacaoSala.Text := 'Há vagas'
     end
     else
     begin
-      eSituacaoSala.Text := 'Há vagas';
-      tbConfirmar.Enabled := True;
+      ShowMessage('A sala escolhida não existe, favor escolher outra sala');
+      eNomeSala.Text := 'Não existe';
+      eSituacaoSala.Text := 'Não existe';
+      enCodigoSala.SetFocus;
     end;
-
-  end
-  else
-  begin
-    ShowMessage('A sala escolhida não existe, favor escolher outra sala');
-    eNomeSala.Text := 'Não existe';
-    eSituacaoSala.Text := 'Não existe';
-    tbConfirmar.Enabled := False;
-  end;
 end;
 
 procedure TfrCadastroEtapa.enCodigoEspacoCafeExit(Sender: TObject);
 var
   wLotacaoAtualEspacoCafe, wLotacaoMaximaEspacoCafe: String;
 begin
-  if not dmAcademiaSci.SQLConnection.Connected then
-    dmAcademiaSci.SQLConnection.Connected := True;
+    if not dmProjeto.SQLConnection.Connected then
+      dmProjeto.SQLConnection.Connected := True;
 
-  dmAcademiaSci.qConsultaEspacoCafe.Close;
-  dmAcademiaSci.qConsultaEspacoCafe.SQL.Clear;
+    dmProjeto.qConsultaEspacoCafe.Close;
+    dmProjeto.qConsultaEspacoCafe.SQL.Clear;
 
-  dmAcademiaSci.qConsultaEspacoCafe.SQL.Add(
-    'select bdnomeespacocafe, bdlotacaoatualespacocafe, bdlotacaomaximaespacocafe ' +
-    'from tespacocafe ' +
-    'where bdcodespacocafe = :bdcodespacocafe ');
+    dmProjeto.qConsultaEspacoCafe.SQL.Add(
+      'select bdnomeespacocafe, bdlotacaoatualespacocafe, bdlotacaomaximaespacocafe ' +
+      'from tespacocafe ' +
+      'where bdcodespacocafe = :bdcodespacocafe ');
 
-  dmAcademiaSci.qConsultaEspacoCafe.ParamByName('bdcodespacocafe').AsInteger := enCodigoEspacoCafe.Codigo;
-  dmAcademiaSci.qConsultaEspacoCafe.Open;
+    dmProjeto.qConsultaEspacoCafe.ParamByName('bdcodespacocafe').AsInteger := enCodigoEspacoCafe.Codigo;
+    dmProjeto.qConsultaEspacoCafe.Open;
 
-  if not dmAcademiaSci.qConsultaEspacoCafe.IsEmpty then
-  begin
-    eNomeEspacoCafe.Text := dmAcademiaSci.qConsultaEspacoCafe.FieldByName('bdnomeespacocafe').AsString;
-    wLotacaoAtualEspacoCafe := dmAcademiaSci.qConsultaEspacoCafe.FieldByName('bdlotacaoatualespacocafe').AsString;
-    wLotacaoMaximaEspacoCafe := dmAcademiaSci.qConsultaEspacoCafe.FieldByName('bdlotacaomaximaespacocafe').AsString;
-
-   if (wLotacaoMaximaEspacoCafe = wLotacaoAtualEspacoCafe) then
+    if not dmProjeto.qConsultaEspacoCafe.IsEmpty then
     begin
-      eSituacaoEspacoCafe.Text := 'Não há vagas';
-      ShowMessage('O espaço para café escolhido está cheio, favor escolher outro espaço');
-      tbConfirmar.Enabled := False;
+      eNomeEspacoCafe.Text := dmProjeto.qConsultaEspacoCafe.FieldByName('bdnomeespacocafe').AsString;
+      wLotacaoAtualEspacoCafe := dmProjeto.qConsultaEspacoCafe.FieldByName('bdlotacaoatualespacocafe').AsString;
+      wLotacaoMaximaEspacoCafe := dmProjeto.qConsultaEspacoCafe.FieldByName('bdlotacaomaximaespacocafe').AsString;
+
+     if (wLotacaoMaximaEspacoCafe = wLotacaoAtualEspacoCafe) then
+      begin
+        eSituacaoEspacoCafe.Text := 'Não há vagas';
+        ShowMessage('O espaço para café escolhido está cheio, favor escolher outro espaço');
+        enCodigoSala.SetFocus;
+      end
+      else
+        eSituacaoEspacoCafe.Text := 'Há vagas';
     end
     else
     begin
-      eSituacaoEspacoCafe.Text := 'Há vagas';
-      tbConfirmar.Enabled := True;
+      ShowMessage('O espaço para café escolhido não existe, favor escolher outro espaço');
+      eNomeEspacoCafe.Text := 'Não existe';
+      eSituacaoEspacoCafe.Text := 'Não existe';
+      enCodigoSala.SetFocus;
     end;
-
-  end
-  else
-  begin
-    ShowMessage('O espaço para café escolhido não existe, favor escolher outro espaço');
-    eNomeEspacoCafe.Text := 'Não existe';
-    eSituacaoEspacoCafe.Text := 'Não existe';
-    tbConfirmar.Enabled := False;
-  end;
 end;
 
+
+function TfrCadastroEtapa.Validar: Boolean;
+var
+  wEtapasCadastradas, wJaEtapa1, wJaEtapa2: Integer;
+begin
+  if not dmProjeto.SQLConnection.Connected then
+    dmProjeto.SQLConnection.Connected := True;
+
+  dmProjeto.qConsultaEtapa.Close;
+  dmProjeto.qConsultaEtapa.SQL.Clear;
+
+  dmProjeto.qConsultaEtapa.SQL.Add(
+    'select ' +
+    'bdcodpessoa, ' +
+    'count(distinct bdnumetapa) as etapas_cadastradas, ' +
+    'max(case when bdnumetapa = 1 then 1 else 0 end) AS ja_etapa_1, ' +
+    'max(case when bdnumetapa = 2 then 1 else 0 end) AS ja_etapa_2 ' +
+    'from tetapa ' +
+    'where bdcodpessoa = :bdcodpessoa ' +
+    'group by bdcodpessoa ');
+
+  dmProjeto.qConsultaEtapa.ParamByName('bdcodpessoa').AsInteger := enCodigoPessoa.Codigo;
+  dmProjeto.qConsultaEtapa.Open;
+
+  if not dmProjeto.qConsultaEtapa.IsEmpty then
+  begin
+    wEtapasCadastradas := dmProjeto.qConsultaEtapa.FieldByName('etapas_cadastradas').AsInteger;
+    wJaEtapa1 := dmProjeto.qConsultaEtapa.FieldByName('ja_etapa_1').AsInteger;
+    wJaEtapa2 := dmProjeto.qConsultaEtapa.FieldByName('ja_etapa_2').AsInteger;
+
+    {ShowMessage('wJaEtapa1: ' + wJaEtapa1 + 'wJaEtapa2: ' + wJaEtapa2);
+    ShowMessage('cmNumeroEtapa.Text: ' + cmNumeroEtapa.Text);}
+
+    if wEtapasCadastradas = 2 then
+    begin
+      ShowMessage('A pessoa inserida já está cadastrada em duas etapas, escolha outra pessoa');
+      Result := false;
+    end else if (wJaEtapa1 = 1) and (cmNumeroEtapa.Text = IntToStr(1)) then
+    begin
+      ShowMessage('A pessoa inserida já está cadastrada na etapa 1, escolha outra etapa');
+      Result := false;
+    end else if (wJaEtapa2 = 1) and (cmNumeroEtapa.Text = IntToStr(2)) then
+    begin
+      ShowMessage('A pessoa inserida já está cadastrada na etapa 2, escolha outra etapa');
+      Result := false;
+    end else
+      Result := true;
+  end
+  else
+    Result := true;
+end;
+
+
+function TfrCadastroEtapa.ConsultarEtapa: Boolean;
+var
+  wCodigoEtapa: Integer;
+begin
+  if not dmProjeto.SQLConnection.Connected then
+    dmProjeto.SQLConnection.Connected := True;
+
+  if dmProjeto.cdsConsultaEtapa.Active then
+    dmProjeto.cdsConsultaEtapa.Close;
+
+  dmProjeto.cdsConsultaEtapa.Close;
+  dmProjeto.qConsultaEtapa.SQL.Clear;
+
+  dmProjeto.qConsultaEtapa.SQL.Add(
+  'select bdcodetapa ' +
+  'from tetapa ' +
+  'where bdcodetapa = :bdcodetapa ');
+
+  dmProjeto.qConsultaEtapa.ParamByName('bdcodetapa').AsInteger := enCodigoEtapa.Codigo;
+  dmProjeto.cdsConsultaEtapa.Open;
+  wCodigoEtapa := dmProjeto.cdsConsultaEtapa.FieldByName('bdcodetapa').AsInteger;
+
+  if wCodigoEtapa > 0 then
+    Result := true
+  else
+    Result := false;
+end;
 
 procedure TfrCadastroEtapa.tbExcluirClick(Sender: TObject);
 begin
-  inherited;
-  ShowMessage('Etapa Exluída com Sucesso');
+  if not ConsultarEtapa then
+    ShowMessage('Etapa não cadastrada, favor escolher outra etapa')
+  else
+    inherited;
 end;
 
-function TfrCadastroEtapa.Validar: Boolean;
+function TfrCadastroEtapa.ValidaCamposZerados: Boolean;
 begin
-  Result := true;
+  if (enCodigoPessoa.Codigo = 0) or
+     (enCodigoSala.Codigo = 0) or
+     (enCodigoEspacoCafe.Codigo = 0) then
+  begin
+    ShowMessage('Erro de Inserção. O cadastro possui campos vazios');
+    Result := false;
+  end
+  else
+    Result := true;
+
 end;
 
 end.

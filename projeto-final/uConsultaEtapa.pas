@@ -22,7 +22,7 @@ var
 
 implementation
 
-uses uDmAcademiaSci;
+uses uDmProjeto;
 
 {$R *.dfm}
 
@@ -30,12 +30,12 @@ uses uDmAcademiaSci;
 
 function TfrConsultaEtapa.setChave: String;
 begin
-  Result := 'BDCODPESSOA;BDCODSALA;BDCODESPACOCAFE';
+  Result := 'BDCODETAPA';
 end;
 
 function TfrConsultaEtapa.setTabela: TClientDataSet;
 begin
-  Result := dmAcademiaSci.cdsEtapa;
+  Result := dmProjeto.cdsEtapa;
 end;
 
 end.

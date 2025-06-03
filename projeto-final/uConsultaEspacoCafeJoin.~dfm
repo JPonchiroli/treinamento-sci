@@ -9,6 +9,10 @@ inherited frConsultaEspacoCafeJoin: TfrConsultaEspacoCafeJoin
     Height = 13
     Caption = 'C'#243'digo Espa'#231'o Caf'#233
   end
+  inherited tbFerramentas: TToolBar
+    Color = clMenu
+    ParentColor = False
+  end
   inherited grPadrao: TDBGrid
     Top = 104
     Width = 673

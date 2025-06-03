@@ -3,8 +3,8 @@ inherited frConsultaEspacoCafe: TfrConsultaEspacoCafe
   PixelsPerInch = 96
   TextHeight = 13
   inherited grPadrao: TDBGrid
-    Width = 689
-    Height = 273
+    Width = 537
+    Height = 177
     Columns = <
       item
         Expanded = False

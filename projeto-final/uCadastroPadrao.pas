@@ -126,10 +126,16 @@ begin
 
     Salvar;
 
-    FTabela.Post;
-    FTabela.ApplyUpdates(0);
-    FTabela.Refresh;
-
+    if Validar then
+    begin
+      FTabela.Post;
+      FTabela.ApplyUpdates(0);
+      FTabela.Refresh;
+      ShowMessage('Inserção realizada com sucesso');
+    end
+    else
+      FTabela.Cancel;
+      
     if FEditCodigo.CanFocus then
       FEditCodigo.SetFocus;
     LimparCampos;
@@ -150,8 +156,13 @@ begin
       else
         wEncontrou := FTabela.FindKey([StrToIntDef(Trim(FEditCodigo.Text), 0)]);
 
-      if wEncontrou then
+      if wEncontrou and (FEditCodigo.Text <> '0') then
+      begin
         FTabela.Delete;
+        ShowMessage('Exclusão realizada com sucesso');
+      end
+      else
+        ShowMessage('Código inválido para exclusão, favor escolher outro código');
 
       FTabela.ApplyUpdates(0);
       FTabela.Refresh;

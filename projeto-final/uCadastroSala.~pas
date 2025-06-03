@@ -17,6 +17,7 @@ type
     lLotacaoAtualSala: TLabel;
     lCodigoSala: TLabel;
     enCodigoSala: TEditNumerico;
+    procedure tbExcluirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -27,6 +28,9 @@ type
     procedure Salvar; override;
     function Consultar: TForm; override;
     procedure Carregar; override;
+    function Validar: Boolean; override;
+    function ConsultarSala: Boolean;
+    function ConsultarChaveEstrangeira: Boolean;
   end;
 
 var
@@ -34,7 +38,7 @@ var
 
 implementation
 
-uses uDmAcademiaSci, uConsultaSala;
+uses uConsultaSala, uDmProjeto;
 
 {$R *.dfm}
 
@@ -53,6 +57,34 @@ begin
   Result := TfrConsultaSala.Create(enCodigoSala);
 end;
 
+function TfrCadastroSala.ConsultarSala: Boolean;
+var
+  wCodigoSala: Integer;
+begin
+  if not dmProjeto.SQLConnection.Connected then
+    dmProjeto.SQLConnection.Connected := True;
+
+  if dmProjeto.cdsConsultaSala.Active then
+    dmProjeto.cdsConsultaSala.Close;
+
+  dmProjeto.cdsConsultaSala.Close;
+  dmProjeto.qConsultaSala.SQL.Clear;
+
+  dmProjeto.qConsultaSala.SQL.Add(
+  'select bdcodsala ' +
+  'from tsala ' +
+  'where bdcodsala = :bdcodsala ');
+
+  dmProjeto.qConsultaSala.ParamByName('bdcodsala').AsInteger := enCodigoSala.Codigo;
+  dmProjeto.cdsConsultaSala.Open;
+  wCodigoSala := dmProjeto.cdsConsultaSala.FieldByName('bdcodsala').AsInteger;
+
+  if wCodigoSala > 0 then
+    Result := true
+  else
+    Result := false;
+end;
+
 procedure TfrCadastroSala.Salvar;
 begin
   inherited;
@@ -60,8 +92,6 @@ begin
   Tabela.FieldByName('BDNOMESALA').AsString := eNomeSala.Text;
   Tabela.FieldByName('BDLOTACAOMAXIMASALA').AsInteger := enLotacaoMaximaSala.Codigo;
   Tabela.FieldByName('BDLOTACAOATUALSALA').AsInteger := enLotacaoAtualSala.Codigo;
-
-  ShowMessage('Sala criada com sucesso!');
 end;
 
 function TfrCadastroSala.setEditCodigo: TEdit;
@@ -76,7 +106,60 @@ end;
 
 function TfrCadastroSala.setTabela: TClientDataSet;
 begin
-  Result := dmAcademiaSci.cdsSala;
+  Result := dmProjeto.cdsSala;
+end;
+
+function TfrCadastroSala.Validar: Boolean;
+begin
+  if (eNomeSala.Text = EmptyStr) or
+     (enLotacaoMaximaSala.Text = EmptyStr) or
+     (enLotacaoAtualSala.Text = EmptyStr) then
+  begin
+    ShowMessage('Erro de Inserção. O cadastro possui campos vazios');
+    Result := false;
+  end else
+  begin
+    ShowMessage('Sala Criada com Sucesso!');
+    Result := true;
+  end;
+end;
+
+procedure TfrCadastroSala.tbExcluirClick(Sender: TObject);
+begin
+  if not ConsultarSala then
+    ShowMessage('Sala não cadastrada, favor escolher outra sala')
+  else if not ConsultarChaveEstrangeira then
+    ShowMessage('Sala já cadastrada em uma etapa, favor escolher outra sala')
+  else
+    inherited;
+end;
+
+function TfrCadastroSala.ConsultarChaveEstrangeira: Boolean;
+var
+  wChaveEstrangeira: Integer;
+begin
+  if not dmProjeto.SQLConnection.Connected then
+    dmProjeto.SQLConnection.Connected := True;
+
+  if dmProjeto.cdsConsultaSala.Active then
+    dmProjeto.cdsConsultaSala.Close;
+
+  dmProjeto.cdsConsultaSala.Close;
+  dmProjeto.qConsultaSala.SQL.Clear;
+
+  dmProjeto.qConsultaSala.SQL.Add(
+  'select bdcodsala ' +
+  'from tetapa ' +
+  'where bdcodsala = :bdcodsala ');
+
+  dmProjeto.qConsultaSala.ParamByName('bdcodsala').AsInteger := enCodigoSala.Codigo;
+  dmProjeto.cdsConsultaSala.Open;
+  wChaveEstrangeira := dmProjeto.cdsConsultaSala.FieldByName('bdcodsala').AsInteger;
+
+  if wChaveEstrangeira > 0 then
+    Result := false
+  else
+    Result := true;
 end;
 
 end.

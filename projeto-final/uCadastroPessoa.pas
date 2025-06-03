@@ -26,6 +26,9 @@ type
     procedure Salvar; override;
     function Consultar: TForm; override;
     procedure Carregar; override;
+    function Validar: Boolean; override;
+    function ConsultarPessoa: Boolean;
+    function ConsultarChaveEstrangeira: Boolean;
   end;
 
 var
@@ -33,7 +36,7 @@ var
 
 implementation
 
-uses uDmAcademiaSci, uConsultaPessoa;
+uses uDmProjeto, uConsultaPessoa, Math;
 
 {$R *.dfm}
 
@@ -51,6 +54,34 @@ begin
   Result := TfrConsultaPessoa.Create(enCodigoPessoa);
 end;
 
+function TfrCadastroPessoa.ConsultarPessoa: Boolean;
+var
+  wCodigoPessoa: Integer;
+begin
+  if not dmProjeto.SQLConnection.Connected then
+    dmProjeto.SQLConnection.Connected := True;
+
+  if dmProjeto.cdsConsultaPessoa.Active then
+    dmProjeto.cdsConsultaPessoa.Close;
+
+  dmProjeto.cdsConsultaPessoa.Close;
+  dmProjeto.qConsultaPessoa.SQL.Clear;
+
+  dmProjeto.qConsultaPessoa.SQL.Add(
+  'select bdcodpessoa ' +
+  'from tpessoa ' +
+  'where bdcodpessoa = :bdcodpessoa ');
+
+  dmProjeto.qConsultaPessoa.ParamByName('bdcodpessoa').AsInteger := enCodigoPessoa.Codigo;
+  dmProjeto.cdsConsultaPessoa.Open;
+  wCodigoPessoa := dmProjeto.cdsConsultaPessoa.FieldByName('bdcodpessoa').AsInteger;
+
+  if wCodigoPessoa > 0 then
+    Result := true
+  else
+    Result := false;
+end;
+
 procedure TfrCadastroPessoa.Salvar;
 begin
   inherited;
@@ -58,8 +89,6 @@ begin
   Tabela.FieldByName('BDCODPESSOA').AsInteger := enCodigoPessoa.Codigo;
   Tabela.FieldByName('BDNOMEPESSOA').AsString := eNomePessoa.Text;
   Tabela.FieldByName('BDSOBRENOMEPESSOA').AsString := eSobrenomePessoa.Text;
-
-  ShowMessage('Pessoa Criada com Sucesso!');
 end;
 
 function TfrCadastroPessoa.setEditCodigo: TEdit;
@@ -74,14 +103,61 @@ end;
 
 function TfrCadastroPessoa.setTabela: TClientDataSet;
 begin
-  Result := dmAcademiaSci.cdsPessoa;
+  Result := dmProjeto.cdsPessoa;
 end;
 
 
+function TfrCadastroPessoa.Validar: Boolean;
+begin
+  if (eNomePessoa.Text = EmptyStr) or
+     (eSobrenomePessoa.Text = EmptyStr) then
+  begin
+    ShowMessage('Erro de Inserção. O cadastro possui campos vazios');
+    Result := false;
+  end else
+  begin
+    Result := true;
+  end;
+
+end;
+
 procedure TfrCadastroPessoa.tbExcluirClick(Sender: TObject);
 begin
-  inherited;
-  ShowMessage('Pessoa Exluída com Sucesso');
+  if not ConsultarPessoa then
+    ShowMessage('Pessoa não cadastrada, favor escolher outra pessoa')
+  else if not ConsultarChaveEstrangeira then
+    ShowMessage('Pessoa já cadastrada em uma etapa, favor escolher outra pessoa')
+  else
+    inherited;
+
+end;
+
+function TfrCadastroPessoa.ConsultarChaveEstrangeira: Boolean;
+var
+  wChaveEstrangeira: Integer;
+begin
+  if not dmProjeto.SQLConnection.Connected then
+    dmProjeto.SQLConnection.Connected := True;
+
+  if dmProjeto.cdsConsultaPessoa.Active then
+    dmProjeto.cdsConsultaPessoa.Close;
+
+  dmProjeto.cdsConsultaPessoa.Close;
+  dmProjeto.qConsultaPessoa.SQL.Clear;
+
+  dmProjeto.qConsultaPessoa.SQL.Add(
+  'select bdcodpessoa ' +
+  'from tetapa ' +
+  'where bdcodpessoa = :bdcodpessoa ');
+
+  dmProjeto.qConsultaPessoa.ParamByName('bdcodpessoa').AsInteger := enCodigoPessoa.Codigo;
+  dmProjeto.cdsConsultaPessoa.Open;
+  wChaveEstrangeira := dmProjeto.cdsConsultaPessoa.FieldByName('bdcodpessoa').AsInteger;
+
+  if wChaveEstrangeira > 0 then
+    Result := false
+  else
+    Result := true;
 end;
 
 end.

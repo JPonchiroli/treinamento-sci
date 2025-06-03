@@ -17,6 +17,7 @@ type
     lLotacaoAtualEspacoCafe: TLabel;
     lCodigoEspacoCafe: TLabel;
     enCodigoEspacoCafe: TEditNumerico;
+    procedure tbExcluirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -27,6 +28,9 @@ type
     procedure Salvar; override;
     function Consultar: TForm; override;
     procedure Carregar; override;
+    function Validar: Boolean; override;
+    function ConsultarEspacoCafe: Boolean;
+    function ConsultarChaveEstrangeira: Boolean;
   end;
 
 var
@@ -34,7 +38,7 @@ var
 
 implementation
 
-uses uDmAcademiaSci, uConsultaEspacoCafe;
+uses uConsultaEspacoCafe, uDmProjeto;
 
 {$R *.dfm}
 
@@ -53,6 +57,34 @@ begin
   Result := TfrConsultaEspacoCafe.Create(enCodigoEspacoCafe);
 end;
 
+function TfrCadastroEspacoCafe.ConsultarEspacoCafe: Boolean;
+var
+  wCodigoEspaco: Integer;
+begin
+  if not dmProjeto.SQLConnection.Connected then
+    dmProjeto.SQLConnection.Connected := True;
+
+  if dmProjeto.cdsConsultaEspacoCafe.Active then
+    dmProjeto.cdsConsultaEspacoCafe.Close;
+
+  dmProjeto.cdsConsultaEspacoCafe.Close;
+  dmProjeto.qConsultaEspacoCafe.SQL.Clear;
+
+  dmProjeto.qConsultaEspacoCafe.SQL.Add(
+  'select bdcodespacocafe ' +
+  'from tespacocafe ' +
+  'where bdcodespacocafe = :bdcodespacocafe ');
+
+  dmProjeto.qConsultaEspacoCafe.ParamByName('bdcodespacocafe').AsInteger := enCodigoEspacoCafe.Codigo;
+  dmProjeto.cdsConsultaEspacoCafe.Open;
+  wCodigoEspaco := dmProjeto.cdsConsultaEspacoCafe.FieldByName('bdcodespacocafe').AsInteger;
+
+  if wCodigoEspaco > 0 then
+    Result := true
+  else
+    Result := false;
+end;
+
 procedure TfrCadastroEspacoCafe.Salvar;
 begin
   inherited;
@@ -60,8 +92,6 @@ begin
   Tabela.FieldByName('BDNOMEESPACOCAFE').AsString := eNomeEspacoCafe.Text;
   Tabela.FieldByName('BDLOTACAOMAXIMAESPACOCAFE').AsInteger := enLotacaoMaximaEspacoCafe.Codigo;
   Tabela.FieldByName('BDLOTACAOATUALESPACOCAFE').AsInteger := enLotacaoAtualEspacoCafe.Codigo;
-
-  ShowMessage('Espaço para Café Criado com Sucesso!');
 end;
 
 function TfrCadastroEspacoCafe.setEditCodigo: TEdit;
@@ -76,7 +106,60 @@ end;
 
 function TfrCadastroEspacoCafe.setTabela: TClientDataSet;
 begin
-  Result := dmAcademiaSci.cdsEspacoCafe;
+  Result := dmProjeto.cdsEspacoCafe;
+end;
+
+function TfrCadastroEspacoCafe.Validar: Boolean;
+begin
+  if (eNomeEspacoCafe.Text = EmptyStr) or
+     (enLotacaoMaximaEspacoCafe.Text = EmptyStr) or
+     (enLotacaoAtualEspacoCafe.Text = EmptyStr) then
+  begin
+    ShowMessage('Erro de Inserção. O cadastro possui campos vazios');
+    Result := false;
+  end else
+  begin
+    ShowMessage('Espaço de Café Criado com Sucesso!');
+    Result := true;
+  end;
+end;
+
+procedure TfrCadastroEspacoCafe.tbExcluirClick(Sender: TObject);
+begin
+  if not ConsultarEspacoCafe then
+    ShowMessage('Espaço de café não cadastrada, favor escolher outro espaço')
+  else if not ConsultarChaveEstrangeira then
+    ShowMessage('Espaço de café já cadastrado em uma etapa, favor escolher outro espaço')
+  else
+    inherited;
+end;
+
+function TfrCadastroEspacoCafe.ConsultarChaveEstrangeira: Boolean;
+var
+  wChaveEstrangeira: Integer;
+begin
+  if not dmProjeto.SQLConnection.Connected then
+    dmProjeto.SQLConnection.Connected := True;
+
+  if dmProjeto.cdsConsultaEspacoCafe.Active then
+    dmProjeto.cdsConsultaEspacoCafe.Close;
+
+  dmProjeto.cdsConsultaEspacoCafe.Close;
+  dmProjeto.qConsultaEspacoCafe.SQL.Clear;
+
+  dmProjeto.qConsultaEspacoCafe.SQL.Add(
+  'select bdcodespacocafe ' +
+  'from tetapa ' +
+  'where bdcodespacocafe = :bdcodespacocafe ');
+
+  dmProjeto.qConsultaEspacoCafe.ParamByName('bdcodespacocafe').AsInteger := enCodigoEspacoCafe.Codigo;
+  dmProjeto.cdsConsultaEspacoCafe.Open;
+  wChaveEstrangeira := dmProjeto.cdsConsultaEspacoCafe.FieldByName('bdcodespacocafe').AsInteger;
+
+  if wChaveEstrangeira > 0 then
+    Result := false
+  else
+    Result := true;
 end;
 
 end.

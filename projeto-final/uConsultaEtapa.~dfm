@@ -3,35 +3,41 @@ inherited frConsultaEtapa: TfrConsultaEtapa
   PixelsPerInch = 96
   TextHeight = 13
   inherited grPadrao: TDBGrid
-    Width = 641
+    Width = 529
     Height = 177
     Columns = <
       item
         Expanded = False
+        FieldName = 'BDCODETAPA'
+        Title.Caption = 'C'#243'digo'
+        Visible = True
+      end
+      item
+        Expanded = False
         FieldName = 'BDNUMETAPA'
         Title.Caption = 'Etapa'
-        Width = 110
+        Width = 65
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'BDCODPESSOA'
         Title.Caption = 'C'#243'digo Pessoa'
-        Width = 146
+        Width = 88
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'BDCODSALA'
         Title.Caption = 'C'#243'digo da Sala'
-        Width = 168
+        Width = 91
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'BDCODESPACOCAFE'
         Title.Caption = 'C'#243'digo Espa'#231'o Caf'#233
-        Width = 146
+        Width = 110
         Visible = True
       end>
   end
