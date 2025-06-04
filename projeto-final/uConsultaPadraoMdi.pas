@@ -12,7 +12,7 @@ type
     dsPadrao: TDataSource;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
+    Shift: TShiftState);
     procedure tbConfirmarClick(Sender: TObject);
   private
     { Private declarations }
@@ -46,6 +46,7 @@ begin
     dsPadrao.DataSet := FTabela;
     grPadrao.DataSource := dsPadrao;
   end;
+
 
   grPadrao.Options := [dgTitles,dgIndicator,dgColumnResize,dgColLines,dgRowLines,dgTabs,dgCancelOnExit];
 end;

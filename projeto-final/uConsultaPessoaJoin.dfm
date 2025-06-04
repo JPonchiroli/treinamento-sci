@@ -1,4 +1,8 @@
 inherited frConsultaPessoaJoin: TfrConsultaPessoaJoin
+  Left = -8
+  Top = -8
+  Width = 1382
+  Height = 736
   Caption = 'frConsultaPessoaJoin'
   PixelsPerInch = 96
   TextHeight = 13
@@ -8,6 +12,9 @@ inherited frConsultaPessoaJoin: TfrConsultaPessoaJoin
     Width = 71
     Height = 13
     Caption = 'C'#243'digo Pessoa'
+  end
+  inherited tbFerramentas: TToolBar
+    Width = 1366
   end
   inherited grPadrao: TDBGrid
     Top = 112

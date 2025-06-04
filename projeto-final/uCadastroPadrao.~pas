@@ -131,6 +131,7 @@ begin
       FTabela.Post;
       FTabela.ApplyUpdates(0);
       FTabela.Refresh;
+      ShowMessage('Inserção realizada com sucesso');
     end
     else
       FTabela.Cancel;

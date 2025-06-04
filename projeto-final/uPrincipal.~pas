@@ -8,22 +8,31 @@ uses
 
 type
   TfrPrincipal = class(TForm)
-    MainMenu1: TMainMenu;
+    mMenu: TMainMenu;
     mCadastro: TMenuItem;
     mCadastroPessoa: TMenuItem;
     mCadastroSala: TMenuItem;
     mCadastroEspacoCafe: TMenuItem;
     mCadastroEtapa: TMenuItem;
-    Consulta1: TMenuItem;
+    mConsulta: TMenuItem;
     mConsultaPessoa: TMenuItem;
     mConsultaSala: TMenuItem;
     mConsultaEspacoCafe: TMenuItem;
+    mRelatorios: TMenuItem;
+    mRelatorioPessoas: TMenuItem;
+    mRelatorioSalas: TMenuItem;
+    mRelatorioEspacosDeCafe: TMenuItem;
+    mRelatorioEtapas: TMenuItem;
     procedure mCadastroPessoaClick(Sender: TObject);
     procedure mCadastroSalaClick(Sender: TObject);
     procedure mCadastroEspacoCafeClick(Sender: TObject);
     procedure mCadastroEtapaClick(Sender: TObject);
     procedure mConsultaPessoaClick(Sender: TObject);
     procedure mConsultaSalaClick(Sender: TObject);
+    procedure mRelatorioPessoasClick(Sender: TObject);
+    procedure mRelatorioSalasClick(Sender: TObject);
+    procedure mRelatorioEspacosDeCafeClick(Sender: TObject);
+    procedure mRelatorioEtapasClick(Sender: TObject);
     procedure mConsultaEspacoCafeClick(Sender: TObject);
   private
     { Private declarations }
@@ -39,7 +48,7 @@ implementation
 
 uses uSimples, uCadastroPessoa, uCadastroSala, uCadastroEspacoCafe,
   uCadastroEtapa, uConsultaPessoaJoin, uConsultaSalaJoin,
-  uConsultaEspacoCafeJoin;
+  uConsultaEspacoCafeJoin, uDmProjeto, uConsultaEspacoCafe;
 
 {$R *.dfm}
 
@@ -77,6 +86,197 @@ end;
 procedure TfrPrincipal.mConsultaEspacoCafeClick(Sender: TObject);
 begin
   TfrConsultaEspacoCafeJoin.Create(Self);
+end;
+
+
+procedure TfrPrincipal.mRelatorioPessoasClick(Sender: TObject);
+var
+  wLista: TStringList;
+  wCampo: Integer;
+  wLinha: String;
+begin
+  if not dmProjeto.SQLConnection.Connected then
+    dmProjeto.SQLConnection.Connected := True;
+
+  if dmProjeto.cdsConsultaPessoa.Active then
+    dmProjeto.cdsConsultaPessoa.Close;
+
+  dmProjeto.qConsultaPessoa.SQL.Clear;
+  dmProjeto.qConsultaPessoa.SQL.Add('SELECT * FROM tpessoa');
+
+  dmProjeto.cdsConsultaPessoa.Open;
+
+  wLista := TStringList.Create;
+  try
+    wLinha := '';
+    for wCampo := 0 to dmProjeto.cdsConsultaPessoa.Fields.Count - 1 do
+    begin
+      wLinha := wLinha + dmProjeto.cdsConsultaPessoa.Fields[wCampo].DisplayLabel + ';';
+    end;
+    wLista.Add(wLinha);
+
+    dmProjeto.cdsConsultaPessoa.First;
+    while not dmProjeto.cdsConsultaPessoa.Eof do
+    begin
+      wLinha := '';
+      for wCampo := 0 to dmProjeto.cdsConsultaPessoa.Fields.Count - 1 do
+      begin
+        wLinha := wLinha + dmProjeto.cdsConsultaPessoa.Fields[wCampo].AsString + ';';
+      end;
+      wLista.Add(wLinha);
+      dmProjeto.cdsConsultaPessoa.Next;
+    end;
+
+    wLista.SaveToFile('C:\Users\Prog11\Desktop\Projeto Final Academia\Projeto Final Academia\Relatórios\pessoas.csv');
+    ShowMessage('Relatório criado com sucesso, enviado para pasta localizada na raiz do projeto');
+  finally
+    wLista.Free;
+  end;
+end;
+
+
+procedure TfrPrincipal.mRelatorioSalasClick(Sender: TObject);
+var
+  wLista: TStringList;
+  wCampo: Integer;
+  wLinha: String;
+begin
+  if not dmProjeto.SQLConnection.Connected then
+    dmProjeto.SQLConnection.Connected := True;
+
+  if dmProjeto.cdsConsultaSala.Active then
+    dmProjeto.cdsConsultaSala.Close;
+
+  dmProjeto.qConsultaSala.SQL.Clear;
+  dmProjeto.qConsultaSala.SQL.Add('SELECT * FROM tsala');
+
+  dmProjeto.cdsConsultaSala.Open;
+
+  wLista := TStringList.Create;
+  try
+    wLinha := '';
+    for wCampo := 0 to dmProjeto.cdsConsultaSala.Fields.Count - 1 do
+    begin
+      wLinha := wLinha + dmProjeto.cdsConsultaSala.Fields[wCampo].DisplayLabel + ';';
+    end;
+    wLista.Add(wLinha);
+
+    dmProjeto.cdsConsultaSala.First;
+    while not dmProjeto.cdsConsultaSala.Eof do
+    begin
+      wLinha := '';
+      for wCampo := 0 to dmProjeto.cdsConsultaSala.Fields.Count - 1 do
+      begin
+        wLinha := wLinha + dmProjeto.cdsConsultaSala.Fields[wCampo].AsString + ';';
+      end;
+      wLista.Add(wLinha);
+      dmProjeto.cdsConsultaSala.Next;
+    end;
+
+    wLista.SaveToFile('C:\Users\Prog11\Desktop\Projeto Final Academia\Projeto Final Academia\Relatórios\salas.csv');
+    ShowMessage('Relatório criado com sucesso, enviado para pasta localizada na raiz do projeto');
+  finally
+    wLista.Free;
+  end;
+end;
+
+procedure TfrPrincipal.mRelatorioEspacosDeCafeClick(Sender: TObject);
+var
+  wLista: TStringList;
+  wCampo: Integer;
+  wLinha: String;
+begin
+  if not dmProjeto.SQLConnection.Connected then
+    dmProjeto.SQLConnection.Connected := True;
+
+  if dmProjeto.cdsConsultaEspacoCafe.Active then
+    dmProjeto.cdsConsultaEspacoCafe.Close;
+
+  dmProjeto.qConsultaEspacoCafe.SQL.Clear;
+  dmProjeto.qConsultaEspacoCafe.SQL.Add('SELECT * FROM tespacocafe');
+
+  dmProjeto.cdsConsultaEspacoCafe.Open;
+
+  wLista := TStringList.Create;
+  try
+    wLinha := '';
+    for wCampo := 0 to dmProjeto.cdsConsultaEspacoCafe.Fields.Count - 1 do
+    begin
+      wLinha := wLinha + dmProjeto.cdsConsultaEspacoCafe.Fields[wCampo].DisplayLabel + ';';
+    end;
+    wLista.Add(wLinha);
+
+    dmProjeto.cdsConsultaEspacoCafe.First;
+    while not dmProjeto.cdsConsultaEspacoCafe.Eof do
+    begin
+      wLinha := '';
+      for wCampo := 0 to dmProjeto.cdsConsultaEspacoCafe.Fields.Count - 1 do
+      begin
+        wLinha := wLinha + dmProjeto.cdsConsultaEspacoCafe.Fields[wCampo].AsString + ';';
+      end;
+      wLista.Add(wLinha);
+      dmProjeto.cdsConsultaEspacoCafe.Next;
+    end;
+
+    wLista.SaveToFile('C:\Users\Prog11\Desktop\Projeto Final Academia\Projeto Final Academia\Relatórios\espacos-de-cafe.csv');
+    ShowMessage('Relatório criado com sucesso, enviado para pasta localizada na raiz do projeto');
+  finally
+    wLista.Free;
+  end;
+end;
+
+procedure TfrPrincipal.mRelatorioEtapasClick(Sender: TObject);
+var
+  wLista: TStringList;
+  wCampo: Integer;
+  wLinha: String;
+begin
+  if not dmProjeto.SQLConnection.Connected then
+    dmProjeto.SQLConnection.Connected := True;
+
+  if dmProjeto.cdsConsultaEtapa.Active then
+    dmProjeto.cdsConsultaEtapa.Close;
+
+  dmProjeto.qConsultaEtapa.SQL.Clear;
+  dmProjeto.qConsultaEtapa.SQL.Add(
+    'select et.bdcodetapa, ' + 
+            'et.bdnumetapa, ' +
+            'p.bdnomepessoa, p.bdsobrenomepessoa, ' +
+            's.bdnomesala, ' +
+            'ec.bdnomeespacocafe ' +
+    'from tetapa et ' +
+    'join tpessoa p on (p.bdcodpessoa = et.bdcodpessoa) ' +
+    'join tsala s on (s.bdcodsala = et.bdcodsala) ' +
+    'join tespacocafe ec on (ec.bdcodespacocafe = et.bdcodespacocafe) ');
+
+  dmProjeto.cdsConsultaEtapa.Open;
+
+  wLista := TStringList.Create;
+  try
+    wLinha := '';
+    for wCampo := 0 to dmProjeto.cdsConsultaEtapa.Fields.Count - 1 do
+    begin
+      wLinha := wLinha + dmProjeto.cdsConsultaEtapa.Fields[wCampo].DisplayLabel + ';';
+    end;
+    wLista.Add(wLinha);
+
+    dmProjeto.cdsConsultaEtapa.First;
+    while not dmProjeto.cdsConsultaEtapa.Eof do
+    begin
+      wLinha := '';
+      for wCampo := 0 to dmProjeto.cdsConsultaEtapa.Fields.Count - 1 do
+      begin
+        wLinha := wLinha + dmProjeto.cdsConsultaEtapa.Fields[wCampo].AsString + ';';
+      end;
+      wLista.Add(wLinha);
+      dmProjeto.cdsConsultaEtapa.Next;
+    end;
+
+    wLista.SaveToFile('C:\Users\Prog11\Desktop\Projeto Final Academia\Projeto Final Academia\Relatórios\etapas.csv');
+    ShowMessage('Relatório criado com sucesso, enviado para pasta localizada na raiz do projeto');
+  finally
+    wLista.Free;
+  end;
 end;
 
 end.

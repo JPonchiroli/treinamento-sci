@@ -47,8 +47,8 @@ begin
   if not dmProjeto.SQLConnection.Connected then
     dmProjeto.SQLConnection.Connected := True;
 
-  if dmProjeto.cdsConsultaPessoa.Active then
-    dmProjeto.cdsConsultaPessoa.Close;
+  if dmProjeto.cdsConsultaSala.Active then
+    dmProjeto.cdsConsultaSala.Close;
 
   dmProjeto.cdsConsultaSala.Close;
   dmProjeto.qConsultaSala.SQL.Clear;

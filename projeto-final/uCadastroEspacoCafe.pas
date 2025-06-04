@@ -18,6 +18,7 @@ type
     lCodigoEspacoCafe: TLabel;
     enCodigoEspacoCafe: TEditNumerico;
     procedure tbExcluirClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -126,7 +127,7 @@ end;
 procedure TfrCadastroEspacoCafe.tbExcluirClick(Sender: TObject);
 begin
   if not ConsultarEspacoCafe then
-    ShowMessage('Espaço de café não cadastrada, favor escolher outro espaço')
+    ShowMessage('Espaço de café não cadastrado, favor escolher outro espaço')
   else if not ConsultarChaveEstrangeira then
     ShowMessage('Espaço de café já cadastrado em uma etapa, favor escolher outro espaço')
   else
@@ -159,6 +160,12 @@ begin
     Result := false
   else
     Result := true;
+end;
+
+procedure TfrCadastroEspacoCafe.FormCreate(Sender: TObject);
+begin
+  inherited;
+  dmProjeto.cdsEspacoCafe.Refresh
 end;
 
 end.

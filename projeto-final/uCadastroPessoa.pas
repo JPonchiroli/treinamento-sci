@@ -85,7 +85,6 @@ end;
 procedure TfrCadastroPessoa.Salvar;
 begin
   inherited;
-
   Tabela.FieldByName('BDCODPESSOA').AsInteger := enCodigoPessoa.Codigo;
   Tabela.FieldByName('BDNOMEPESSOA').AsString := eNomePessoa.Text;
   Tabela.FieldByName('BDSOBRENOMEPESSOA').AsString := eSobrenomePessoa.Text;
@@ -106,7 +105,6 @@ begin
   Result := dmProjeto.cdsPessoa;
 end;
 
-
 function TfrCadastroPessoa.Validar: Boolean;
 begin
   if (eNomePessoa.Text = EmptyStr) or
@@ -118,7 +116,6 @@ begin
   begin
     Result := true;
   end;
-
 end;
 
 procedure TfrCadastroPessoa.tbExcluirClick(Sender: TObject);
@@ -129,7 +126,6 @@ begin
     ShowMessage('Pessoa já cadastrada em uma etapa, favor escolher outra pessoa')
   else
     inherited;
-
 end;
 
 function TfrCadastroPessoa.ConsultarChaveEstrangeira: Boolean;

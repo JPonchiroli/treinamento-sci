@@ -67,7 +67,7 @@ begin
   dsPadrao.DataSet := dmProjeto.cdsConsultaPessoa;
 
   if dmProjeto.cdsConsultaPessoa.IsEmpty then
-    ShowMessage('Pessoa não registrada, favor escolha outra pessoa');
+    ShowMessage('Pessoa não registrada em nenhuma etapa, favor escolha outra pessoa');
 end;
 
 end.

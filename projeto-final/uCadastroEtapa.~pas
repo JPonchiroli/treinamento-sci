@@ -29,7 +29,7 @@ type
     lSituacaoEspacoCafe: TLabel;
     eNomeEspacoCafe: TEdit;
     eSituacaoEspacoCafe: TEdit;
-    Label1: TLabel;
+    lCodigoEtapa: TLabel;
     enCodigoEtapa: TEditNumerico;
     procedure enCodigoPessoaExit(Sender: TObject);
     procedure enCodigoSalaExit(Sender: TObject);
@@ -48,7 +48,6 @@ type
     function Validar: Boolean; override;
     function ConsultarEtapa: Boolean;
     function ValidaCamposZerados: Boolean;
-    
   end;
 
 var
@@ -70,15 +69,12 @@ end;
 
 procedure TfrCadastroEtapa.Salvar;
 begin
-  if ValidaCamposZerados then
-  begin
-    inherited;
-    Tabela.FieldByName('BDCODETAPA').AsInteger := enCodigoEtapa.Codigo;
-    Tabela.FieldByName('BDNUMETAPA').AsInteger := StrToIntDef(cmNumeroEtapa.Text, 0);
-    Tabela.FieldByName('BDCODPESSOA').AsInteger := enCodigoPessoa.Codigo;
-    Tabela.FieldByName('BDCODSALA').AsInteger := enCodigoSala.Codigo;
-    Tabela.FieldByName('BDCODESPACOCAFE').AsInteger := enCodigoEspacoCafe.Codigo;
-  end;
+  inherited;
+  Tabela.FieldByName('BDCODETAPA').AsInteger := enCodigoEtapa.Codigo;
+  Tabela.FieldByName('BDNUMETAPA').AsInteger := StrToIntDef(cmNumeroEtapa.Text, 0);
+  Tabela.FieldByName('BDCODPESSOA').AsInteger := enCodigoPessoa.Codigo;
+  Tabela.FieldByName('BDCODSALA').AsInteger := enCodigoSala.Codigo;
+  Tabela.FieldByName('BDCODESPACOCAFE').AsInteger := enCodigoEspacoCafe.Codigo;
 end;
 
 function TfrCadastroEtapa.setEditCodigo: TEdit;
@@ -137,37 +133,37 @@ end;
 
 procedure TfrCadastroEtapa.enCodigoSalaExit(Sender: TObject);
 var
-  wLotacaoAtualSala, wLotacaoMaximaSala: String;
+  wLotacaoAtualSala, wLotacaoMaximaSala: Integer;
 begin
     if not dmProjeto.SQLConnection.Connected then
       dmProjeto.SQLConnection.Connected := True;
 
-    dmProjeto.qConsultaPessoa.Close;
-    dmProjeto.qConsultaPessoa.SQL.Clear;
+    dmProjeto.qConsultaSala.Close;
+    dmProjeto.qConsultaSala.SQL.Clear;
 
-    dmProjeto.qConsultaPessoa.SQL.Add(
+    dmProjeto.qConsultaSala.SQL.Add(
       'select bdnomesala, bdlotacaoatualsala, bdlotacaomaximasala ' +
       'from tsala ' +
       'where bdcodsala = :bdcodsala ');
 
-    dmProjeto.qConsultaPessoa.ParamByName('bdcodsala').AsInteger := enCodigoSala.Codigo;
-    dmProjeto.qConsultaPessoa.Open;
+    dmProjeto.qConsultaSala.ParamByName('bdcodsala').AsInteger := enCodigoSala.Codigo;
+    dmProjeto.qConsultaSala.Open;
 
     if not dmProjeto.qConsultaPessoa.IsEmpty then
     begin
-      eNomeSala.Text := dmProjeto.qConsultaPessoa.FieldByName('bdnomesala').AsString;
-      wLotacaoAtualSala := dmProjeto.qConsultaPessoa.FieldByName('bdlotacaoatualsala').AsString;
-      wLotacaoMaximaSala := dmProjeto.qConsultaPessoa.FieldByName('bdlotacaomaximasala').AsString;
+      eNomeSala.Text := dmProjeto.qConsultaSala.FieldByName('bdnomesala').AsString;
+      wLotacaoAtualSala := dmProjeto.qConsultaSala.FieldByName('bdlotacaoatualsala').AsInteger;
+      wLotacaoMaximaSala := dmProjeto.qConsultaSala.FieldByName('bdlotacaomaximasala').AsInteger;
 
-
-      if (wLotacaoMaximaSala = wLotacaoAtualSala) then
+      if wLotacaoAtualSala >= wLotacaoMaximaSala then
       begin
         eSituacaoSala.Text := 'Não há vagas';
         ShowMessage('A sala escolhida está cheia, favor escolher outra sala');
         enCodigoSala.SetFocus;
       end
       else
-        eSituacaoSala.Text := 'Há vagas'
+        eSituacaoSala.Text := 'Há vagas';
+      
     end
     else
     begin
@@ -180,7 +176,7 @@ end;
 
 procedure TfrCadastroEtapa.enCodigoEspacoCafeExit(Sender: TObject);
 var
-  wLotacaoAtualEspacoCafe, wLotacaoMaximaEspacoCafe: String;
+  wLotacaoAtualEspacoCafe, wLotacaoMaximaEspacoCafe: Integer;
 begin
     if not dmProjeto.SQLConnection.Connected then
       dmProjeto.SQLConnection.Connected := True;
@@ -199,24 +195,25 @@ begin
     if not dmProjeto.qConsultaEspacoCafe.IsEmpty then
     begin
       eNomeEspacoCafe.Text := dmProjeto.qConsultaEspacoCafe.FieldByName('bdnomeespacocafe').AsString;
-      wLotacaoAtualEspacoCafe := dmProjeto.qConsultaEspacoCafe.FieldByName('bdlotacaoatualespacocafe').AsString;
-      wLotacaoMaximaEspacoCafe := dmProjeto.qConsultaEspacoCafe.FieldByName('bdlotacaomaximaespacocafe').AsString;
+      wLotacaoAtualEspacoCafe := dmProjeto.qConsultaEspacoCafe.FieldByName('bdlotacaoatualespacocafe').AsInteger;
+      wLotacaoMaximaEspacoCafe := dmProjeto.qConsultaEspacoCafe.FieldByName('bdlotacaomaximaespacocafe').AsInteger;
 
-     if (wLotacaoMaximaEspacoCafe = wLotacaoAtualEspacoCafe) then
+      if wLotacaoAtualEspacoCafe >= wLotacaoMaximaEspacoCafe then
       begin
         eSituacaoEspacoCafe.Text := 'Não há vagas';
         ShowMessage('O espaço para café escolhido está cheio, favor escolher outro espaço');
-        enCodigoSala.SetFocus;
+        enCodigoEspacoCafe.SetFocus;
       end
       else
         eSituacaoEspacoCafe.Text := 'Há vagas';
+
     end
     else
     begin
       ShowMessage('O espaço para café escolhido não existe, favor escolher outro espaço');
       eNomeEspacoCafe.Text := 'Não existe';
       eSituacaoEspacoCafe.Text := 'Não existe';
-      enCodigoSala.SetFocus;
+      enCodigoEspacoCafe.SetFocus;
     end;
 end;
 
@@ -250,9 +247,6 @@ begin
     wJaEtapa1 := dmProjeto.qConsultaEtapa.FieldByName('ja_etapa_1').AsInteger;
     wJaEtapa2 := dmProjeto.qConsultaEtapa.FieldByName('ja_etapa_2').AsInteger;
 
-    {ShowMessage('wJaEtapa1: ' + wJaEtapa1 + 'wJaEtapa2: ' + wJaEtapa2);
-    ShowMessage('cmNumeroEtapa.Text: ' + cmNumeroEtapa.Text);}
-
     if wEtapasCadastradas = 2 then
     begin
       ShowMessage('A pessoa inserida já está cadastrada em duas etapas, escolha outra pessoa');
@@ -267,6 +261,10 @@ begin
       Result := false;
     end else
       Result := true;
+  end else if not ValidaCamposZerados then
+  begin
+    ShowMessage('Erro de inserção, o cadastro possui campos vazios');
+    Result := false;
   end
   else
     Result := true;
@@ -311,16 +309,18 @@ end;
 
 function TfrCadastroEtapa.ValidaCamposZerados: Boolean;
 begin
-  if (enCodigoPessoa.Codigo = 0) or
-     (enCodigoSala.Codigo = 0) or
-     (enCodigoEspacoCafe.Codigo = 0) then
-  begin
-    ShowMessage('Erro de Inserção. O cadastro possui campos vazios');
-    Result := false;
-  end
-  else
-    Result := true;
 
+  if (cmNumeroEtapa.ItemIndex <> 0) and (cmNumeroEtapa.ItemIndex <> 1) then
+    Result := false
+  else
+  begin
+    if (enCodigoPessoa.Codigo = 0) or
+       (enCodigoSala.Codigo = 0) or
+       (enCodigoEspacoCafe.Codigo = 0) then
+      Result := false
+    else
+      Result := true;
+  end
 end;
 
 end.

@@ -206,7 +206,7 @@ end;
 
 function TfrCadastroPadrao.Validar: Boolean;
 begin
-  Result := true;
+  Result := True;
 end;
 
 end.

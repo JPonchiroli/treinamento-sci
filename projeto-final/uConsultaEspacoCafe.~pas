@@ -22,7 +22,7 @@ var
 
 implementation
 
-uses uDmAcademiaSci, uDmProjeto;
+uses uDmProjeto;
 
 {$R *.dfm}
 

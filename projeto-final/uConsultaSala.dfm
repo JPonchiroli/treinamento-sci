@@ -3,7 +3,7 @@ inherited frConsultaSala: TfrConsultaSala
   PixelsPerInch = 96
   TextHeight = 13
   inherited grPadrao: TDBGrid
-    Left = 16
+    Top = 64
     Width = 689
     Height = 177
     Columns = <

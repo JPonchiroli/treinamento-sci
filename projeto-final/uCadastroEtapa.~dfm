@@ -31,49 +31,49 @@ inherited frCadastroEtapa: TfrCadastroEtapa
     Caption = 'C'#243'digo Sala'
   end
   object lNomePessoa: TLabel [4]
-    Left = 312
+    Left = 344
     Top = 120
     Width = 31
     Height = 13
     Caption = 'Nome '
   end
   object lSobrenomePessoa: TLabel [5]
-    Left = 496
+    Left = 528
     Top = 120
     Width = 54
     Height = 13
     Caption = 'Sobrenome'
   end
   object lNomeSala: TLabel [6]
-    Left = 322
+    Left = 354
     Top = 152
     Width = 21
     Height = 13
     Caption = 'Sala'
   end
   object lSituacaoAtualSala: TLabel [7]
-    Left = 508
+    Left = 540
     Top = 152
     Width = 42
     Height = 13
     Caption = 'Situa'#231#227'o'
   end
   object lNomeEspacoCafe: TLabel [8]
-    Left = 307
+    Left = 339
     Top = 184
     Width = 36
     Height = 13
     Caption = 'Espa'#231'o'
   end
   object lSituacaoEspacoCafe: TLabel [9]
-    Left = 508
+    Left = 540
     Top = 184
     Width = 42
     Height = 13
     Caption = 'Situa'#231#227'o'
   end
-  object Label1: TLabel [10]
-    Left = 88
+  object lCodigoEtapa: TLabel [10]
+    Left = 95
     Top = 88
     Width = 64
     Height = 13
@@ -132,7 +132,7 @@ inherited frCadastroEtapa: TfrCadastroEtapa
     Separador = ','
   end
   object eNomePessoa: TEdit [16]
-    Left = 352
+    Left = 384
     Top = 116
     Width = 121
     Height = 21
@@ -140,7 +140,7 @@ inherited frCadastroEtapa: TfrCadastroEtapa
     TabOrder = 5
   end
   object eSobrenomePessoa: TEdit [17]
-    Left = 560
+    Left = 592
     Top = 116
     Width = 121
     Height = 21
@@ -148,7 +148,7 @@ inherited frCadastroEtapa: TfrCadastroEtapa
     TabOrder = 6
   end
   object eNomeSala: TEdit [18]
-    Left = 352
+    Left = 384
     Top = 148
     Width = 121
     Height = 21
@@ -156,7 +156,7 @@ inherited frCadastroEtapa: TfrCadastroEtapa
     TabOrder = 7
   end
   object eSituacaoSala: TEdit [19]
-    Left = 560
+    Left = 592
     Top = 148
     Width = 121
     Height = 21
@@ -164,7 +164,7 @@ inherited frCadastroEtapa: TfrCadastroEtapa
     TabOrder = 8
   end
   object eNomeEspacoCafe: TEdit [20]
-    Left = 352
+    Left = 384
     Top = 180
     Width = 121
     Height = 21
@@ -172,7 +172,7 @@ inherited frCadastroEtapa: TfrCadastroEtapa
     TabOrder = 9
   end
   object eSituacaoEspacoCafe: TEdit [21]
-    Left = 560
+    Left = 592
     Top = 180
     Width = 121
     Height = 21

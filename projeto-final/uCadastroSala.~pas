@@ -18,6 +18,7 @@ type
     lCodigoSala: TLabel;
     enCodigoSala: TEditNumerico;
     procedure tbExcluirClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -119,7 +120,6 @@ begin
     Result := false;
   end else
   begin
-    ShowMessage('Sala Criada com Sucesso!');
     Result := true;
   end;
 end;
@@ -162,4 +162,8 @@ begin
     Result := true;
 end;
 
+procedure TfrCadastroSala.FormCreate(Sender: TObject);
+begin
+  inherited;
+  dmProjeto.cdsSala.Refresh
 end.

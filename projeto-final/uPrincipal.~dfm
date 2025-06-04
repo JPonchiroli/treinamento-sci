@@ -11,11 +11,11 @@ object frPrincipal: TfrPrincipal
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   FormStyle = fsMDIForm
-  Menu = MainMenu1
+  Menu = mMenu
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
-  object MainMenu1: TMainMenu
+  object mMenu: TMainMenu
     Left = 8
     Top = 16
     object mCadastro: TMenuItem
@@ -37,8 +37,8 @@ object frPrincipal: TfrPrincipal
         OnClick = mCadastroEtapaClick
       end
     end
-    object Consulta1: TMenuItem
-      Caption = 'Consulta'
+    object mConsulta: TMenuItem
+      Caption = 'Consulta Etapas'
       object mConsultaPessoa: TMenuItem
         Caption = 'Pessoa'
         OnClick = mConsultaPessoaClick
@@ -50,6 +50,25 @@ object frPrincipal: TfrPrincipal
       object mConsultaEspacoCafe: TMenuItem
         Caption = 'Espa'#231'o Caf'#233
         OnClick = mConsultaEspacoCafeClick
+      end
+    end
+    object mRelatorios: TMenuItem
+      Caption = 'Exportar CSV'
+      object mRelatorioPessoas: TMenuItem
+        Caption = 'Pessoas'
+        OnClick = mRelatorioPessoasClick
+      end
+      object mRelatorioSalas: TMenuItem
+        Caption = 'Salas'
+        OnClick = mRelatorioSalasClick
+      end
+      object mRelatorioEspacosDeCafe: TMenuItem
+        Caption = 'Espa'#231'os de Caf'#233
+        OnClick = mRelatorioEspacosDeCafeClick
+      end
+      object mRelatorioEtapas: TMenuItem
+        Caption = 'Etapas'
+        OnClick = mRelatorioEtapasClick
       end
     end
   end

@@ -106,7 +106,6 @@ begin
   Result := dmProjeto.cdsPessoa;
 end;
 
-
 function TfrCadastroPessoa.Validar: Boolean;
 begin
   if (eNomePessoa.Text = EmptyStr) or
@@ -116,10 +115,8 @@ begin
     Result := false;
   end else
   begin
-    ShowMessage('Pessoa Criada com Sucesso!');
     Result := true;
   end;
-
 end;
 
 procedure TfrCadastroPessoa.tbExcluirClick(Sender: TObject);
@@ -130,7 +127,6 @@ begin
     ShowMessage('Pessoa já cadastrada em uma etapa, favor escolher outra pessoa')
   else
     inherited;
-
 end;
 
 function TfrCadastroPessoa.ConsultarChaveEstrangeira: Boolean;
