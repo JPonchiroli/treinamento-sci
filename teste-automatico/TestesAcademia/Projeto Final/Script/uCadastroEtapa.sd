@@ -1,0 +1,73 @@
+uses
+  uUtil,
+  uCadastroPessoa,
+  uCadastroSala,
+  uCadastroEspacoCafe;
+  
+procedure pCadastroEtapa(wCodigoEtapa, wNumeroEtapa, wCodigoPessoa, wCodigoSala, wCodigoEspacoCafe: String); forward;
+procedure pConsultaEspacoCafe; forward;
+procedure pExcluiEspacoCafe(wCodigoEspacoCafe: String); forward; 
+   
+procedure pTesteEtapa;
+begin
+
+  uUtil.pAbreAcademiaSci;
+  pCadastroEtapa('100', '1', '100', '100', '100');
+  uUtil.pFechaAcademiaSci; 
+  
+  uUtil.pAbreAcademiaSci;
+  pConsultaEspacoCafe();
+  uUtil.pFechaAcademiaSci; 
+  
+  uUtil.pAbreAcademiaSci;
+  pExcluiEspacoCafe('100');
+  uUtil.pFechaAcademiaSci; 
+   
+end;
+
+procedure pCadastroEtapa(wCodigoEtapa, wNumeroEtapa, wCodigoPessoa, wCodigoSala, wCodigoEspacoCafe);
+  var p1 : OleVariant;
+  var w1 : OleVariant;
+  var w2 : OleVariant;
+begin
+  p1 := Sys.Process('AcademiaSci');
+  w1 := p1.Window('TfrPrincipal', 'Tela Principal');
+  w1.MainMenu.Click('Cadastro|Etapa');
+  w2 := w1.Window('MDIClient').Window('TfrCadastroEtapa', 'Cadastro Etapa');
+  w2.Window('TEditNumerico', '0', 1).Keys('[BS]' + wCodigoEtapa + '[Tab]');
+  w2.Window('TComboBox').Keys(wNumeroEtapa + '[Tab]');
+  w2.Window('TEditNumerico', '0', 4).Keys(wCodigoPessoa + '[Tab]');
+  w2.Window('TEditNumerico', '0', 3).Keys(wCodigoSala + '[Tab]');
+  w2.Window('TEditNumerico', '0', 2).Keys(wCodigoEspacoCafe + '[Tab]');
+  w2.Window('TToolBar').ClickItem('Confirmar', false);
+  p1.Window('TMessageForm', 'Projeto Final Academia').Window('TButton', 'OK').ClickButton;
+  
+  Log.Message('Etapa Criada! Código ' + wCodigoEtapa + ': Número Etapa:' + wNumEtapa + ', Cod. Pessoa: ' + wCodigoPessoa + ', Cod. Sala: ' + wCodigoSala + ', Cod. Espaco Cafe: ' + wCodigoEspacoCafe);
+end;
+
+procedure pExcluiEspacoCafe(wCodigoEspacoCafe);
+  var p1 : OleVariant;
+  var w1 : OleVariant;
+  var w2 : OleVariant;
+begin
+  p1 := Sys.Process('AcademiaSci');
+  w1 := p1.Window('TfrPrincipal', 'Tela Principal');
+  w1.MainMenu.Click('Cadastro|Etapa');
+  w2 := w1.Window('MDIClient').Window('TfrCadastroEtapa', 'Cadastro Etapa');
+  w2.Window('TEditNumerico', '0', 1).Keys('[BS]' + wCodigoEtapa + '[Tab]');
+  w2.Window('TToolBar').ClickItem('Excluir', false);
+  p1.Window('TMessageForm', 'Information').Window('TButton', '&Yes').ClickButton;
+  p1.Window('TMessageForm', 'Projeto Final Academia').Window('TButton', 'OK').ClickButton;
+  
+  Log.Message('Código: ' + wCodigoEtapa + ' excluido');
+end;
+
+procedure pConsultaEspacoCafe();
+  var w1 : OleVariant;
+begin
+  w1 := Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal');
+  w1.MainMenu.Click('Cadastro|Espaço Café');
+  w1.Window('MDIClient').Window('TfrCadastroEspacoCafe', 'Cadastro Espaço Café').Window('TToolBar').ClickItem('Consultar', false);
+  uUtil.pPrintTela;
+  BuiltIn.Delay(2000); 
+end;

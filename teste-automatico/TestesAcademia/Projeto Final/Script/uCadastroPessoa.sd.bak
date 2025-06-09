@@ -1,0 +1,75 @@
+uses
+  uUtil;
+
+procedure pCadastroPessoa(wCodigoPessoa, wNomePessoa, wSobrenomePessoa: String); forward;
+procedure pConsultaPessoa; forward;
+procedure pExcluiPessoa(wCodigoPessoa: String); forward; 
+   
+procedure pTestePessoa;
+begin
+
+  pCadastroPessoa('100', 'Joao', 'Ponchiroli');
+  pConsultaPessoa();
+  pExcluiPessoa('100');
+     
+end;
+
+procedure pCadastroPessoa(wCodigoPessoa, wNomePessoa, wSobrenomePessoa);
+  var p1 : OleVariant;
+  var w1 : OleVariant;
+  var w2 : OleVariant;
+begin
+  p1 := Sys.Process('AcademiaSci');
+  w1 := p1.Window('TfrPrincipal', 'Tela Principal');
+  w1.MainMenu.Click('Cadastro|Pessoa');
+  w2 := w1.Window('MDIClient').Window('TfrCadastroPessoa', 'Cadastro Pessoa');
+  w1 := w2.Window('TEditNumerico', '0');
+  w1.Click(16, 9);
+  w1.Keys('[BS]' + wCodigoPessoa + '[Tab]');
+  w2.Window('TEdit', '', 2).Keys(wNomePessoa + '[Tab]');
+  w2.Window('TEdit', '', 1).Keys(wSobrenomePessoa);
+  w2.Window('TToolBar').ClickItem('Confirmar', false);
+  p1.Window('TMessageForm', 'Projeto Final Academia').Window('TButton', 'OK').ClickButton;
+  
+  Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal', 1).Window('MDIClient', '', 1).Window('TfrCadastroPessoa', 'Cadastro Pessoa', 1).Close;
+  
+  Log.Message('Pessoa Criada! Código ' + wCodigoPessoa + ': ' + wNomePessoa + ' ' + wSobrenomePessoa);
+end;
+
+procedure pExcluiPessoa(wCodigoPessoa);
+  var p1 : OleVariant;
+  var w1 : OleVariant;
+  var w2 : OleVariant;
+begin
+  p1 := Sys.Process('AcademiaSci');
+  w1 := p1.Window('TfrPrincipal', 'Tela Principal');
+  w1.MainMenu.Click('Cadastro|Pessoa');
+  w2 := w1.Window('MDIClient').Window('TfrCadastroPessoa', 'Cadastro Pessoa');
+  w1 := w2.Window('TEditNumerico', '0');
+  w1.Click(16, 9);
+  w1.Keys('[BS]' + wCodigoPessoa);
+  w2.Window('TToolBar').ClickItem('Excluir', false);
+  p1.Window('TMessageForm', 'Information').Window('TButton', '&Yes').ClickButton;
+  p1.Window('TMessageForm', 'Projeto Final Academia').Window('TButton', 'OK').ClickButton;
+  
+  w2.Window('TToolBar').ClickItem('Consultar', false);
+  uUtil.pPrintTela;
+  BuiltIn.Delay(2000);
+  
+  Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal', 1).Window('MDIClient', '', 1).Window('TfrCadastroPessoa', 'Cadastro Pessoa', 1).Close;
+  
+  Log.Message('Código: ' + wCodigoPessoa + ' excluido');
+end;
+
+procedure pConsultaPessoa();
+  var w1 : OleVariant;
+begin
+  w1 := Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal');
+  w1.MainMenu.Click('Cadastro|Pessoa');
+  w1.Window('MDIClient').Window('TfrCadastroPessoa', 'Cadastro Pessoa').Window('TToolBar').ClickItem('Consultar', false);
+  uUtil.pPrintTela;
+  BuiltIn.Delay(2000);
+  
+  Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal', 1).Window('MDIClient', '', 1).Window('TfrConsultaPessoa', 'Consulta Pessoa', 1).Close;
+  Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal', 1).Window('MDIClient', '', 1).Window('TfrCadastroPessoa', 'Cadastro Pessoa', 1).Close;
+end;

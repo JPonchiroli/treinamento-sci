@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE Nodes [
+
+<!ENTITY % NameValue "CDATA">
+<!ENTITY % PropType "(I|S|D|L|H|B)">
+<!ENTITY % VersionValue "CDATA">
+
+<!ELEMENT Prp (#PCDATA)>
+<!ELEMENT Node (Node|Prp)*>
+<!ELEMENT Nodes (Node)+>
+
+<!ATTLIST Nodes version CDATA "1">
+
+<!ATTLIST Node name CDATA #REQUIRED>
+
+<!ATTLIST Prp name CDATA #REQUIRED>
+<!ATTLIST Prp type CDATA #REQUIRED>
+<!ATTLIST Prp value CDATA #REQUIRED>
+]>
+<Nodes version="1">
+	<Node name="root">
+		<Node name="data">
+			<Node name="{2360bfa2-e4b6-489f-8d89-2ce0362f9da2}">
+				<Prp name="relpath" type="S" value="AulaTC\AulaTC.mds.tcLS"/>
+			</Node>
+			<Node name="{69cd2978-a92e-41a6-a564-3a4f6af07a68}">
+				<Prp name="relpath" type="S" value="Projeto Final\Projeto Final.mds.tcLS"/>
+			</Node>
+			<Node name="{dd04cca3-eb67-47d9-9362-f8a4add2280d}">
+				<Prp name="relpath" type="S" value="Projeto Final\Projeto Final.mds.tcLS"/>
+			</Node>
+			<Node name="logs">
+				<Prp name="key" type="S" value="{2822569E-7522-4304-9B9F-970F7FF2EC2F}"/>
+				<Prp name="relpath" type="S" value="Log"/>
+			</Node>
+			<Node name="variables">
+				<Node name="datav2"/>
+			</Node>
+		</Node>
+		<Prp name="signature" type="S" value="{71078212-FAEB-4856-A901-B237C89E6B5C}"/>
+	</Node>
+</Nodes>

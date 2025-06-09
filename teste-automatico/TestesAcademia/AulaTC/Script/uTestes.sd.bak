@@ -1,0 +1,8 @@
+uses
+  uUtil,
+  uCadastroCategoria;
+  
+procedure pTesteCadastrarCategoria;
+begin
+  uCadastroCategoria.pCadastroCategoria(1, 'Eletro');
+end;

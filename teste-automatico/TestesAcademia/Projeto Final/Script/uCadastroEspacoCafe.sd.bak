@@ -1,0 +1,75 @@
+uses
+  uUtil;
+  
+procedure pCadastroEspacoCafe(wCodigoEspacoCafe, wNomeEspacoCafe, wLotacaoMaximaEspacoCafe: String); forward;
+procedure pConsultaEspacoCafe; forward;
+procedure pExcluiEspacoCafe(wCodigoEspacoCafe: String); forward; 
+   
+procedure pTesteEspacoCafe;
+begin
+
+  pCadastroEspacoCafe('100', 'Cantina 100', '10');
+  pConsultaEspacoCafe();
+  pExcluiEspacoCafe('100');
+   
+end;
+
+procedure pCadastroEspacoCafe(wCodigoEspacoCafe, wNomeEspacoCafe, wLotacaoMaximaEspacoCafe);
+  var p1 : OleVariant;
+  var w1 : OleVariant;
+  var w2 : OleVariant;
+begin
+  p1 := Sys.Process('AcademiaSci');
+  w1 := p1.Window('TfrPrincipal', 'Tela Principal');
+  w1.MainMenu.Click('Cadastro|Espaço Café');
+  w2 := w1.Window('MDIClient').Window('TfrCadastroEspacoCafe', 'Cadastro Espaço Café');
+  w1 := w2.Window('TEditNumerico', '0', 1);
+  w1.Click(59, 7);
+  w1.Keys('[BS]' + wCodigoEspacoCafe + '[Tab]');
+  w2.Window('TEdit').Keys(wNomeEspacoCafe + '[Tab]');
+  w2.Window('TEditNumerico', '0', 2).Keys(wLotacaoMaximaEspacoCafe);
+  w2.Window('TToolBar').ClickItem('Confirmar', false);
+  p1.Window('TMessageForm', 'Projeto Final Academia').Window('TButton', 'OK').ClickButton;
+  
+  Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal', 1).Window('MDIClient', '', 1).Window('TfrCadastroEspacoCafe', 'Cadastro Espaço Café', 1).Close;
+  Log.Message('Espaço de Café Criado! Código ' + wCodigoEspacoCafe + ': ' + wNomeEspacoCafe + ', Lotação: ' + wLotacaoMaximaEspacoCafe);
+end;
+
+procedure pExcluiEspacoCafe(wCodigoEspacoCafe);
+  var p1 : OleVariant;
+  var w1 : OleVariant;
+  var w2 : OleVariant;
+begin
+  p1 := Sys.Process('AcademiaSci');
+  w1 := p1.Window('TfrPrincipal', 'Tela Principal');
+  w1.MainMenu.Click('Cadastro|Espaço Café');
+  w2 := w1.Window('MDIClient').Window('TfrCadastroEspacoCafe', 'Cadastro Espaço Café');
+  w1 := w2.Window('TEditNumerico', '0', 1); 
+  w1.Click(59, 7);   
+  w1.Keys('[BS]' + wCodigoEspacoCafe);
+  w2.Window('TToolBar').ClickItem('Excluir', false);
+  p1.Window('TMessageForm', 'Information').Window('TButton', '&Yes').ClickButton;
+  p1.Window('TMessageForm', 'Projeto Final Academia').Window('TButton', 'OK').ClickButton;
+  
+  w2.Window('TToolBar').ClickItem(Consultar, false);
+  uUtil.pPrintTela;
+  BuiltIn.Delay(2000);
+  
+  Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal', 1).Window('MDIClient', '', 1).Window('TfrConsultaEspacoCafe', 'Consulta Espaço Cafe', 1).Close;
+  Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal', 1).Window('MDIClient', '', 1).Window('TfrCadastroEspacoCafe', 'Cadastro Espaço Café', 1).Close;
+  
+  Log.Message('Código: ' + wCodigoEspacoCafe + ' excluida');
+end;
+
+procedure pConsultaEspacoCafe();
+  var w1 : OleVariant;
+begin
+  w1 := Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal');
+  w1.MainMenu.Click('Cadastro|Espaço Café');
+  w1.Window('MDIClient').Window('TfrCadastroEspacoCafe', 'Cadastro Espaço Café').Window('TToolBar').ClickItem('Consultar', false);
+  uUtil.pPrintTela;
+  BuiltIn.Delay(2000);
+  
+  Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal', 1).Window('MDIClient', '', 1).Window('TfrConsultaEspacoCafe', 'Consulta Espaço Cafe', 1).Close;
+  Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal', 1).Window('MDIClient', '', 1).Window('TfrCadastroEspacoCafe', 'Cadastro Espaço Café', 1).Close; 
+end;

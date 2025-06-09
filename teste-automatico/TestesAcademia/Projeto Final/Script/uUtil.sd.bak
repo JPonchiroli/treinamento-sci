@@ -1,0 +1,43 @@
+procedure pAbreAcademiaSci;
+begin
+  Log.Message('Abrindo o projeto final academia');
+  if not (Sys.WaitProcess('AcademiaSci').Exists) then
+    begin
+      TestedApps.AcademiaSci.Run();
+      Log.Message('O projeto foi aberto');
+    end
+  else
+    Log.Message('O sistema já está aberto');      
+end;
+
+procedure pFechaAcademiaSci;
+begin
+  Log.Message('Fechando o projeto final academia');
+  if not (Sys.WaitProcess('AcademiaSci').Exists) then
+    Log.Message('O sistema já está fechado')
+  else
+    begin
+      Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal').Close;
+      BuiltIn.Delay(3000);
+      Log.Message('O projeto foi fechado');
+    end;   
+end;
+
+procedure pPrintTela();
+var
+  wPrint : Olevariant;
+begin
+  BuiltIn.Delay(2000);
+  wPrint := Sys.Desktop.Picture();
+  Log.Message('Print da tela de consulta', '', 300, '', wPrint);   
+end;
+
+procedure GeneralEvents_OnStartTest(Sender);
+begin
+  pAbreAcademiaSci;
+end;
+
+procedure GeneralEvents_OnStopTest(Sender);
+begin
+  pFechaAcademiaSci;
+end;

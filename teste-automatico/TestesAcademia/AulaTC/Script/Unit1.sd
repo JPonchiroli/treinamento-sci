@@ -1,0 +1,8 @@
+procedure Main;
+begin
+  try
+    // Enter your code here. 
+  except
+    Log.Error('Exception', ExceptionMessage)
+  end;
+end;

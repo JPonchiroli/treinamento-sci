@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE Nodes [
+
+<!ENTITY % NameValue "CDATA">
+<!ENTITY % PropType "(I|S|D|L|H|B)">
+<!ENTITY % VersionValue "CDATA">
+
+<!ELEMENT Prp (#PCDATA)>
+<!ELEMENT Node (Node|Prp)*>
+<!ELEMENT Nodes (Node)+>
+
+<!ATTLIST Nodes version CDATA "1">
+
+<!ATTLIST Node name CDATA #REQUIRED>
+
+<!ATTLIST Prp name CDATA #REQUIRED>
+<!ATTLIST Prp type CDATA #REQUIRED>
+<!ATTLIST Prp value CDATA #REQUIRED>
+]>
+<Nodes version="1">
+	<Node name="root">
+		<Node name="data">
+			<Node name="message 18">
+				<Prp name="date" type="D" value="45817.7275197569"/>
+				<Prp name="priority" type="I" value="300"/>
+				<Prp name="owner id" type="I" value="-1"/>
+				<Prp name="color" type="I" value="-252645136"/>
+				<Prp name="id" type="I" value="18"/>
+				<Prp name="bkcolor" type="I" value="-252645136"/>
+				<Prp name="message" type="S" value="Keyboard input."/>
+				<Prp name="picture" type="S" value=""/>
+				<Prp name="link" type="S" value=""/>
+				<Prp name="unit id" type="I" value="1"/>
+				<Prp name="remarks" type="S" value="'[BS]100' was sent as a keyboard input to a window:&#xA;&#xA;Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal', 1).Window('MDIClient', '', 1).Window('TfrCadastroPessoa', 'Cadastro Pessoa', 1).Window('TEditNumerico', '0', 1)"/>
+				<Prp name="type" type="I" value="1"/>
+				<Prp name="line no" type="I" value="56"/>
+				<Prp name="child index" type="I" value="-1"/>
+			</Node>
+			<Node name="message 7">
+				<Prp name="date" type="D" value="45817.7274586343"/>
+				<Prp name="priority" type="I" value="300"/>
+				<Prp name="owner id" type="I" value="-1"/>
+				<Prp name="color" type="I" value="-252645136"/>
+				<Prp name="id" type="I" value="7"/>
+				<Prp name="bkcolor" type="I" value="-252645136"/>
+				<Prp name="message" type="S" value="Toolbar button 'Confirmar' was clicked."/>
+				<Prp name="picture" type="S" value=""/>
+				<Prp name="link" type="S" value=""/>
+				<Prp name="unit id" type="I" value="1"/>
+				<Prp name="remarks" type="S" value="A click at point (25, 22) with no key pressed.&#xA;&#xA;Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal', 1).Window('MDIClient', '', 1).Window('TfrCadastroPessoa', 'Cadastro Pessoa', 1).Window('TToolBar', '', 1)"/>
+				<Prp name="type" type="I" value="1"/>
+				<Prp name="line no" type="I" value="37"/>
+				<Prp name="child index" type="I" value="-1"/>
+			</Node>
+			<Node name="message 17">
+				<Prp name="date" type="D" value="45817.7275159259"/>
+				<Prp name="priority" type="I" value="300"/>
+				<Prp name="owner id" type="I" value="-1"/>
+				<Prp name="color" type="I" value="-252645136"/>
+				<Prp name="id" type="I" value="17"/>
+				<Prp name="bkcolor" type="I" value="-252645136"/>
+				<Prp name="message" type="S" value="The window was clicked with the left mouse button."/>
+				<Prp name="picture" type="S" value=""/>
+				<Prp name="link" type="S" value=""/>
+				<Prp name="unit id" type="I" value="1"/>
+				<Prp name="remarks" type="S" value="A click at point (16, 9) with no key pressed.&#xA;&#xA;Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal', 1).Window('MDIClient', '', 1).Window('TfrCadastroPessoa', 'Cadastro Pessoa', 1).Window('TEditNumerico', '0', 1)"/>
+				<Prp name="type" type="I" value="1"/>
+				<Prp name="line no" type="I" value="55"/>
+				<Prp name="child index" type="I" value="-1"/>
+			</Node>
+			<Node name="message 6">
+				<Prp name="date" type="D" value="45817.7274572454"/>
+				<Prp name="priority" type="I" value="300"/>
+				<Prp name="owner id" type="I" value="-1"/>
+				<Prp name="color" type="I" value="-252645136"/>
+				<Prp name="id" type="I" value="6"/>
+				<Prp name="bkcolor" type="I" value="-252645136"/>
+				<Prp name="message" type="S" value="Keyboard input."/>
+				<Prp name="picture" type="S" value=""/>
+				<Prp name="link" type="S" value=""/>
+				<Prp name="unit id" type="I" value="1"/>
+				<Prp name="remarks" type="S" value="'Ponchiroli' was sent as a keyboard input to a window:&#xA;&#xA;Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal', 1).Window('MDIClient', '', 1).Window('TfrCadastroPessoa', 'Cadastro Pessoa', 1).Window('TEdit', '', 1)"/>
+				<Prp name="type" type="I" value="1"/>
+				<Prp name="line no" type="I" value="36"/>
+				<Prp name="child index" type="I" value="-1"/>
+			</Node>
+			<Node name="message 16">
+				<Prp name="date" type="D" value="45817.7275144444"/>
+				<Prp name="priority" type="I" value="300"/>
+				<Prp name="owner id" type="I" value="-1"/>
+				<Prp name="color" type="I" value="-252645136"/>
+				<Prp name="id" type="I" value="16"/>
+				<Prp name="bkcolor" type="I" value="-252645136"/>
+				<Prp name="message" type="S" value="The menu item 'Cadastro|Pessoa' was clicked."/>
+				<Prp name="picture" type="S" value=""/>
+				<Prp name="link" type="S" value=""/>
+				<Prp name="unit id" type="I" value="1"/>
+				<Prp name="remarks" type="S" value="Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal', 1).MainMenu"/>
+				<Prp name="type" type="I" value="1"/>
+				<Prp name="line no" type="I" value="52"/>
+				<Prp name="child index" type="I" value="-1"/>
+			</Node>
+			<Node name="message 5">
+				<Prp name="date" type="D" value="45817.7274484722"/>
+				<Prp name="priority" type="I" value="300"/>
+				<Prp name="owner id" type="I" value="-1"/>
+				<Prp name="color" type="I" value="-252645136"/>
+				<Prp name="id" type="I" value="5"/>
+				<Prp name="bkcolor" type="I" value="-252645136"/>
+				<Prp name="message" type="S" value="Keyboard input."/>
+				<Prp name="picture" type="S" value=""/>
+				<Prp name="link" type="S" value=""/>
+				<Prp name="unit id" type="I" value="1"/>
+				<Prp name="remarks" type="S" value="'Joao[Tab]' was sent as a keyboard input to a window:&#xA;&#xA;Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal', 1).Window('MDIClient', '', 1).Window('TfrCadastroPessoa', 'Cadastro Pessoa', 1).Window('TEdit', '', 2)"/>
+				<Prp name="type" type="I" value="1"/>
+				<Prp name="line no" type="I" value="35"/>
+				<Prp name="child index" type="I" value="-1"/>
+			</Node>
+			<Node name="message 15">
+				<Prp name="date" type="D" value="45817.7275125579"/>
+				<Prp name="priority" type="I" value="300"/>
+				<Prp name="owner id" type="I" value="-1"/>
+				<Prp name="color" type="I" value="-252645136"/>
+				<Prp name="id" type="I" value="15"/>
+				<Prp name="bkcolor" type="I" value="-252645136"/>
+				<Prp name="message" type="S" value="The 'Cadastro Pessoa' window was closed."/>
+				<Prp name="picture" type="S" value=""/>
+				<Prp name="link" type="S" value=""/>
+				<Prp name="unit id" type="I" value="1"/>
+				<Prp name="remarks" type="S" value="Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal', 1).Window('MDIClient', '', 1).Window('TfrCadastroPessoa', 'Cadastro Pessoa', 1)"/>
+				<Prp name="type" type="I" value="1"/>
+				<Prp name="line no" type="I" value="76"/>
+				<Prp name="child index" type="I" value="-1"/>
+			</Node>
+			<Node name="message 4">
+				<Prp name="date" type="D" value="45817.727443588"/>
+				<Prp name="priority" type="I" value="300"/>
+				<Prp name="owner id" type="I" value="-1"/>
+				<Prp name="color" type="I" value="-252645136"/>
+				<Prp name="id" type="I" value="4"/>
+				<Prp name="bkcolor" type="I" value="-252645136"/>
+				<Prp name="message" type="S" value="Keyboard input."/>
+				<Prp name="picture" type="S" value=""/>
+				<Prp name="link" type="S" value=""/>
+				<Prp name="unit id" type="I" value="1"/>
+				<Prp name="remarks" type="S" value="'[BS]100[Tab]' was sent as a keyboard input to a window:&#xA;&#xA;Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal', 1).Window('MDIClient', '', 1).Window('TfrCadastroPessoa', 'Cadastro Pessoa', 2).Window('TEditNumerico', '0', 1)"/>
+				<Prp name="type" type="I" value="1"/>
+				<Prp name="line no" type="I" value="34"/>
+				<Prp name="child index" type="I" value="-1"/>
+			</Node>
+			<Node name="message 14">
+				<Prp name="date" type="D" value="45817.7275116782"/>
+				<Prp name="priority" type="I" value="300"/>
+				<Prp name="owner id" type="I" value="-1"/>
+				<Prp name="color" type="I" value="-252645136"/>
+				<Prp name="id" type="I" value="14"/>
+				<Prp name="bkcolor" type="I" value="-252645136"/>
+				<Prp name="message" type="S" value="The 'Consulta Pessoa' window was closed."/>
+				<Prp name="picture" type="S" value=""/>
+				<Prp name="link" type="S" value=""/>
+				<Prp name="unit id" type="I" value="1"/>
+				<Prp name="remarks" type="S" value="Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal', 1).Window('MDIClient', '', 1).Window('TfrConsultaPessoa', 'Consulta Pessoa', 1)"/>
+				<Prp name="type" type="I" value="1"/>
+				<Prp name="line no" type="I" value="75"/>
+				<Prp name="child index" type="I" value="-1"/>
+			</Node>
+			<Node name="message 3">
+				<Prp name="date" type="D" value="45817.7274390509"/>
+				<Prp name="priority" type="I" value="300"/>
+				<Prp name="owner id" type="I" value="-1"/>
+				<Prp name="color" type="I" value="-252645136"/>
+				<Prp name="id" type="I" value="3"/>
+				<Prp name="bkcolor" type="I" value="-252645136"/>
+				<Prp name="message" type="S" value="The window was clicked with the left mouse button."/>
+				<Prp name="picture" type="S" value=""/>
+				<Prp name="link" type="S" value=""/>
+				<Prp name="unit id" type="I" value="1"/>
+				<Prp name="remarks" type="S" value="A click at point (16, 9) with no key pressed.&#xA;&#xA;Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal', 1).Window('MDIClient', '', 1).Window('TfrCadastroPessoa', 'Cadastro Pessoa', 2).Window('TEditNumerico', '0', 1)"/>
+				<Prp name="type" type="I" value="1"/>
+				<Prp name="line no" type="I" value="33"/>
+				<Prp name="child index" type="I" value="-1"/>
+			</Node>
+			<Node name="message 13">
+				<Prp name="date" type="D" value="45817.7274876273"/>
+				<Prp name="priority" type="I" value="300"/>
+				<Prp name="owner id" type="I" value="-1"/>
+				<Prp name="color" type="I" value="-252645136"/>
+				<Prp name="id" type="I" value="13"/>
+				<Prp name="bkcolor" type="I" value="-252645136"/>
+				<Prp name="message" type="S" value="Print da tela de consulta"/>
+				<Prp name="picture" type="S" value="Picture1.bmp"/>
+				<Prp name="link" type="S" value=""/>
+				<Prp name="unit id" type="I" value="0"/>
+				<Prp name="remarks" type="S" value=""/>
+				<Prp name="type" type="I" value="0"/>
+				<Prp name="line no" type="I" value="31"/>
+				<Prp name="child index" type="I" value="-1"/>
+			</Node>
+			<Node name="message 2">
+				<Prp name="date" type="D" value="45817.7273702894"/>
+				<Prp name="priority" type="I" value="300"/>
+				<Prp name="owner id" type="I" value="-1"/>
+				<Prp name="color" type="I" value="-252645136"/>
+				<Prp name="id" type="I" value="2"/>
+				<Prp name="bkcolor" type="I" value="-252645136"/>
+				<Prp name="message" type="S" value="The menu item 'Cadastro|Pessoa' was clicked."/>
+				<Prp name="picture" type="S" value=""/>
+				<Prp name="link" type="S" value=""/>
+				<Prp name="unit id" type="I" value="1"/>
+				<Prp name="remarks" type="S" value="Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal', 1).MainMenu"/>
+				<Prp name="type" type="I" value="1"/>
+				<Prp name="line no" type="I" value="30"/>
+				<Prp name="child index" type="I" value="-1"/>
+			</Node>
+			<Node name="message 12">
+				<Prp name="date" type="D" value="45817.7274637731"/>
+				<Prp name="priority" type="I" value="300"/>
+				<Prp name="owner id" type="I" value="-1"/>
+				<Prp name="color" type="I" value="-252645136"/>
+				<Prp name="id" type="I" value="12"/>
+				<Prp name="bkcolor" type="I" value="-252645136"/>
+				<Prp name="message" type="S" value="Toolbar button 'Consultar' was clicked."/>
+				<Prp name="picture" type="S" value=""/>
+				<Prp name="link" type="S" value=""/>
+				<Prp name="unit id" type="I" value="1"/>
+				<Prp name="remarks" type="S" value="A click at point (127, 22) with no key pressed.&#xA;&#xA;Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal', 1).Window('MDIClient', '', 1).Window('TfrCadastroPessoa', 'Cadastro Pessoa', 1).Window('TToolBar', '', 1)"/>
+				<Prp name="type" type="I" value="1"/>
+				<Prp name="line no" type="I" value="71"/>
+				<Prp name="child index" type="I" value="-1"/>
+			</Node>
+			<Node name="message 1">
+				<Prp name="date" type="D" value="45817.7273683333"/>
+				<Prp name="priority" type="I" value="300"/>
+				<Prp name="owner id" type="I" value="-1"/>
+				<Prp name="color" type="I" value="-252645136"/>
+				<Prp name="id" type="I" value="1"/>
+				<Prp name="bkcolor" type="I" value="-252645136"/>
+				<Prp name="message" type="S" value="O sistema já está aberto"/>
+				<Prp name="picture" type="S" value=""/>
+				<Prp name="link" type="S" value=""/>
+				<Prp name="unit id" type="I" value="0"/>
+				<Prp name="remarks" type="S" value=""/>
+				<Prp name="type" type="I" value="0"/>
+				<Prp name="line no" type="I" value="9"/>
+				<Prp name="child index" type="I" value="-1"/>
+			</Node>
+			<Node name="message 11">
+				<Prp name="date" type="D" value="45817.7274622222"/>
+				<Prp name="priority" type="I" value="300"/>
+				<Prp name="owner id" type="I" value="-1"/>
+				<Prp name="color" type="I" value="-252645136"/>
+				<Prp name="id" type="I" value="11"/>
+				<Prp name="bkcolor" type="I" value="-252645136"/>
+				<Prp name="message" type="S" value="The menu item 'Cadastro|Pessoa' was clicked."/>
+				<Prp name="picture" type="S" value=""/>
+				<Prp name="link" type="S" value=""/>
+				<Prp name="unit id" type="I" value="1"/>
+				<Prp name="remarks" type="S" value="Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal', 1).MainMenu"/>
+				<Prp name="type" type="I" value="1"/>
+				<Prp name="line no" type="I" value="70"/>
+				<Prp name="child index" type="I" value="-1"/>
+			</Node>
+			<Node name="message 0">
+				<Prp name="date" type="D" value="45817.7273676968"/>
+				<Prp name="priority" type="I" value="300"/>
+				<Prp name="owner id" type="I" value="-1"/>
+				<Prp name="color" type="I" value="-252645136"/>
+				<Prp name="id" type="I" value="0"/>
+				<Prp name="bkcolor" type="I" value="-252645136"/>
+				<Prp name="message" type="S" value="Abrindo o projeto final academia"/>
+				<Prp name="picture" type="S" value=""/>
+				<Prp name="link" type="S" value=""/>
+				<Prp name="unit id" type="I" value="0"/>
+				<Prp name="remarks" type="S" value=""/>
+				<Prp name="type" type="I" value="0"/>
+				<Prp name="line no" type="I" value="2"/>
+				<Prp name="child index" type="I" value="-1"/>
+			</Node>
+			<Node name="message 10">
+				<Prp name="date" type="D" value="45817.7274603588"/>
+				<Prp name="priority" type="I" value="300"/>
+				<Prp name="owner id" type="I" value="-1"/>
+				<Prp name="color" type="I" value="-252645136"/>
+				<Prp name="id" type="I" value="10"/>
+				<Prp name="bkcolor" type="I" value="-252645136"/>
+				<Prp name="message" type="S" value="Pessoa Criada! Código 100: Joao Ponchiroli"/>
+				<Prp name="picture" type="S" value=""/>
+				<Prp name="link" type="S" value=""/>
+				<Prp name="unit id" type="I" value="1"/>
+				<Prp name="remarks" type="S" value=""/>
+				<Prp name="type" type="I" value="0"/>
+				<Prp name="line no" type="I" value="42"/>
+				<Prp name="child index" type="I" value="-1"/>
+			</Node>
+			<Node name="children"/>
+			<Node name="message 26">
+				<Prp name="date" type="D" value="45817.7276762153"/>
+				<Prp name="priority" type="I" value="300"/>
+				<Prp name="owner id" type="I" value="-1"/>
+				<Prp name="color" type="I" value="-252645136"/>
+				<Prp name="id" type="I" value="26"/>
+				<Prp name="bkcolor" type="I" value="-252645136"/>
+				<Prp name="message" type="S" value="O projeto foi fechado"/>
+				<Prp name="picture" type="S" value=""/>
+				<Prp name="link" type="S" value=""/>
+				<Prp name="unit id" type="I" value="0"/>
+				<Prp name="remarks" type="S" value=""/>
+				<Prp name="type" type="I" value="0"/>
+				<Prp name="line no" type="I" value="21"/>
+				<Prp name="child index" type="I" value="-1"/>
+			</Node>
+			<Node name="message 25">
+				<Prp name="date" type="D" value="45817.7276388542"/>
+				<Prp name="priority" type="I" value="300"/>
+				<Prp name="owner id" type="I" value="-1"/>
+				<Prp name="color" type="I" value="-252645136"/>
+				<Prp name="id" type="I" value="25"/>
+				<Prp name="bkcolor" type="I" value="-252645136"/>
+				<Prp name="message" type="S" value="Fechando o projeto final academia"/>
+				<Prp name="picture" type="S" value=""/>
+				<Prp name="link" type="S" value=""/>
+				<Prp name="unit id" type="I" value="0"/>
+				<Prp name="remarks" type="S" value=""/>
+				<Prp name="type" type="I" value="0"/>
+				<Prp name="line no" type="I" value="14"/>
+				<Prp name="child index" type="I" value="-1"/>
+			</Node>
+			<Node name="message 24">
+				<Prp name="date" type="D" value="45817.7276388542"/>
+				<Prp name="priority" type="I" value="300"/>
+				<Prp name="owner id" type="I" value="-1"/>
+				<Prp name="color" type="I" value="-252645136"/>
+				<Prp name="id" type="I" value="24"/>
+				<Prp name="bkcolor" type="I" value="-252645136"/>
+				<Prp name="message" type="S" value="Código: 100 excluido"/>
+				<Prp name="picture" type="S" value=""/>
+				<Prp name="link" type="S" value=""/>
+				<Prp name="unit id" type="I" value="1"/>
+				<Prp name="remarks" type="S" value=""/>
+				<Prp name="type" type="I" value="0"/>
+				<Prp name="line no" type="I" value="63"/>
+				<Prp name="child index" type="I" value="-1"/>
+			</Node>
+			<Node name="message 23">
+				<Prp name="date" type="D" value="45817.7276387384"/>
+				<Prp name="priority" type="I" value="300"/>
+				<Prp name="owner id" type="I" value="-1"/>
+				<Prp name="color" type="I" value="-252645136"/>
+				<Prp name="id" type="I" value="23"/>
+				<Prp name="bkcolor" type="I" value="-252645136"/>
+				<Prp name="message" type="S" value="The 'Cadastro Pessoa' window was closed."/>
+				<Prp name="picture" type="S" value=""/>
+				<Prp name="link" type="S" value=""/>
+				<Prp name="unit id" type="I" value="1"/>
+				<Prp name="remarks" type="S" value="Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal', 1).Window('MDIClient', '', 1).Window('TfrCadastroPessoa', 'Cadastro Pessoa', 1)"/>
+				<Prp name="type" type="I" value="1"/>
+				<Prp name="line no" type="I" value="61"/>
+				<Prp name="child index" type="I" value="-1"/>
+			</Node>
+			<Node name="message 22">
+				<Prp name="date" type="D" value="45817.727638206"/>
+				<Prp name="priority" type="I" value="300"/>
+				<Prp name="owner id" type="I" value="-1"/>
+				<Prp name="color" type="I" value="-252645136"/>
+				<Prp name="id" type="I" value="22"/>
+				<Prp name="bkcolor" type="I" value="-252645136"/>
+				<Prp name="message" type="S" value="The 'OK' button was clicked with the left mouse button."/>
+				<Prp name="picture" type="S" value=""/>
+				<Prp name="link" type="S" value=""/>
+				<Prp name="unit id" type="I" value="1"/>
+				<Prp name="remarks" type="S" value="A click at point (37, 13).&#xA;&#xA;Sys.Process('AcademiaSci').Window('TMessageForm', 'Projeto Final Academia', 1).Window('TButton', 'OK', 1)"/>
+				<Prp name="type" type="I" value="1"/>
+				<Prp name="line no" type="I" value="59"/>
+				<Prp name="child index" type="I" value="-1"/>
+			</Node>
+			<Node name="message 21">
+				<Prp name="date" type="D" value="45817.7276372569"/>
+				<Prp name="priority" type="I" value="400"/>
+				<Prp name="owner id" type="I" value="-1"/>
+				<Prp name="color" type="I" value="-252645136"/>
+				<Prp name="id" type="I" value="21"/>
+				<Prp name="bkcolor" type="I" value="-252645136"/>
+				<Prp name="message" type="S" value="The object does not exist."/>
+				<Prp name="picture" type="S" value=""/>
+				<Prp name="link" type="S" value=""/>
+				<Prp name="unit id" type="I" value="1"/>
+				<Prp name="remarks" type="S" value="You are trying to call the &quot;ClickButton&quot; method or property of the &quot;&amp;Yes&quot; object that does not exist."/>
+				<Prp name="type" type="I" value="3"/>
+				<Prp name="line no" type="I" value="58"/>
+				<Prp name="child index" type="I" value="-1"/>
+			</Node>
+			<Node name="message 20">
+				<Prp name="date" type="D" value="45817.7276372106"/>
+				<Prp name="priority" type="I" value="300"/>
+				<Prp name="owner id" type="I" value="-1"/>
+				<Prp name="color" type="I" value="-252645136"/>
+				<Prp name="id" type="I" value="20"/>
+				<Prp name="bkcolor" type="I" value="-252645136"/>
+				<Prp name="message" type="S" value="Cannot obtain the window with the window class 'TMessageForm', window caption 'Information' and index -1."/>
+				<Prp name="picture" type="S" value=""/>
+				<Prp name="link" type="S" value=""/>
+				<Prp name="unit id" type="I" value="1"/>
+				<Prp name="remarks" type="S" value="Possible reasons:&#xA;- The window with the specified attributes does not exist.&#xA;- The current object tree model differs from the tree model that was active during the recording.&#xA;&#xA;Possible solutions:&#xA;To avoid this error message, you can check whether the window exists before you address it. To do this, get a reference to the object using the WaitWindow method and check the Exists property of the returned object."/>
+				<Prp name="type" type="I" value="3"/>
+				<Prp name="line no" type="I" value="58"/>
+				<Prp name="child index" type="I" value="-1"/>
+			</Node>
+			<Node name="units">
+				<Prp name="unit 0" type="S" value="{0637D52D-1B21-4251-AD70-0215FBE96D58}"/>
+				<Prp name="unit 1" type="S" value="{BF73E310-E8F8-4A31-9C62-E1ACA102EDA3}"/>
+			</Node>
+			<Node name="message 9">
+				<Prp name="date" type="D" value="45817.7274603241"/>
+				<Prp name="priority" type="I" value="300"/>
+				<Prp name="owner id" type="I" value="-1"/>
+				<Prp name="color" type="I" value="-252645136"/>
+				<Prp name="id" type="I" value="9"/>
+				<Prp name="bkcolor" type="I" value="-252645136"/>
+				<Prp name="message" type="S" value="The 'Cadastro Pessoa' window was closed."/>
+				<Prp name="picture" type="S" value=""/>
+				<Prp name="link" type="S" value=""/>
+				<Prp name="unit id" type="I" value="1"/>
+				<Prp name="remarks" type="S" value="Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal', 1).Window('MDIClient', '', 1).Window('TfrCadastroPessoa', 'Cadastro Pessoa', 1)"/>
+				<Prp name="type" type="I" value="1"/>
+				<Prp name="line no" type="I" value="40"/>
+				<Prp name="child index" type="I" value="-1"/>
+			</Node>
+			<Node name="message 19">
+				<Prp name="date" type="D" value="45817.7275208912"/>
+				<Prp name="priority" type="I" value="300"/>
+				<Prp name="owner id" type="I" value="-1"/>
+				<Prp name="color" type="I" value="-252645136"/>
+				<Prp name="id" type="I" value="19"/>
+				<Prp name="bkcolor" type="I" value="-252645136"/>
+				<Prp name="message" type="S" value="Toolbar button 'Excluir' was clicked."/>
+				<Prp name="picture" type="S" value=""/>
+				<Prp name="link" type="S" value=""/>
+				<Prp name="unit id" type="I" value="1"/>
+				<Prp name="remarks" type="S" value="A click at point (76, 22) with no key pressed.&#xA;&#xA;Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal', 1).Window('MDIClient', '', 1).Window('TfrCadastroPessoa', 'Cadastro Pessoa', 1).Window('TToolBar', '', 1)"/>
+				<Prp name="type" type="I" value="1"/>
+				<Prp name="line no" type="I" value="57"/>
+				<Prp name="child index" type="I" value="-1"/>
+			</Node>
+			<Node name="message 8">
+				<Prp name="date" type="D" value="45817.7274597338"/>
+				<Prp name="priority" type="I" value="300"/>
+				<Prp name="owner id" type="I" value="-1"/>
+				<Prp name="color" type="I" value="-252645136"/>
+				<Prp name="id" type="I" value="8"/>
+				<Prp name="bkcolor" type="I" value="-252645136"/>
+				<Prp name="message" type="S" value="The 'OK' button was clicked with the left mouse button."/>
+				<Prp name="picture" type="S" value=""/>
+				<Prp name="link" type="S" value=""/>
+				<Prp name="unit id" type="I" value="1"/>
+				<Prp name="remarks" type="S" value="A click at point (37, 13).&#xA;&#xA;Sys.Process('AcademiaSci').Window('TMessageForm', 'Projeto Final Academia', 1).Window('TButton', 'OK', 1)"/>
+				<Prp name="type" type="I" value="1"/>
+				<Prp name="line no" type="I" value="38"/>
+				<Prp name="child index" type="I" value="-1"/>
+			</Node>
+			<Prp name="project" type="S" value="{DD04CCA3-EB67-47D9-9362-F8A4ADD2280D}"/>
+			<Prp name="test moniker" type="S" value="{BF73E310-E8F8-4A31-9C62-E1ACA102EDA3}pTestePessoa"/>
+			<Prp name="name" type="S" value="Test Log [uCadastroPessoa\pTestePessoa]"/>
+			<Prp name="status" type="I" value="2"/>
+		</Node>
+		<Prp name="data type" type="S" value="{C0A16E40-A745-4685-B1CC-65EC03A4C819}"/>
+	</Node>
+</Nodes>

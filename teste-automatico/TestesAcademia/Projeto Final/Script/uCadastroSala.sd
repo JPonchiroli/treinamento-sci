@@ -1,0 +1,76 @@
+uses
+  uUtil;
+  
+procedure pCadastroSala(wCodigoSala, wNomeSala, wLotacaoMaximaSala: String); forward;
+procedure pConsultaSala; forward;
+procedure pExcluiSala(wCodigoSala: String); forward; 
+   
+procedure pTesteSala;
+begin
+
+  pCadastroSala('100', 'Multiuso 100', '10');
+  pConsultaSala();
+  pExcluiSala('100');
+   
+end;
+
+procedure pCadastroSala(wCodigoSala, wNomeSala, wLotacaoMaximaSala);
+  var p1 : OleVariant;
+  var w1 : OleVariant;
+  var w2 : OleVariant;
+begin
+  p1 := Sys.Process('AcademiaSci');
+  w1 := p1.Window('TfrPrincipal', 'Tela Principal');
+  w1.MainMenu.Click('Cadastro|Sala');
+  w2 := w1.Window('MDIClient').Window('TfrCadastroSala', 'Cadastro Sala');
+  w1 := w2.Window('TEditNumerico', '0', 1);
+  w1.Click(19, 14);
+  w1.Keys('[BS]' + wCodigoSala + '[Tab]');
+  w2.Window('TEdit').Keys(wNomeSala + '[Tab]');
+  w2.Window('TEditNumerico', '0', 2).Keys(wLotacaoMaximaSala);
+  w2.Window('TToolBar').ClickItem('Confirmar', false);
+  p1.Window('TMessageForm', 'Projeto Final Academia').Window('TButton', 'OK').ClickButton;
+  
+  Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal', 1).Window('MDIClient', '', 1).Window('TfrCadastroSala', 'Cadastro Sala', 1).Close;
+  
+  Log.Message('Sala Criada! Código ' + wCodigoSala + ': ' + wNomeSala + ', Lotação: ' + wLotacaoMaximaSala);
+end;
+
+procedure pExcluiSala(wCodigoSala);
+  var p1 : OleVariant;
+  var w1 : OleVariant;
+  var w2 : OleVariant;
+begin
+  p1 := Sys.Process('AcademiaSci');
+  w1 := p1.Window('TfrPrincipal', 'Tela Principal');
+  w1.MainMenu.Click('Cadastro|Sala');
+  w2 := w1.Window('MDIClient').Window('TfrCadastroSala', 'Cadastro Sala');
+  w1 := w2.Window('TEditNumerico', '0', 1); 
+  w1.Keys('[BS]' + wCodigoSala);
+  w2.Window('TToolBar').ClickItem('Excluir', false);
+  p1.Window('TMessageForm', 'Information').Window('TButton', '&Yes').ClickButton;
+  p1.Window('TMessageForm', 'Projeto Final Academia').Window('TButton', 'OK').ClickButton;
+  
+    
+  w2.Window('TToolBar').ClickItem('Consultar', false);
+  uUtil.pPrintTela;
+  BuiltIn.Delay(2000);
+  
+  Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal', 1).Window('MDIClient', '', 1).Window('TfrConsultaSala', 'Consulta Sala', 1).Close;
+  Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal', 1).Window('MDIClient', '', 1).Window('TfrCadastroSala', 'Cadastro Sala', 1).Close;
+  
+  Log.Message('Código: ' + wCodigoSala + ' excluida');
+end;
+
+procedure pConsultaSala();
+  var w1 : OleVariant;
+begin
+  w1 := Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal');
+  w1.MainMenu.Click('Cadastro|Sala');
+  w1.Window('MDIClient').Window('TfrCadastroSala', 'Cadastro Sala').Window('TToolBar').ClickItem('Consultar', false);
+  uUtil.pPrintTela;
+  BuiltIn.Delay(2000);
+  
+  Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal', 1).Window('MDIClient', '', 1).Window('TfrConsultaSala', 'Consulta Sala', 1).Close;
+  Sys.Process('AcademiaSci').Window('TfrPrincipal', 'Tela Principal', 1).Window('MDIClient', '', 1).Window('TfrCadastroSala', 'Cadastro Sala', 1).Close; 
+end;
