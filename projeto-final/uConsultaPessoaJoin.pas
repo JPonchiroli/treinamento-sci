@@ -9,8 +9,8 @@ uses
 
 type
   TfrConsultaPessoaJoin = class(TfrConsultaPadraoMdi)
-    lCodigoPessoa: TLabel;
-    enCodigoPessoa: TEditNumerico;
+    lbCodigoPessoa_Label: TLabel;
+    enCodigoPessoa_EditNumerico: TEditNumerico;
     procedure tbConfirmarClick(Sender: TObject);
   private
     { Private declarations }
@@ -36,22 +36,22 @@ end;
 
 function TfrConsultaPessoaJoin.setTabela: TClientDataSet;
 begin
-  Result := dmProjeto.cdsConsultaPessoa;
+  Result := dmProjeto_DataModule.cdsConsulta;
 end;
 
 procedure TfrConsultaPessoaJoin.tbConfirmarClick(Sender: TObject);
 begin
   inherited;
-  if not dmProjeto.SQLConnection.Connected then
-    dmProjeto.SQLConnection.Connected := True;
+  if not dmProjeto_DataModule.SQLConnection.Connected then
+    dmProjeto_DataModule.SQLConnection.Connected := True;
 
-  if dmProjeto.cdsConsultaPessoa.Active then
-    dmProjeto.cdsConsultaPessoa.Close;
+  if dmProjeto_DataModule.cdsConsulta.Active then
+    dmProjeto_DataModule.cdsConsulta.Close;
 
-  dmProjeto.cdsConsultaPessoa.Close;
-  dmProjeto.qConsultaPessoa.SQL.Clear;
+  dmProjeto_DataModule.cdsConsulta.Close;
+  dmProjeto_DataModule.qConsulta.SQL.Clear;
 
-  dmProjeto.qConsultaPessoa.SQL.Add(
+  dmProjeto_DataModule.qConsulta.SQL.Add(
   'select et.bdnumetapa, ' +
           'p.bdnomepessoa, p.bdsobrenomepessoa, ' +
           's.bdnomesala, ' +
@@ -62,11 +62,11 @@ begin
   'join tespacocafe ec on (ec.bdcodespacocafe = et.bdcodespacocafe) ' +
   'where et.bdcodpessoa = :bdcodpessoa ');
 
-  dmProjeto.qConsultaPessoa.ParamByName('bdcodpessoa').AsInteger := enCodigoPessoa.Codigo;
-  dmProjeto.cdsConsultaPessoa.Open;
-  dsPadrao.DataSet := dmProjeto.cdsConsultaPessoa;
+  dmProjeto_DataModule.qConsulta.ParamByName('bdcodpessoa').AsInteger := enCodigoPessoa_EditNumerico.Codigo;
+  dmProjeto_DataModule.cdsConsulta.Open;
+  dsPadrao.DataSet := dmProjeto_DataModule.cdsConsulta;
 
-  if dmProjeto.cdsConsultaPessoa.IsEmpty then
+  if dmProjeto_DataModule.cdsConsulta.IsEmpty then
     ShowMessage('Pessoa não registrada em nenhuma etapa, favor escolha outra pessoa');
 end;
 

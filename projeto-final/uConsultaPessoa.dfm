@@ -1,10 +1,12 @@
 inherited frConsultaPessoa: TfrConsultaPessoa
-  Caption = 'frConsultaPessoa'
+  Left = 312
+  Top = 192
+  Caption = 'Consulta Pessoa'
   PixelsPerInch = 96
   TextHeight = 13
-  inherited grPadrao: TDBGrid
-    Width = 537
-    Height = 161
+  inherited grPadrao_Grid: TDBGrid
+    Width = 617
+    Height = 155
     Columns = <
       item
         Expanded = False

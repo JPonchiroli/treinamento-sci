@@ -9,7 +9,7 @@ uses
 
 type
   TfrConsultaSalaJoin = class(TfrConsultaPadraoMdi)
-    eCodigoSala: TLabel;
+    enCodigoSala_EditNumerico: TLabel;
     enCodigoSala: TEditNumerico;
     procedure tbConfirmarClick(Sender: TObject);
   private
@@ -38,22 +38,22 @@ end;
 
 function TfrConsultaSalaJoin.setTabela: TClientDataSet;
 begin
-  Result := dmProjeto.cdsConsultaSala;
+  Result := dmProjeto_DataModule.cdsConsulta;
 end;
 
 procedure TfrConsultaSalaJoin.tbConfirmarClick(Sender: TObject);
 begin
   inherited;
-  if not dmProjeto.SQLConnection.Connected then
-    dmProjeto.SQLConnection.Connected := True;
+  if not dmProjeto_DataModule.SQLConnection.Connected then
+    dmProjeto_DataModule.SQLConnection.Connected := True;
 
-  if dmProjeto.cdsConsultaSala.Active then
-    dmProjeto.cdsConsultaSala.Close;
+  if dmProjeto_DataModule.cdsConsulta.Active then
+    dmProjeto_DataModule.cdsConsulta.Close;
 
-  dmProjeto.cdsConsultaSala.Close;
-  dmProjeto.qConsultaSala.SQL.Clear;
+  dmProjeto_DataModule.cdsConsulta.Close;
+  dmProjeto_DataModule.qConsulta.SQL.Clear;
 
-  dmProjeto.qConsultaSala.SQL.Add(
+  dmProjeto_DataModule.qConsulta.SQL.Add(
   'select et.bdnumetapa, ' +
           's.bdnomesala, ' +
           'p.bdnomepessoa, p.bdsobrenomepessoa ' +
@@ -62,11 +62,11 @@ begin
   'join tsala s on (s.bdcodsala = et.bdcodsala) ' +
   'where et.bdcodsala = :bdcodsala ');
 
-  dmProjeto.qConsultaSala.ParamByName('bdcodsala').AsInteger := enCodigoSala.Codigo;
-  dmProjeto.cdsConsultaSala.Open;
-  dsPadrao.DataSet := dmProjeto.cdsConsultaSala;
+  dmProjeto_DataModule.qConsulta.ParamByName('bdcodsala').AsInteger := enCodigoSala.Codigo;
+  dmProjeto_DataModule.cdsConsulta.Open;
+  dsPadrao.DataSet := dmProjeto_DataModule.cdsConsulta;
 
-  if dmProjeto.cdsConsultaSala.IsEmpty then
+  if dmProjeto_DataModule.cdsConsulta.IsEmpty then
     ShowMessage('Sala não registrada em nenhuma etapa, favor escolha outra sala');
 end;
 

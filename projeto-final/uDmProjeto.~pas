@@ -7,32 +7,23 @@ uses
   DBClient, Provider;
 
 type
-  TdmProjeto = class(TDataModule)
+  TdmProjeto_DataModule = class(TDataModule)
     SQLConnection: TSQLConnection;
-    TPessoa: TSQLTable;
+    tbPessoa_Tabela: TSQLTable;
     dspPessoa: TDataSetProvider;
     cdsPessoa: TClientDataSet;
-    TSala: TSQLTable;
+    tbSala_Tabela: TSQLTable;
     dspSala: TDataSetProvider;
     cdsSala: TClientDataSet;
-    TEspacoCafe: TSQLTable;
+    tbEspacoCafe_Tabela: TSQLTable;
     dspEspacoCafe: TDataSetProvider;
     cdsEspacoCafe: TClientDataSet;
-    TEtapa: TSQLTable;
+    tbEtapa_Tabela: TSQLTable;
     dspEtapa: TDataSetProvider;
     cdsEtapa: TClientDataSet;
-    qConsultaPessoa: TSQLQuery;
-    dspConsultaPessoa: TDataSetProvider;
-    cdsConsultaPessoa: TClientDataSet;
-    qConsultaSala: TSQLQuery;
-    dspConsultaSala: TDataSetProvider;
-    cdsConsultaSala: TClientDataSet;
-    qConsultaEspacoCafe: TSQLQuery;
-    dspConsultaEspacoCafe: TDataSetProvider;
-    cdsConsultaEspacoCafe: TClientDataSet;
-    qConsultaEtapa: TSQLQuery;
-    dspConsultaEtapa: TDataSetProvider;
-    cdsConsultaEtapa: TClientDataSet;
+    qConsulta: TSQLQuery;
+    dspConsulta: TDataSetProvider;
+    cdsConsulta: TClientDataSet;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
@@ -41,13 +32,13 @@ type
   end;
 
 var
-  dmProjeto: TdmProjeto;
+  dmProjeto_DataModule: TdmProjeto_DataModule;
 
 implementation
 
 {$R *.dfm}
 
-procedure TdmProjeto.DataModuleCreate(Sender: TObject);
+procedure TdmProjeto_DataModule.DataModuleCreate(Sender: TObject);
 begin
   SQLConnection.Close;
 

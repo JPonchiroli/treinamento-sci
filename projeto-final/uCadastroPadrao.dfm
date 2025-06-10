@@ -3,7 +3,7 @@ inherited frCadastroPadrao: TfrCadastroPadrao
   Top = 152
   Width = 951
   Height = 502
-  Caption = 'frCadastroPadrao'
+  Caption = 'Cadastro Padr'#227'o'
   OldCreateOrder = True
   OnCreate = FormCreate
   PixelsPerInch = 96

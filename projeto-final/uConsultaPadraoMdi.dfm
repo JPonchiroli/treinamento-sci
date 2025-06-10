@@ -1,7 +1,8 @@
 inherited frConsultaPadraoMdi: TfrConsultaPadraoMdi
   Left = 266
   Top = 140
-  Caption = 'frConsultaPadraoMdi'
+  Height = 457
+  Caption = 'Consulta Padr'#227'o'
   OldCreateOrder = True
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -14,11 +15,11 @@ inherited frConsultaPadraoMdi: TfrConsultaPadraoMdi
       Caption = 'Cancelar'
     end
   end
-  object grPadrao: TDBGrid [1]
+  object grPadrao_Grid: TDBGrid [1]
     Left = 8
-    Top = 56
-    Width = 320
-    Height = 120
+    Top = 62
+    Width = 489
+    Height = 195
     DataSource = dsPadrao
     TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET
@@ -28,19 +29,19 @@ inherited frConsultaPadraoMdi: TfrConsultaPadraoMdi
     TitleFont.Style = []
   end
   inherited imImages: TImageList
-    Left = 552
-    Top = 56
-  end
-  inherited imHotImages: TImageList
-    Left = 592
-    Top = 56
-  end
-  inherited imDisableImages: TImageList
     Left = 632
     Top = 56
   end
+  inherited imHotImages: TImageList
+    Left = 672
+    Top = 56
+  end
+  inherited imDisableImages: TImageList
+    Left = 712
+    Top = 56
+  end
   object dsPadrao: TDataSource
-    Left = 336
+    Left = 592
     Top = 56
   end
 end

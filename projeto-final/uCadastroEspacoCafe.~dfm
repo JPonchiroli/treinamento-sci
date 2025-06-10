@@ -1,43 +1,36 @@
 inherited frCadastroEspacoCafe: TfrCadastroEspacoCafe
-  Caption = 'frCadastroEspacoCafe'
+  Caption = 'Cadastro Espa'#231'o Caf'#233
   PixelsPerInch = 96
   TextHeight = 13
-  object lNomeEspacoCafe: TLabel [0]
-    Left = 88
+  object lbNomeEspacoCafe_Label: TLabel [0]
+    Left = 80
     Top = 128
-    Width = 28
+    Width = 35
     Height = 13
-    Caption = 'Nome'
+    Caption = '* Nome'
   end
-  object lLotacaoMaximaEspacoCafe: TLabel [1]
-    Left = 38
+  object lbLotacaoMaximaEspacoCafe_Label: TLabel [1]
+    Left = 30
     Top = 160
-    Width = 78
+    Width = 85
     Height = 13
-    Caption = 'Lota'#231#227'o M'#225'xima'
+    Caption = '* Lota'#231#227'o M'#225'xima'
   end
-  object lLotacaoAtualEspacoCafe: TLabel [2]
-    Left = 50
-    Top = 192
-    Width = 66
-    Height = 13
-    Caption = 'Lota'#231#227'o Atual'
-  end
-  object lCodigoEspacoCafe: TLabel [3]
+  object lbCodigoEspacoCafe_Label: TLabel [2]
     Left = 83
     Top = 96
     Width = 33
     Height = 13
     Caption = 'C'#243'digo'
   end
-  object eNomeEspacoCafe: TEdit [5]
+  object edNomeEspacoCafe_Edit: TEdit [4]
     Left = 128
     Top = 124
     Width = 121
     Height = 21
     TabOrder = 1
   end
-  object enLotacaoMaximaEspacoCafe: TEditNumerico [6]
+  object enLotacaoMaximaEspacoCafe_EditNumerico: TEditNumerico [5]
     Left = 128
     Top = 156
     Width = 121
@@ -48,23 +41,12 @@ inherited frCadastroEspacoCafe: TfrCadastroEspacoCafe
     Decimal = False
     Separador = ','
   end
-  object enLotacaoAtualEspacoCafe: TEditNumerico [7]
-    Left = 128
-    Top = 188
-    Width = 121
-    Height = 21
-    TabOrder = 3
-    Text = '0'
-    Codigo = 0
-    Decimal = False
-    Separador = ','
-  end
-  object enCodigoEspacoCafe: TEditNumerico [8]
+  object enCodigoEspacoCafe_EditNumerico: TEditNumerico [6]
     Left = 128
     Top = 92
     Width = 121
     Height = 21
-    TabOrder = 4
+    TabOrder = 3
     Text = '0'
     Codigo = 0
     Decimal = False

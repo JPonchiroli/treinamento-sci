@@ -35,7 +35,7 @@ end;
 
 function TfrConsultaEtapa.setTabela: TClientDataSet;
 begin
-  Result := dmProjeto.cdsEtapa;
+  Result := dmProjeto_DataModule.cdsEtapa;
 end;
 
 end.

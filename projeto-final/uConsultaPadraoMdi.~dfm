@@ -1,7 +1,7 @@
 inherited frConsultaPadraoMdi: TfrConsultaPadraoMdi
   Left = 266
   Top = 140
-  Caption = 'frConsultaPadraoMdi'
+  Caption = 'Consulta Padr'#227'o'
   OldCreateOrder = True
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -14,7 +14,7 @@ inherited frConsultaPadraoMdi: TfrConsultaPadraoMdi
       Caption = 'Cancelar'
     end
   end
-  object grPadrao: TDBGrid [1]
+  object grPadrao_Grid: TDBGrid [1]
     Left = 8
     Top = 56
     Width = 320

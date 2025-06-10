@@ -9,14 +9,12 @@ uses
 
 type
   TfrCadastroSala = class(TfrCadastroPadrao)
-    eNomeSala: TEdit;
-    enLotacaoMaximaSala: TEditNumerico;
-    enLotacaoAtualSala: TEditNumerico;
-    lNomeSala: TLabel;
-    lLotacaoMaximaSala: TLabel;
-    lLotacaoAtualSala: TLabel;
-    lCodigoSala: TLabel;
-    enCodigoSala: TEditNumerico;
+    edNomeSala_Edit: TEdit;
+    enLotacaoMaximaSala_EditNumerico: TEditNumerico;
+    lbNomeSala_Label: TLabel;
+    lbLotacaoMaximaSala_Label: TLabel;
+    lbCodigoSala_Label: TLabel;
+    enCodigoSala_EditNumerico: TEditNumerico;
     procedure tbExcluirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
@@ -48,37 +46,36 @@ uses uConsultaSala, uDmProjeto;
 procedure TfrCadastroSala.Carregar;
 begin
   inherited;
-  eNomeSala.Text :=  Tabela.FieldByName('BDNOMESALA').AsString;
-  enLotacaoMaximaSala.Text := Tabela.FieldByName('BDLOTACAOMAXIMASALA').AsString;
-  enLotacaoAtualSala.Text := Tabela.FieldByName('BDLOTACAOATUALSALA').AsString;
+  edNomeSala_Edit.Text :=  Tabela.FieldByName('BDNOMESALA').AsString;
+  enLotacaoMaximaSala_EditNumerico.Text := Tabela.FieldByName('BDLOTACAOMAXIMASALA').AsString;
 end;
 
 function TfrCadastroSala.Consultar: TForm;
 begin
-  Result := TfrConsultaSala.Create(enCodigoSala);
+  Result := TfrConsultaSala.Create(enCodigoSala_EditNumerico);
 end;
 
 function TfrCadastroSala.ConsultarSala: Boolean;
 var
   wCodigoSala: Integer;
 begin
-  if not dmProjeto.SQLConnection.Connected then
-    dmProjeto.SQLConnection.Connected := True;
+  if not dmProjeto_DataModule.SQLConnection.Connected then
+    dmProjeto_DataModule.SQLConnection.Connected := True;
 
-  if dmProjeto.cdsConsultaSala.Active then
-    dmProjeto.cdsConsultaSala.Close;
+  if dmProjeto_DataModule.cdsConsulta.Active then
+    dmProjeto_DataModule.cdsConsulta.Close;
 
-  dmProjeto.cdsConsultaSala.Close;
-  dmProjeto.qConsultaSala.SQL.Clear;
+  dmProjeto_DataModule.cdsConsulta.Close;
+  dmProjeto_DataModule.qConsulta.SQL.Clear;
 
-  dmProjeto.qConsultaSala.SQL.Add(
+  dmProjeto_DataModule.qConsulta.SQL.Add(
   'select bdcodsala ' +
   'from tsala ' +
   'where bdcodsala = :bdcodsala ');
 
-  dmProjeto.qConsultaSala.ParamByName('bdcodsala').AsInteger := enCodigoSala.Codigo;
-  dmProjeto.cdsConsultaSala.Open;
-  wCodigoSala := dmProjeto.cdsConsultaSala.FieldByName('bdcodsala').AsInteger;
+  dmProjeto_DataModule.qConsulta.ParamByName('bdcodsala').AsInteger := enCodigoSala_EditNumerico.Codigo;
+  dmProjeto_DataModule.cdsConsulta.Open;
+  wCodigoSala := dmProjeto_DataModule.cdsConsulta.FieldByName('bdcodsala').AsInteger;
 
   if wCodigoSala > 0 then
     Result := true
@@ -89,15 +86,14 @@ end;
 procedure TfrCadastroSala.Salvar;
 begin
   inherited;
-  Tabela.FieldByName('BDCODSALA').AsInteger := enCodigoSala.Codigo;
-  Tabela.FieldByName('BDNOMESALA').AsString := eNomeSala.Text;
-  Tabela.FieldByName('BDLOTACAOMAXIMASALA').AsInteger := enLotacaoMaximaSala.Codigo;
-  Tabela.FieldByName('BDLOTACAOATUALSALA').AsInteger := enLotacaoAtualSala.Codigo;
+  Tabela.FieldByName('BDCODSALA').AsInteger := enCodigoSala_EditNumerico.Codigo;
+  Tabela.FieldByName('BDNOMESALA').AsString := edNomeSala_Edit.Text;
+  Tabela.FieldByName('BDLOTACAOMAXIMASALA').AsInteger := enLotacaoMaximaSala_EditNumerico.Codigo;
 end;
 
 function TfrCadastroSala.setEditCodigo: TEdit;
 begin
-  Result := enCodigoSala;
+  Result := enCodigoSala_EditNumerico;
 end;
 
 function TfrCadastroSala.setIndice: string;
@@ -107,14 +103,13 @@ end;
 
 function TfrCadastroSala.setTabela: TClientDataSet;
 begin
-  Result := dmProjeto.cdsSala;
+  Result := dmProjeto_DataModule.cdsSala;
 end;
 
 function TfrCadastroSala.Validar: Boolean;
 begin
-  if (eNomeSala.Text = EmptyStr) or
-     (enLotacaoMaximaSala.Text = EmptyStr) or
-     (enLotacaoAtualSala.Text = EmptyStr) then
+  if (edNomeSala_Edit.Text = EmptyStr) or
+     (enLotacaoMaximaSala_EditNumerico.Text = EmptyStr) then
   begin
     ShowMessage('Erro de Inserção. O cadastro possui campos vazios');
     Result := false;
@@ -138,23 +133,23 @@ function TfrCadastroSala.ConsultarChaveEstrangeira: Boolean;
 var
   wChaveEstrangeira: Integer;
 begin
-  if not dmProjeto.SQLConnection.Connected then
-    dmProjeto.SQLConnection.Connected := True;
+  if not dmProjeto_DataModule.SQLConnection.Connected then
+    dmProjeto_DataModule.SQLConnection.Connected := True;
 
-  if dmProjeto.cdsConsultaSala.Active then
-    dmProjeto.cdsConsultaSala.Close;
+  if dmProjeto_DataModule.cdsConsulta.Active then
+    dmProjeto_DataModule.cdsConsulta.Close;
 
-  dmProjeto.cdsConsultaSala.Close;
-  dmProjeto.qConsultaSala.SQL.Clear;
+  dmProjeto_DataModule.cdsConsulta.Close;
+  dmProjeto_DataModule.qConsulta.SQL.Clear;
 
-  dmProjeto.qConsultaSala.SQL.Add(
+  dmProjeto_DataModule.qConsulta.SQL.Add(
   'select bdcodsala ' +
   'from tetapa ' +
   'where bdcodsala = :bdcodsala ');
 
-  dmProjeto.qConsultaSala.ParamByName('bdcodsala').AsInteger := enCodigoSala.Codigo;
-  dmProjeto.cdsConsultaSala.Open;
-  wChaveEstrangeira := dmProjeto.cdsConsultaSala.FieldByName('bdcodsala').AsInteger;
+  dmProjeto_DataModule.qConsulta.ParamByName('bdcodsala').AsInteger := enCodigoSala_EditNumerico.Codigo;
+  dmProjeto_DataModule.cdsConsulta.Open;
+  wChaveEstrangeira := dmProjeto_DataModule.cdsConsulta.FieldByName('bdcodsala').AsInteger;
 
   if wChaveEstrangeira > 0 then
     Result := false
@@ -165,5 +160,7 @@ end;
 procedure TfrCadastroSala.FormCreate(Sender: TObject);
 begin
   inherited;
-  dmProjeto.cdsSala.Refresh
+  dmProjeto_DataModule.cdsSala.Refresh
+end;
+
 end.

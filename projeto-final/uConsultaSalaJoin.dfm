@@ -1,18 +1,23 @@
 inherited frConsultaSalaJoin: TfrConsultaSalaJoin
-  Caption = 'frConsultaSalaJoin'
+  Width = 1010
+  Height = 538
+  Caption = 'Consulta Sala'
   PixelsPerInch = 96
   TextHeight = 13
-  object eCodigoSala: TLabel [0]
-    Left = 16
-    Top = 80
+  object enCodigoSala_EditNumerico: TLabel [0]
+    Left = 8
+    Top = 64
     Width = 57
     Height = 13
     Caption = 'C'#243'digo Sala'
   end
-  inherited grPadrao: TDBGrid
-    Top = 112
-    Width = 617
-    Height = 137
+  inherited tbFerramentas: TToolBar
+    Width = 994
+  end
+  inherited grPadrao_Grid: TDBGrid
+    Top = 94
+    Width = 577
+    Height = 155
     Columns = <
       item
         Expanded = False
@@ -44,8 +49,8 @@ inherited frConsultaSalaJoin: TfrConsultaSalaJoin
       end>
   end
   object enCodigoSala: TEditNumerico [3]
-    Left = 88
-    Top = 80
+    Left = 80
+    Top = 60
     Width = 121
     Height = 21
     TabOrder = 2

@@ -1,11 +1,17 @@
 inherited frConsultaSala: TfrConsultaSala
-  Caption = 'frConsultaSala'
+  Left = 271
+  Top = 189
+  Width = 947
+  Height = 327
+  Caption = 'Consulta Sala'
   PixelsPerInch = 96
   TextHeight = 13
-  inherited grPadrao: TDBGrid
-    Top = 64
-    Width = 689
-    Height = 177
+  inherited tbFerramentas: TToolBar
+    Width = 931
+  end
+  inherited grPadrao_Grid: TDBGrid
+    Width = 681
+    Height = 155
     Columns = <
       item
         Expanded = False
@@ -29,10 +35,8 @@ inherited frConsultaSala: TfrConsultaSala
       end
       item
         Expanded = False
-        FieldName = 'BDLOTACAOATUALSALA'
-        Title.Caption = 'Lota'#231#227'o Atual'
-        Width = 114
-        Visible = True
+        Width = -1
+        Visible = False
       end>
   end
   inherited imImages: TImageList

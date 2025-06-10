@@ -1,10 +1,10 @@
-object dmProjeto: TdmProjeto
+object dmProjeto_DataModule: TdmProjeto_DataModule
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 214
-  Top = 177
-  Height = 285
-  Width = 956
+  Left = 200
+  Top = 178
+  Height = 282
+  Width = 1157
   object SQLConnection: TSQLConnection
     ConnectionName = 'DB2Connection'
     DriverName = 'DB2'
@@ -23,7 +23,7 @@ object dmProjeto: TdmProjeto
     Left = 32
     Top = 16
   end
-  object TPessoa: TSQLTable
+  object tbPessoa_Tabela: TSQLTable
     MaxBlobSize = -1
     SQLConnection = SQLConnection
     TableName = 'TPESSOA'
@@ -31,7 +31,7 @@ object dmProjeto: TdmProjeto
     Top = 16
   end
   object dspPessoa: TDataSetProvider
-    DataSet = TPessoa
+    DataSet = tbPessoa_Tabela
     Left = 128
     Top = 80
   end
@@ -45,64 +45,64 @@ object dmProjeto: TdmProjeto
     Left = 128
     Top = 144
   end
-  object TSala: TSQLTable
+  object tbSala_Tabela: TSQLTable
     MaxBlobSize = -1
     SQLConnection = SQLConnection
     TableName = 'TSALA'
-    Left = 216
+    Left = 224
     Top = 16
   end
   object dspSala: TDataSetProvider
-    DataSet = TSala
-    Left = 216
+    DataSet = tbSala_Tabela
+    Left = 224
     Top = 80
   end
   object cdsSala: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspSala'
-    Left = 216
+    Left = 224
     Top = 144
   end
-  object TEspacoCafe: TSQLTable
+  object tbEspacoCafe_Tabela: TSQLTable
     MaxBlobSize = -1
     SQLConnection = SQLConnection
     TableName = 'TESPACOCAFE'
-    Left = 296
+    Left = 336
     Top = 16
   end
   object dspEspacoCafe: TDataSetProvider
-    DataSet = TEspacoCafe
-    Left = 296
+    DataSet = tbEspacoCafe_Tabela
+    Left = 336
     Top = 80
   end
   object cdsEspacoCafe: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspEspacoCafe'
-    Left = 296
+    Left = 336
     Top = 144
   end
-  object TEtapa: TSQLTable
+  object tbEtapa_Tabela: TSQLTable
     MaxBlobSize = -1
     SQLConnection = SQLConnection
     TableName = 'TETAPA'
-    Left = 384
+    Left = 448
     Top = 16
   end
   object dspEtapa: TDataSetProvider
-    DataSet = TEtapa
-    Left = 384
+    DataSet = tbEtapa_Tabela
+    Left = 448
     Top = 80
   end
   object cdsEtapa: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspEtapa'
-    Left = 384
+    Left = 448
     Top = 144
   end
-  object qConsultaPessoa: TSQLQuery
+  object qConsulta: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -115,115 +115,22 @@ object dmProjeto: TdmProjeto
       'FROM TPESSOA '
       'WHERE BDCODPESSOA = :bdcodpessoa')
     SQLConnection = SQLConnection
-    Left = 512
-    Top = 16
+    Left = 552
+    Top = 24
   end
-  object dspConsultaPessoa: TDataSetProvider
-    DataSet = qConsultaPessoa
-    Left = 512
-    Top = 72
+  object dspConsulta: TDataSetProvider
+    DataSet = qConsulta
+    Left = 552
+    Top = 80
   end
-  object cdsConsultaPessoa: TClientDataSet
+  object cdsConsulta: TClientDataSet
     Aggregates = <>
     FieldDefs = <>
     IndexDefs = <>
     Params = <>
-    ProviderName = 'dspConsultaPessoa'
+    ProviderName = 'dspConsulta'
     StoreDefs = True
-    Left = 512
-    Top = 136
-  end
-  object qConsultaSala: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'bdcodpessoa'
-        ParamType = ptUnknown
-      end>
-    SQL.Strings = (
-      'SELECT * '
-      'FROM TPESSOA '
-      'WHERE BDCODPESSOA = :bdcodpessoa')
-    SQLConnection = SQLConnection
-    Left = 616
-    Top = 16
-  end
-  object dspConsultaSala: TDataSetProvider
-    DataSet = qConsultaSala
-    Left = 616
-    Top = 72
-  end
-  object cdsConsultaSala: TClientDataSet
-    Aggregates = <>
-    FieldDefs = <>
-    IndexDefs = <>
-    Params = <>
-    ProviderName = 'dspConsultaSala'
-    StoreDefs = True
-    Left = 616
-    Top = 136
-  end
-  object qConsultaEspacoCafe: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'bdcodpessoa'
-        ParamType = ptUnknown
-      end>
-    SQL.Strings = (
-      'SELECT * '
-      'FROM TPESSOA '
-      'WHERE BDCODPESSOA = :bdcodpessoa')
-    SQLConnection = SQLConnection
-    Left = 728
-    Top = 16
-  end
-  object dspConsultaEspacoCafe: TDataSetProvider
-    DataSet = qConsultaEspacoCafe
-    Left = 728
-    Top = 72
-  end
-  object cdsConsultaEspacoCafe: TClientDataSet
-    Aggregates = <>
-    FieldDefs = <>
-    IndexDefs = <>
-    Params = <>
-    ProviderName = 'dspConsultaEspacoCafe'
-    StoreDefs = True
-    Left = 728
-    Top = 136
-  end
-  object qConsultaEtapa: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'bdcodpessoa'
-        ParamType = ptUnknown
-      end>
-    SQL.Strings = (
-      'SELECT * '
-      'FROM TPESSOA '
-      'WHERE BDCODPESSOA = :bdcodpessoa')
-    SQLConnection = SQLConnection
-    Left = 840
-    Top = 16
-  end
-  object dspConsultaEtapa: TDataSetProvider
-    DataSet = qConsultaEtapa
-    Left = 840
-    Top = 72
-  end
-  object cdsConsultaEtapa: TClientDataSet
-    Aggregates = <>
-    FieldDefs = <>
-    IndexDefs = <>
-    Params = <>
-    ProviderName = 'dspConsultaEtapa'
-    StoreDefs = True
-    Left = 840
-    Top = 136
+    Left = 552
+    Top = 144
   end
 end

@@ -3,7 +3,7 @@ object frPrincipal: TfrPrincipal
   Top = 144
   Width = 928
   Height = 486
-  Caption = 'frPrincipal'
+  Caption = 'Tela Principal'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

@@ -1,5 +1,5 @@
 inherited frConsultaPessoa: TfrConsultaPessoa
-  Caption = 'frConsultaPessoa'
+  Caption = 'Consulta Pessoa'
   PixelsPerInch = 96
   TextHeight = 13
   inherited grPadrao: TDBGrid

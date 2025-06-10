@@ -35,7 +35,7 @@ end;
 
 function TfrConsultaEspacoCafe.setTabela: TClientDataSet;
 begin
-  Result := dmProjeto.cdsEspacoCafe;
+  Result := dmProjeto_DataModule.cdsEspacoCafe;
 end;
 
 end.

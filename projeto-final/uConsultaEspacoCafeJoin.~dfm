@@ -1,8 +1,11 @@
 inherited frConsultaEspacoCafeJoin: TfrConsultaEspacoCafeJoin
-  Caption = 'frConsultaEspacoCafeJoin'
+  Left = 220
+  Width = 993
+  Height = 328
+  Caption = 'Consulta Espa'#231'o Caf'#233
   PixelsPerInch = 96
   TextHeight = 13
-  object lCodigoEspacoCafe: TLabel [0]
+  object lbCodigoEspacoCafe_Label: TLabel [0]
     Left = 8
     Top = 64
     Width = 97
@@ -10,13 +13,14 @@ inherited frConsultaEspacoCafeJoin: TfrConsultaEspacoCafeJoin
     Caption = 'C'#243'digo Espa'#231'o Caf'#233
   end
   inherited tbFerramentas: TToolBar
+    Width = 977
     Color = clMenu
     ParentColor = False
   end
-  inherited grPadrao: TDBGrid
-    Top = 104
-    Width = 673
-    Height = 113
+  inherited grPadrao_Grid: TDBGrid
+    Top = 94
+    Width = 569
+    Height = 123
     Columns = <
       item
         Expanded = False
@@ -29,7 +33,7 @@ inherited frConsultaEspacoCafeJoin: TfrConsultaEspacoCafeJoin
         Expanded = False
         FieldName = 'BDNOMEESPACOCAFE'
         Title.Caption = 'Nome Espa'#231'o Caf'#233
-        Width = 99
+        Width = 112
         Visible = True
       end
       item
@@ -47,9 +51,9 @@ inherited frConsultaEspacoCafeJoin: TfrConsultaEspacoCafeJoin
         Visible = True
       end>
   end
-  object enCodigoEspacoCafe: TEditNumerico [3]
+  object enCodigoEspacoCafe_EditNumerico: TEditNumerico [3]
     Left = 120
-    Top = 64
+    Top = 60
     Width = 121
     Height = 21
     TabOrder = 2
@@ -59,15 +63,19 @@ inherited frConsultaEspacoCafeJoin: TfrConsultaEspacoCafeJoin
     Separador = ','
   end
   inherited imImages: TImageList
-    Left = 568
+    Left = 744
+    Top = 64
   end
   inherited imHotImages: TImageList
-    Left = 608
+    Left = 784
+    Top = 64
   end
   inherited imDisableImages: TImageList
-    Left = 648
+    Left = 824
+    Top = 64
   end
   inherited dsPadrao: TDataSource
-    Left = 528
+    Left = 704
+    Top = 64
   end
 end

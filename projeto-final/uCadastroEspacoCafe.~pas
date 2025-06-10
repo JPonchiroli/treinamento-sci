@@ -9,14 +9,12 @@ uses
 
 type
   TfrCadastroEspacoCafe = class(TfrCadastroPadrao)
-    eNomeEspacoCafe: TEdit;
-    enLotacaoMaximaEspacoCafe: TEditNumerico;
-    enLotacaoAtualEspacoCafe: TEditNumerico;
-    lNomeEspacoCafe: TLabel;
-    lLotacaoMaximaEspacoCafe: TLabel;
-    lLotacaoAtualEspacoCafe: TLabel;
-    lCodigoEspacoCafe: TLabel;
-    enCodigoEspacoCafe: TEditNumerico;
+    edNomeEspacoCafe_Edit: TEdit;
+    enLotacaoMaximaEspacoCafe_EditNumerico: TEditNumerico;
+    lbNomeEspacoCafe_Label: TLabel;
+    lbLotacaoMaximaEspacoCafe_Label: TLabel;
+    lbCodigoEspacoCafe_Label: TLabel;
+    enCodigoEspacoCafe_EditNumerico: TEditNumerico;
     procedure tbExcluirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
@@ -48,37 +46,36 @@ uses uConsultaEspacoCafe, uDmProjeto;
 procedure TfrCadastroEspacoCafe.Carregar;
 begin
   inherited;
-  eNomeEspacoCafe.Text :=  Tabela.FieldByName('BDNOMEESPACOCAFE').AsString;
-  enLotacaoMaximaEspacoCafe.Text := Tabela.FieldByName('BDLOTACAOMAXIMAESPACOCAFE').AsString;
-  enLotacaoAtualEspacoCafe.Text := Tabela.FieldByName('BDLOTACAOATUALESPACOCAFE').AsString;
+  edNomeEspacoCafe_Edit.Text :=  Tabela.FieldByName('BDNOMEESPACOCAFE').AsString;
+  enLotacaoMaximaEspacoCafe_EditNumerico.Text := Tabela.FieldByName('BDLOTACAOMAXIMAESPACOCAFE').AsString;
 end;
 
 function TfrCadastroEspacoCafe.Consultar: TForm;
 begin
-  Result := TfrConsultaEspacoCafe.Create(enCodigoEspacoCafe);
+  Result := TfrConsultaEspacoCafe.Create(enCodigoEspacoCafe_EditNumerico);
 end;
 
 function TfrCadastroEspacoCafe.ConsultarEspacoCafe: Boolean;
 var
   wCodigoEspaco: Integer;
 begin
-  if not dmProjeto.SQLConnection.Connected then
-    dmProjeto.SQLConnection.Connected := True;
+  if not dmProjeto_DataModule.SQLConnection.Connected then
+    dmProjeto_DataModule.SQLConnection.Connected := True;
 
-  if dmProjeto.cdsConsultaEspacoCafe.Active then
-    dmProjeto.cdsConsultaEspacoCafe.Close;
+  if dmProjeto_DataModule.cdsConsulta.Active then
+    dmProjeto_DataModule.cdsConsulta.Close;
 
-  dmProjeto.cdsConsultaEspacoCafe.Close;
-  dmProjeto.qConsultaEspacoCafe.SQL.Clear;
+  dmProjeto_DataModule.cdsConsulta.Close;
+  dmProjeto_DataModule.qConsulta.SQL.Clear;
 
-  dmProjeto.qConsultaEspacoCafe.SQL.Add(
+  dmProjeto_DataModule.qConsulta.SQL.Add(
   'select bdcodespacocafe ' +
   'from tespacocafe ' +
   'where bdcodespacocafe = :bdcodespacocafe ');
 
-  dmProjeto.qConsultaEspacoCafe.ParamByName('bdcodespacocafe').AsInteger := enCodigoEspacoCafe.Codigo;
-  dmProjeto.cdsConsultaEspacoCafe.Open;
-  wCodigoEspaco := dmProjeto.cdsConsultaEspacoCafe.FieldByName('bdcodespacocafe').AsInteger;
+  dmProjeto_DataModule.qConsulta.ParamByName('bdcodespacocafe').AsInteger := enCodigoEspacoCafe_EditNumerico.Codigo;
+  dmProjeto_DataModule.cdsConsulta.Open;
+  wCodigoEspaco := dmProjeto_DataModule.cdsConsulta.FieldByName('bdcodespacocafe').AsInteger;
 
   if wCodigoEspaco > 0 then
     Result := true
@@ -89,15 +86,14 @@ end;
 procedure TfrCadastroEspacoCafe.Salvar;
 begin
   inherited;
-  Tabela.FieldByName('BDCODESPACOCAFE').AsInteger := enCodigoEspacoCafe.Codigo;
-  Tabela.FieldByName('BDNOMEESPACOCAFE').AsString := eNomeEspacoCafe.Text;
-  Tabela.FieldByName('BDLOTACAOMAXIMAESPACOCAFE').AsInteger := enLotacaoMaximaEspacoCafe.Codigo;
-  Tabela.FieldByName('BDLOTACAOATUALESPACOCAFE').AsInteger := enLotacaoAtualEspacoCafe.Codigo;
+  Tabela.FieldByName('BDCODESPACOCAFE').AsInteger := enCodigoEspacoCafe_EditNumerico.Codigo;
+  Tabela.FieldByName('BDNOMEESPACOCAFE').AsString := edNomeEspacoCafe_Edit.Text;
+  Tabela.FieldByName('BDLOTACAOMAXIMAESPACOCAFE').AsInteger := enLotacaoMaximaEspacoCafe_EditNumerico.Codigo;
 end;
 
 function TfrCadastroEspacoCafe.setEditCodigo: TEdit;
 begin
-  Result := enCodigoEspacoCafe;
+  Result := enCodigoEspacoCafe_EditNumerico;
 end;
 
 function TfrCadastroEspacoCafe.setIndice: string;
@@ -107,14 +103,13 @@ end;
 
 function TfrCadastroEspacoCafe.setTabela: TClientDataSet;
 begin
-  Result := dmProjeto.cdsEspacoCafe;
+  Result := dmProjeto_DataModule.cdsEspacoCafe;
 end;
 
 function TfrCadastroEspacoCafe.Validar: Boolean;
 begin
-  if (eNomeEspacoCafe.Text = EmptyStr) or
-     (enLotacaoMaximaEspacoCafe.Text = EmptyStr) or
-     (enLotacaoAtualEspacoCafe.Text = EmptyStr) then
+  if (edNomeEspacoCafe_Edit.Text = EmptyStr) or
+     (enLotacaoMaximaEspacoCafe_EditNumerico.Text = EmptyStr) then
   begin
     ShowMessage('Erro de Inserção. O cadastro possui campos vazios');
     Result := false;
@@ -138,23 +133,23 @@ function TfrCadastroEspacoCafe.ConsultarChaveEstrangeira: Boolean;
 var
   wChaveEstrangeira: Integer;
 begin
-  if not dmProjeto.SQLConnection.Connected then
-    dmProjeto.SQLConnection.Connected := True;
+  if not dmProjeto_DataModule.SQLConnection.Connected then
+    dmProjeto_DataModule.SQLConnection.Connected := True;
 
-  if dmProjeto.cdsConsultaEspacoCafe.Active then
-    dmProjeto.cdsConsultaEspacoCafe.Close;
+  if dmProjeto_DataModule.cdsConsulta.Active then
+    dmProjeto_DataModule.cdsConsulta.Close;
 
-  dmProjeto.cdsConsultaEspacoCafe.Close;
-  dmProjeto.qConsultaEspacoCafe.SQL.Clear;
+  dmProjeto_DataModule.cdsConsulta.Close;
+  dmProjeto_DataModule.qConsulta.SQL.Clear;
 
-  dmProjeto.qConsultaEspacoCafe.SQL.Add(
+  dmProjeto_DataModule.qConsulta.SQL.Add(
   'select bdcodespacocafe ' +
   'from tetapa ' +
   'where bdcodespacocafe = :bdcodespacocafe ');
 
-  dmProjeto.qConsultaEspacoCafe.ParamByName('bdcodespacocafe').AsInteger := enCodigoEspacoCafe.Codigo;
-  dmProjeto.cdsConsultaEspacoCafe.Open;
-  wChaveEstrangeira := dmProjeto.cdsConsultaEspacoCafe.FieldByName('bdcodespacocafe').AsInteger;
+  dmProjeto_DataModule.qConsulta.ParamByName('bdcodespacocafe').AsInteger := enCodigoEspacoCafe_EditNumerico.Codigo;
+  dmProjeto_DataModule.cdsConsulta.Open;
+  wChaveEstrangeira := dmProjeto_DataModule.cdsConsulta.FieldByName('bdcodespacocafe').AsInteger;
 
   if wChaveEstrangeira > 0 then
     Result := false
@@ -165,7 +160,7 @@ end;
 procedure TfrCadastroEspacoCafe.FormCreate(Sender: TObject);
 begin
   inherited;
-  dmProjeto.cdsEspacoCafe.Refresh
+  dmProjeto_DataModule.cdsEspacoCafe.Refresh
 end;
 
 end.

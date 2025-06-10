@@ -19,7 +19,7 @@ uses
   uConsultaEspacoCafeJoin in 'uConsultaEspacoCafeJoin.pas' {frConsultaEspacoCafeJoin},
   uDmProjeto in 'uDmProjeto.pas' {dmProjeto: TDataModule};
 
-{$R *Academia.res}
+{$R *.res}
 
 begin
   Application.Initialize;

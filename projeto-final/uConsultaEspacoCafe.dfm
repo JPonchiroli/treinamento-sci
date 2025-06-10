@@ -1,11 +1,17 @@
 inherited frConsultaEspacoCafe: TfrConsultaEspacoCafe
-  Caption = 'frConsultaEspacoCafe'
+  Left = 256
+  Top = 183
+  Width = 957
+  Height = 308
+  Caption = 'Consulta Espa'#231'o Cafe'
   PixelsPerInch = 96
   TextHeight = 13
-  inherited grPadrao: TDBGrid
-    Top = 64
-    Width = 537
-    Height = 177
+  inherited tbFerramentas: TToolBar
+    Width = 941
+  end
+  inherited grPadrao_Grid: TDBGrid
+    Width = 585
+    Height = 123
     Columns = <
       item
         Expanded = False
@@ -29,10 +35,8 @@ inherited frConsultaEspacoCafe: TfrConsultaEspacoCafe
       end
       item
         Expanded = False
-        FieldName = 'BDLOTACAOATUALESPACOCAFE'
-        Title.Caption = 'Lota'#231#227'o Atual'
-        Width = 154
-        Visible = True
+        Width = -1
+        Visible = False
       end>
   end
   inherited imImages: TImageList

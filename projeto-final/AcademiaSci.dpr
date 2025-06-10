@@ -17,7 +17,7 @@ uses
   uConsultaPessoaJoin in 'uConsultaPessoaJoin.pas' {frConsultaPessoaJoin},
   uConsultaSalaJoin in 'uConsultaSalaJoin.pas' {frConsultaSalaJoin},
   uConsultaEspacoCafeJoin in 'uConsultaEspacoCafeJoin.pas' {frConsultaEspacoCafeJoin},
-  uDmProjeto in 'uDmProjeto.pas' {dmProjeto: TDataModule};
+  uDmProjeto in 'uDmProjeto.pas' {dmProjeto_DataModule: TDataModule};
 
 {$R *.res}
 
@@ -25,6 +25,6 @@ begin
   Application.Initialize;
   Application.Title := 'Projeto Final Academia';
   Application.CreateForm(TfrPrincipal, frPrincipal);
-  Application.CreateForm(TdmProjeto, dmProjeto);
+  Application.CreateForm(TdmProjeto_DataModule, dmProjeto_DataModule);
   Application.Run;
 end.

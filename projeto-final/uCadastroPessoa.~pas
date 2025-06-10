@@ -9,12 +9,12 @@ uses
 
 type
   TfrCadastroPessoa = class(TfrCadastroPadrao)
-    eNomePessoa: TEdit;
-    eSobrenomePessoa: TEdit;
-    lNomePessoa: TLabel;
-    lSobrenomePessoa: TLabel;
-    lCodigoPessoa: TLabel;
-    enCodigoPessoa: TEditNumerico;
+    edNomePessoa_Edit: TEdit;
+    edSobrenomePessoa_Edit: TEdit;
+    lbNomePessoa_Label: TLabel;
+    lbSobrenomePessoa_Label: TLabel;
+    lbCodigoPessoa_Label: TLabel;
+    enCodigoPessoa_EditNumerico: TEditNumerico;
     procedure tbExcluirClick(Sender: TObject);
   private
     { Private declarations }
@@ -45,36 +45,36 @@ uses uDmProjeto, uConsultaPessoa, Math;
 procedure TfrCadastroPessoa.Carregar;
 begin
   inherited;
-  eNomePessoa.Text := Tabela.FieldByName('BDNOMEPESSOA').AsString;
-  eSobrenomePessoa.Text := Tabela.FieldByName('BDSOBRENOMEPESSOA').AsString;
+  edNomePessoa_Edit.Text := Tabela.FieldByName('BDNOMEPESSOA').AsString;
+  edSobrenomePessoa_Edit.Text := Tabela.FieldByName('BDSOBRENOMEPESSOA').AsString;
 end;
 
 function TfrCadastroPessoa.Consultar: TForm;
 begin
-  Result := TfrConsultaPessoa.Create(enCodigoPessoa);
+  Result := TfrConsultaPessoa.Create(enCodigoPessoa_EditNumerico);
 end;
 
 function TfrCadastroPessoa.ConsultarPessoa: Boolean;
 var
   wCodigoPessoa: Integer;
 begin
-  if not dmProjeto.SQLConnection.Connected then
-    dmProjeto.SQLConnection.Connected := True;
+  if not dmProjeto_DataModule.SQLConnection.Connected then
+    dmProjeto_DataModule.SQLConnection.Connected := True;
 
-  if dmProjeto.cdsConsultaPessoa.Active then
-    dmProjeto.cdsConsultaPessoa.Close;
+  if dmProjeto_DataModule.cdsConsulta.Active then
+    dmProjeto_DataModule.cdsConsulta.Close;
 
-  dmProjeto.cdsConsultaPessoa.Close;
-  dmProjeto.qConsultaPessoa.SQL.Clear;
+  dmProjeto_DataModule.cdsConsulta.Close;
+  dmProjeto_DataModule.qConsulta.SQL.Clear;
 
-  dmProjeto.qConsultaPessoa.SQL.Add(
+  dmProjeto_DataModule.qConsulta.SQL.Add(
   'select bdcodpessoa ' +
   'from tpessoa ' +
   'where bdcodpessoa = :bdcodpessoa ');
 
-  dmProjeto.qConsultaPessoa.ParamByName('bdcodpessoa').AsInteger := enCodigoPessoa.Codigo;
-  dmProjeto.cdsConsultaPessoa.Open;
-  wCodigoPessoa := dmProjeto.cdsConsultaPessoa.FieldByName('bdcodpessoa').AsInteger;
+  dmProjeto_DataModule.qConsulta.ParamByName('bdcodpessoa').AsInteger := enCodigoPessoa_EditNumerico.Codigo;
+  dmProjeto_DataModule.cdsConsulta.Open;
+  wCodigoPessoa := dmProjeto_DataModule.cdsConsulta.FieldByName('bdcodpessoa').AsInteger;
 
   if wCodigoPessoa > 0 then
     Result := true
@@ -85,15 +85,14 @@ end;
 procedure TfrCadastroPessoa.Salvar;
 begin
   inherited;
-
-  Tabela.FieldByName('BDCODPESSOA').AsInteger := enCodigoPessoa.Codigo;
-  Tabela.FieldByName('BDNOMEPESSOA').AsString := eNomePessoa.Text;
-  Tabela.FieldByName('BDSOBRENOMEPESSOA').AsString := eSobrenomePessoa.Text;
+  Tabela.FieldByName('BDCODPESSOA').AsInteger := enCodigoPessoa_EditNumerico.Codigo;
+  Tabela.FieldByName('BDNOMEPESSOA').AsString := edNomePessoa_Edit.Text;
+  Tabela.FieldByName('BDSOBRENOMEPESSOA').AsString := edSobrenomePessoa_Edit.Text;
 end;
 
 function TfrCadastroPessoa.setEditCodigo: TEdit;
 begin
-  Result := enCodigoPessoa
+  Result := enCodigoPessoa_EditNumerico
 end;
 
 function TfrCadastroPessoa.setIndice: String;
@@ -103,13 +102,13 @@ end;
 
 function TfrCadastroPessoa.setTabela: TClientDataSet;
 begin
-  Result := dmProjeto.cdsPessoa;
+  Result := dmProjeto_DataModule.cdsPessoa;
 end;
 
 function TfrCadastroPessoa.Validar: Boolean;
 begin
-  if (eNomePessoa.Text = EmptyStr) or
-     (eSobrenomePessoa.Text = EmptyStr) then
+  if (edNomePessoa_Edit.Text = EmptyStr) or
+     (edSobrenomePessoa_Edit.Text = EmptyStr) then
   begin
     ShowMessage('Erro de Inserção. O cadastro possui campos vazios');
     Result := false;
@@ -133,23 +132,23 @@ function TfrCadastroPessoa.ConsultarChaveEstrangeira: Boolean;
 var
   wChaveEstrangeira: Integer;
 begin
-  if not dmProjeto.SQLConnection.Connected then
-    dmProjeto.SQLConnection.Connected := True;
+  if not dmProjeto_DataModule.SQLConnection.Connected then
+    dmProjeto_DataModule.SQLConnection.Connected := True;
 
-  if dmProjeto.cdsConsultaPessoa.Active then
-    dmProjeto.cdsConsultaPessoa.Close;
+  if dmProjeto_DataModule.cdsConsulta.Active then
+    dmProjeto_DataModule.cdsConsulta.Close;
 
-  dmProjeto.cdsConsultaPessoa.Close;
-  dmProjeto.qConsultaPessoa.SQL.Clear;
+  dmProjeto_DataModule.cdsConsulta.Close;
+  dmProjeto_DataModule.qConsulta.SQL.Clear;
 
-  dmProjeto.qConsultaPessoa.SQL.Add(
+  dmProjeto_DataModule.qConsulta.SQL.Add(
   'select bdcodpessoa ' +
   'from tetapa ' +
   'where bdcodpessoa = :bdcodpessoa ');
 
-  dmProjeto.qConsultaPessoa.ParamByName('bdcodpessoa').AsInteger := enCodigoPessoa.Codigo;
-  dmProjeto.cdsConsultaPessoa.Open;
-  wChaveEstrangeira := dmProjeto.cdsConsultaPessoa.FieldByName('bdcodpessoa').AsInteger;
+  dmProjeto_DataModule.qConsulta.ParamByName('bdcodpessoa').AsInteger := enCodigoPessoa_EditNumerico.Codigo;
+  dmProjeto_DataModule.cdsConsulta.Open;
+  wChaveEstrangeira := dmProjeto_DataModule.cdsConsulta.FieldByName('bdcodpessoa').AsInteger;
 
   if wChaveEstrangeira > 0 then
     Result := false

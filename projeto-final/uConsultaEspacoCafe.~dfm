@@ -1,11 +1,14 @@
 inherited frConsultaEspacoCafe: TfrConsultaEspacoCafe
-  Caption = 'frConsultaEspacoCafe'
+  Caption = 'Consulta Espa'#231'o Cafe'
   PixelsPerInch = 96
   TextHeight = 13
-  inherited grPadrao: TDBGrid
-    Top = 104
-    Width = 537
-    Height = 177
+  inherited tbFerramentas: TToolBar
+    Width = 920
+  end
+  inherited grPadrao_Grid: TDBGrid
+    Top = 46
+    Width = 912
+    Height = 395
     Columns = <
       item
         Expanded = False

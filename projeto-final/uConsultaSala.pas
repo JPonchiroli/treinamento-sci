@@ -35,7 +35,7 @@ end;
 
 function TfrConsultaSala.setTabela: TClientDataSet;
 begin
-  Result := dmProjeto.cdsSala;
+  Result := dmProjeto_DataModule.cdsSala;
 end;
 
 end.

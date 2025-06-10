@@ -9,8 +9,8 @@ uses
 
 type
   TfrConsultaEspacoCafeJoin = class(TfrConsultaPadraoMdi)
-    lCodigoEspacoCafe: TLabel;
-    enCodigoEspacoCafe: TEditNumerico;
+    lbCodigoEspacoCafe_Label: TLabel;
+    enCodigoEspacoCafe_EditNumerico: TEditNumerico;
     procedure tbConfirmarClick(Sender: TObject);
   private
     { Private declarations }
@@ -38,22 +38,22 @@ end;
 
 function TfrConsultaEspacoCafeJoin.setTabela: TClientDataSet;
 begin
-  Result := dmProjeto.cdsConsultaEspacoCafe;
+  Result := dmProjeto_DataModule.cdsConsulta;
 end;
 
 procedure TfrConsultaEspacoCafeJoin.tbConfirmarClick(Sender: TObject);
 begin
   inherited;
-  if not dmProjeto.SQLConnection.Connected then
-    dmProjeto.SQLConnection.Connected := True;
+  if not dmProjeto_DataModule.SQLConnection.Connected then
+    dmProjeto_DataModule.SQLConnection.Connected := True;
 
-  if dmProjeto.cdsConsultaEspacoCafe.Active then
-     dmProjeto.cdsConsultaEspacoCafe.Close;
+  if dmProjeto_DataModule.cdsConsulta.Active then
+     dmProjeto_DataModule.cdsConsulta.Close;
 
-  dmProjeto.cdsConsultaEspacoCafe.Close;
-  dmProjeto.qConsultaEspacoCafe.SQL.Clear;
+  dmProjeto_DataModule.cdsConsulta.Close;
+  dmProjeto_DataModule.qConsulta.SQL.Clear;
 
-  dmProjeto.qConsultaEspacoCafe.SQL.Add(
+  dmProjeto_DataModule.qConsulta.SQL.Add(
   'select et.bdnumetapa, ' +
           'ec.bdnomeespacocafe, ' +
           'p.bdnomepessoa, p.bdsobrenomepessoa ' +
@@ -62,12 +62,12 @@ begin
   'join tespacocafe ec on (ec.bdcodespacocafe = et.bdcodespacocafe) ' +
   'where et.bdcodespacocafe = :bdcodespacocafe ');
 
-  dmProjeto.qConsultaEspacoCafe.ParamByName('bdcodespacocafe').AsInteger := enCodigoEspacoCafe.Codigo;
-  dmProjeto.cdsConsultaEspacoCafe.Open;
-  dsPadrao.DataSet := dmProjeto.cdsConsultaEspacoCafe;
+  dmProjeto_DataModule.qConsulta.ParamByName('bdcodespacocafe').AsInteger := enCodigoEspacoCafe_EditNumerico.Codigo;
+  dmProjeto_DataModule.cdsConsulta.Open;
+  dsPadrao.DataSet := dmProjeto_DataModule.cdsConsulta;
 
-  if dmProjeto.cdsConsultaEspacoCafe.IsEmpty then
-    ShowMessage('Espaço para Café não registrado em nenhuma etapa, favor escolha outro espaço');
+  if dmProjeto_DataModule.cdsConsulta.IsEmpty then
+    ShowMessage('Espaço para café não registrado em nenhuma etapa, favor escolha outro espaço');
 end;
 
 end.

@@ -1,43 +1,43 @@
 inherited frCadastroPessoa: TfrCadastroPessoa
-  Caption = 'frCadastroPessoa'
+  Caption = 'Cadastro Pessoa'
   PixelsPerInch = 96
   TextHeight = 13
-  object lNomePessoa: TLabel [0]
-    Left = 88
+  object lbNomePessoa_Label: TLabel [0]
+    Left = 80
     Top = 120
-    Width = 28
+    Width = 35
     Height = 13
-    Caption = 'Nome'
+    Caption = '* Nome'
   end
-  object lSobrenomePessoa: TLabel [1]
-    Left = 62
+  object lbSobrenomePessoa_Label: TLabel [1]
+    Left = 54
     Top = 152
-    Width = 54
+    Width = 61
     Height = 13
-    Caption = 'Sobrenome'
+    Caption = '* Sobrenome'
   end
-  object lCodigoPessoa: TLabel [2]
+  object lbCodigoPessoa_Label: TLabel [2]
     Left = 83
     Top = 88
     Width = 33
     Height = 13
     Caption = 'C'#243'digo'
   end
-  object eNomePessoa: TEdit [4]
+  object edNomePessoa_Edit: TEdit [4]
     Left = 128
     Top = 116
     Width = 121
     Height = 21
     TabOrder = 1
   end
-  object eSobrenomePessoa: TEdit [5]
+  object edSobrenomePessoa_Edit: TEdit [5]
     Left = 128
     Top = 148
     Width = 121
     Height = 21
     TabOrder = 2
   end
-  object enCodigoPessoa: TEditNumerico [6]
+  object enCodigoPessoa_EditNumerico: TEditNumerico [6]
     Left = 128
     Top = 84
     Width = 121

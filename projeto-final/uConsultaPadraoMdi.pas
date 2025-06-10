@@ -8,7 +8,7 @@ uses
 
 type
   TfrConsultaPadraoMdi = class(TfrSimples)
-    grPadrao: TDBGrid;
+    grPadrao_Grid: TDBGrid;
     dsPadrao: TDataSource;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
@@ -44,11 +44,11 @@ begin
   if Assigned(FTabela) then
   begin
     dsPadrao.DataSet := FTabela;
-    grPadrao.DataSource := dsPadrao;
+    grPadrao_Grid.DataSource := dsPadrao;
   end;
 
 
-  grPadrao.Options := [dgTitles,dgIndicator,dgColumnResize,dgColLines,dgRowLines,dgTabs,dgCancelOnExit];
+  grPadrao_Grid.Options := [dgTitles,dgIndicator,dgColumnResize,dgColLines,dgRowLines,dgTabs,dgCancelOnExit];
 end;
 
 procedure TfrConsultaPadraoMdi.FormKeyDown(Sender: TObject; var Key: Word;

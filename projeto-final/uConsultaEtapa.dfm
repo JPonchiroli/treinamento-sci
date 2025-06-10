@@ -1,10 +1,13 @@
 inherited frConsultaEtapa: TfrConsultaEtapa
-  Caption = 'frConsultaEtapa'
+  Caption = 'Consulta Etapa'
   PixelsPerInch = 96
   TextHeight = 13
-  inherited grPadrao: TDBGrid
-    Width = 529
-    Height = 177
+  inherited tbFerramentas: TToolBar
+    Width = 920
+  end
+  inherited grPadrao_Grid: TDBGrid
+    Width = 912
+    Height = 395
     Columns = <
       item
         Expanded = False

@@ -1,23 +1,23 @@
 inherited frConsultaPessoaJoin: TfrConsultaPessoaJoin
-  Left = -8
-  Top = -8
-  Width = 1382
-  Height = 736
-  Caption = 'frConsultaPessoaJoin'
+  Left = 270
+  Top = 170
+  Width = 982
+  Height = 506
+  Caption = 'Consulta Pessoa'
   PixelsPerInch = 96
   TextHeight = 13
-  object lCodigoPessoa: TLabel [0]
+  object lbCodigoPessoa_Label: TLabel [0]
     Left = 8
-    Top = 80
+    Top = 64
     Width = 71
     Height = 13
     Caption = 'C'#243'digo Pessoa'
   end
   inherited tbFerramentas: TToolBar
-    Width = 1366
+    Width = 966
   end
-  inherited grPadrao: TDBGrid
-    Top = 112
+  inherited grPadrao_Grid: TDBGrid
+    Top = 96
     Width = 641
     Height = 145
     Columns = <
@@ -57,9 +57,9 @@ inherited frConsultaPessoaJoin: TfrConsultaPessoaJoin
         Visible = True
       end>
   end
-  object enCodigoPessoa: TEditNumerico [3]
+  object enCodigoPessoa_EditNumerico: TEditNumerico [3]
     Left = 88
-    Top = 80
+    Top = 60
     Width = 121
     Height = 21
     TabOrder = 2
