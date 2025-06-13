@@ -9,7 +9,7 @@
     </head>
     <body>
         <main>
-            <form >
+            <form method="post" action="academiaFormDo.php">
 
                 <div class="containerTitulo">
                     <img src="./css/profile-man.png" alt="profile-man" class="profileMan">
@@ -18,33 +18,33 @@
 
                 <div class="containerInputs">
                     <label for="nome">Nome</label>
-                    <input type="text" id="nome" placeholder="Informe seu nome" required>
+                    <input type="text" name="nome" placeholder="Informe seu nome" required>
                 </div>
 
                 <div class="containerInputs">
                     <label for="idade">Idade</label>
-                    <input type="text" id="idade" placeholder="Informe sua idade">
+                    <input type="text" name="idade" placeholder="Informe sua idade">
                 </div>
 
                 <div class="containerInputs">
                     <label for="email">E-mail</label>
-                    <input type="email" id="email" placeholder="Informe seu e-mail">
+                    <input type="email" name="email" placeholder="Informe seu e-mail">
                 </div>
 
                 <div class="containerInputs">
                     <label for="celular">Celular</label>
-                    <input type="tel" id="celular" placeholder="Informe seu celular">
+                    <input type="tel" name="celular" placeholder="Informe seu celular">
                 </div>
                 
                 <div class="containerInputs"> 
                     <label>Sexo</label>
 
                     <div class="containerRadios">
-                        <input type="radio" id="masculino" placeholder="Masculino">
-                        <label class="labelSexo" for="masculino">Masculino</label>
+                        <input type="radio" name="sexo" id="sexoM" value="0" placeholder="Masculino">
+                        <label class="labelSexo" for="sexoM">Masculino</label>
                         
-                        <input type="radio" id="feminino" placeholder="Feminino">
-                        <label class="labelSexo" for="feminino">Feminino</label>
+                        <input type="radio" name="sexo" id="sexoF" value="1" placeholder="Feminino">
+                        <label class="labelSexo" for="sexoF">Feminino</label>
                     </div>
                 </div>
 
