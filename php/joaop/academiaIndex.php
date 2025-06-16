@@ -23,7 +23,7 @@
         </section>
 
         <section class="containerTabela">
-            <input type="text" placeholder="Pesquisar por nome...">
+            <input type="text" id="inputBusca" placeholder="Pesquisar por nome...">
 
             <table>
                 <thead>
@@ -34,11 +34,11 @@
                         <th>Email</th>
                         <th>Celular</th>
                         <th>Sexo</th>
-                        <th>Aï¿½ï¿½o</th>
+                        <th>Ação</th>
                     </tr>
                 </thead>
 
-                <tbody>
+                <tbody id="tabelaPessoas">
                     <?php
                     require_once("../../connectionSCI/connection.php");
 
@@ -54,22 +54,78 @@
                             echo "<td>" . $row['idadePessoa'] . "</td>";
                             echo "<td>" . $row['emailPessoa'] . "</td>";
                             echo "<td>" . $row['celularPessoa'] . "</td>";
-                            echo "<td>" . $row['sexoPessoa'] . "</td>";
-                            echo "<td> <button class='botaoAcao'> <img src='./css/ico-editar.png' class='imagemAcao' > </button>  <button class='botaoAcao'> <img src='./css/ico-excluir.png' class='imagemAcao' > </button> </td>";
+                            echo $row['sexoPessoa'] == 0 ? "<td> Masculino </td>" : "<td> Feminino </td>";
+                            echo "<td> 
+                                    <a href='academiaForm.php?idPessoa=" . $row['idPessoa'] . "' class='botaoEditar'>
+                                        <img src='./css/ico-editar.png' class='imagemEditar'>
+                                    </a>  
+                                    <button class='botaoExcluir' onclick='excluirPessoa(" . $row['idPessoa'] . ")' value=" . $row['idPessoa'] . "> 
+                                        <img src='./css/ico-excluir.png' class='imagemExcluir' > 
+                                    </button>
+                                 </td>";
                             echo "<tr>";
                         }
                     } else {
-                        echo "<td> Nenhum registro cadastrado. </td>";
+                        echo "<td colspan='7'> Nenhum registro cadastrado. </td>";
                     }
                     ?>
                 </tbody>
+
+                <tfoot>
+                    <tr>
+                        <td colspan="7">
+                            <?php echo "Foram encontrados um total de " . mysql_num_rows($rs) . " registros." ?>
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
-            <tfoot>
-                <?php echo "Foram encontrados um total de " . mysql_num_rows($rs) . " registros." ?>
-            </tfoot>
+
         </section>
 
     </main>
+
+    <script>
+        document.getElementById('inputBusca').addEventListener('keydown', function() {
+            const nome = this.value;
+
+            fetch('academiaBuscarPessoas.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'nome=' + encodeURIComponent(nome)
+                })
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('tabelaPessoas').innerHTML = html;
+                })
+                .catch(error => console.error('Erro ao buscar pessoas:', error));
+        });
+
+        function excluirPessoa(idPessoa) {
+            if (confirm("Tem certeza que deseja excluir esta pessoa?")) {
+                fetch('academiaDeletaPessoa.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: 'idPessoa=' + encodeURIComponent(idPessoa)
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            alert("Pessoa excluída com sucesso!");
+                            window.location.reload();
+                        } else {
+                            alert("Erro ao excluir pessoa (status: " + response.status + ")");
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro:', error);
+                        alert('Erro na exclusão. Verifique o console.');
+                    });
+            }
+        }
+    </script>
 </body>
 
 </html>
