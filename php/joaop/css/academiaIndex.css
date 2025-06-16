@@ -22,6 +22,10 @@
   font-weight: 700;
 }
 
+.containerBotao {
+  display: flex;
+}
+
 .botaoCadastrar {
   padding: 10px 30px;
   background-color: #007bff;
@@ -57,6 +61,89 @@ input {
 
 .containerTabela input {
   width: 70%;
+}
+
+.modalCadastro {
+  position: absolute;
+  width: 50%;
+  margin: 0 auto;
+  height: 80;
+  z-index: 99;
+}
+
+menu {
+  width: 100%;
+}
+
+.containerTitulo {
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+}
+
+form {
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
+  background-color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  padding: 5em;
+}
+
+.containerInputs {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.containerRadios {
+  flex-direction: row;
+}
+
+.labelSexo {
+  font-weight: 500;
+}
+
+label {
+  font-weight: bold;
+}
+
+.botaoCadastrarModal {
+  display: block;
+  margin: 30px auto 0 auto;
+  padding: 10px 30px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.botaoCadastrarModal:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+#cancel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 30px;
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#cancel:hover {
+  transform: scale(1.1);
 }
 
 table {
