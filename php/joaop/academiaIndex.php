@@ -1,72 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Academia Index</title>
 
-        <link rel="stylesheet" href="./css/academiaIndex.css">
-    </head>
-    <body>
-        <header class="cabecalhoListagem">
-            <img class="profileListagem" src="css/profile-man.png">
-            <h2 class="tituloListagem">Listagem Pessoas</h2>
-        </header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academia Index</title>
 
-        <main>
-            <section>
-                <button class="botaoCadastrar">
-                    <a href="academiaForm.php">Cadastro</a>
-                </button>
-            </section>
+    <link rel="stylesheet" href="./css/academiaIndex.css">
+</head>
 
-            <section class="containerTabela">
-                <input type="text" placeholder="Pesquisar por nome...">
+<body>
+    <header class="cabecalhoListagem">
+        <img class="profileListagem" src="css/profile-man.png">
+        <h2 class="tituloListagem">Listagem Pessoas</h2>
+    </header>
 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nome</th>
-                            <th>Idade</th>
-                            <th>Email</th>
-                            <th>Celular</th>
-                            <th>Sexo</th>
-                            <th>Ação</th>
-                            </tr>
-                    </thead>
+    <main>
+        <section>
+            <button class="botaoCadastrar">
+                <a href="academiaForm.php">Cadastro</a>
+            </button>
+        </section>
 
-                    <tbody>
-                        <?php
-                            require_once("../../connectionSCI/connection.php"); 
+        <section class="containerTabela">
+            <input type="text" placeholder="Pesquisar por nome...">
 
-                            $sql = "SELECT * FROM joaop";
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nome</th>
+                        <th>Idade</th>
+                        <th>Email</th>
+                        <th>Celular</th>
+                        <th>Sexo</th>
+                        <th>Aï¿½ï¿½o</th>
+                    </tr>
+                </thead>
 
-                            $rs = mysql_query($sql, $conexao) or die ("Query Incorreta: [> ".$sql." <]<br>".mysql_errno().': '.mysql_error()); 
+                <tbody>
+                    <?php
+                    require_once("../../connectionSCI/connection.php");
 
-                            if (mysql_num_rows($rs) > 0) {
-                                while($row = mysql_fetch_assoc($rs)) {
-                                    echo "<tr>";
-                                        echo "<td>" .$row['idPessoa']. "</td>";
-                                        echo "<td>" .$row['nomePessoa']. "</td>";
-                                        echo "<td>" .$row['idadePessoa']. "</td>";
-                                        echo "<td>" .$row['emailPessoa']. "</td>";
-                                        echo "<td>" .$row['celularPessoa']. "</td>";
-                                        echo "<td>" .$row['sexoPessoa']. "</td>";
-                                        echo "<td> <button class='botaoAcao'> <img src='./css/ico-editar.png' class='imagemAcao' > </button>  <button class='botaoAcao'> <img src='./css/ico-excluir.png' class='imagemAcao' > </button> </td>";
-                                    echo "<tr>";
-                                }
-                            } else {
-                                echo "<td> Nenhum registro cadastrado. </td>";
-                            }
-                        ?>
-                        </tbody>
-                </table>
-                <tfoot>
-                    <?php echo "Foram encontrados um total de " .mysql_num_rows($rs). " registros." ?>
-                </tfoot>
-            </section>
+                    $sql = "SELECT * FROM joaop";
 
-        </main>
-    </body>
+                    $rs = mysql_query($sql, $conexao) or die("Query Incorreta: [> " . $sql . " <]<br>" . mysql_errno() . ': ' . mysql_error());
+
+                    if (mysql_num_rows($rs) > 0) {
+                        while ($row = mysql_fetch_assoc($rs)) {
+                            echo "<tr>";
+                            echo "<td>" . $row['idPessoa'] . "</td>";
+                            echo "<td>" . $row['nomePessoa'] . "</td>";
+                            echo "<td>" . $row['idadePessoa'] . "</td>";
+                            echo "<td>" . $row['emailPessoa'] . "</td>";
+                            echo "<td>" . $row['celularPessoa'] . "</td>";
+                            echo "<td>" . $row['sexoPessoa'] . "</td>";
+                            echo "<td> <button class='botaoAcao'> <img src='./css/ico-editar.png' class='imagemAcao' > </button>  <button class='botaoAcao'> <img src='./css/ico-excluir.png' class='imagemAcao' > </button> </td>";
+                            echo "<tr>";
+                        }
+                    } else {
+                        echo "<td> Nenhum registro cadastrado. </td>";
+                    }
+                    ?>
+                </tbody>
+            </table>
+            <tfoot>
+                <?php echo "Foram encontrados um total de " . mysql_num_rows($rs) . " registros." ?>
+            </tfoot>
+        </section>
+
+    </main>
+</body>
+
 </html>
