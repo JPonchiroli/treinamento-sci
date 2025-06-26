@@ -5,7 +5,7 @@ posicao = 0
 while True:
     numeros.append(input("> Digite um número: "))
     
-    if "sair" in numeros:
+    if "sair" in numeros or "Sair" in numeros:
         break
     
     if int(numeros[posicao]) > maiorNumero:
